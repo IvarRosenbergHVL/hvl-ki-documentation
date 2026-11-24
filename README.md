@@ -1,6 +1,6 @@
 # HVLs KI-økosystem – dokumentasjon og opplæring
 
-Offentlig tilgjengelig prosjektdokumentasjon og kursutkast. Innholdet beskriver målbildet, ikke verifisert produksjonsstatus.
+Offentlig tilgjengelig arkitektur- og funksjonalitetsbeskrivelse for planlagt utvikling av HVLs KI-økosystem.
 
 ## Lokal utvikling
 
@@ -16,6 +16,3 @@ GitHub Pages er planlagt publiseringsmål: https://ivarrosenberghvl.github.io/hv
 
 Repoet og Pages-nettstedet er offentlige. Ikke legg hemmeligheter, personopplysninger eller sensitiv systemdokumentasjon i repoet. De to inngangene er navigasjon, ikke tilgangskontroll.
 
-## Status
-
-Første versjon er et faglig utkast basert på prosjektets planlagte arkitektur. Teknisk implementeringsstatus og API-kontrakter skal verifiseres mot hovedrepoet. Designet er HVL-inspirert, ikke en godkjent profilimplementering.
