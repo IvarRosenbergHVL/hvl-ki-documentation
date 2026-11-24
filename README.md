@@ -1,6 +1,6 @@
 # HVLs KI-økosystem – dokumentasjon og opplæring
 
-Privat prosjektdokumentasjon. Innholdet beskriver målbildet, ikke verifisert produksjonsstatus.
+Offentlig tilgjengelig prosjektdokumentasjon og kursutkast. Innholdet beskriver målbildet, ikke verifisert produksjonsstatus.
 
 ## Lokal utvikling
 
@@ -12,7 +12,9 @@ To læringsløp: utviklere og interessenter. Kursene ligger i `docs/` som Markdo
 
 ## Publisering
 
-Ingen offentlig publisering er aktivert. Containeren må plasseres bak godkjent tilgangskontroll før intern publisering. Ikke legg hemmeligheter, personopplysninger eller sensitiv systemdokumentasjon i nettstedet. De to inngangene er navigasjon, ikke tilgangskontroll.
+GitHub Pages er planlagt publiseringsmål: https://ivarrosenberghvl.github.io/hvl-ki-documentation/. Aktiver GitHub Actions som kilde under Settings → Pages. Publiseringsworkflowen bygger og publiserer fra main; den kan også startes manuelt fra Actions. Lokal utvikling bruker fortsatt rotstien `/`.
+
+Repoet og Pages-nettstedet er offentlige. Ikke legg hemmeligheter, personopplysninger eller sensitiv systemdokumentasjon i repoet. De to inngangene er navigasjon, ikke tilgangskontroll.
 
 ## Status
 
