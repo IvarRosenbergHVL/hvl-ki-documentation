@@ -8,10 +8,14 @@ En LLM tolker og genererer språk, men har ikke automatisk kunnskap om HVLs inte
 ```mermaid
 flowchart TD
  R[Backend / Runtime] --> G[Model Gateway]
- G --> P[Policy og ruting]
- P --> E[Godkjent ekstern modell]
- P --> L[Lokal modell i godkjent miljø]
+ G --> P[Klassifisering, dataminimering og PII-vask]
+ P --> D{Tillatt behandlingsmiljø?}
+ D -->|Eksternt tillatt| E[Godkjent ekstern modell]
+ D -->|Internt tillatt| L[Lokal modell i godkjent miljø]
+ D -->|Ikke tillatt eller uavklart| X[Stopp eller avklar]
 ```
+
+HVL håndterer brukeridentiteten internt. Model Gateway skal ikke sende direkte identitetsmetadata til eksterne modelltilbydere. Gatewayens PII-vaskemaskin skal redusere identifiserende opplysninger i prompt og kontekst der det er mulig. Den er ett av flere sikkerhetslag, ikke en garanti for anonymisering. Se [Innebygd personvern](./personvern.mdx).
 
 Modellvalg avhenger av dataklassifisering, oppgave, kapasitet, kostnad, responstid og språk. Policy må også gjelde embeddings, hjelpe- og reserve-modeller. Lokal drift er ikke i seg selv en godkjenning for røde eller svarte data.
 
