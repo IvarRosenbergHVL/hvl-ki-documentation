@@ -1,0 +1,31 @@
+---
+title: "04 · Memory Fabric"
+sidebar_position: 4
+---
+
+Memory Fabric gir varig, kontrollert kontekst utover modellens kontekstvindu. Samtalehistorikk, midlertidig runtime-tilstand og varig minne må skilles.
+
+| Område | Formål |
+|---|---|
+| Bruker | Preferanser og relevant kontekst |
+| Agent | Oppgavespesifikk kontekst mellom kjøringer |
+| Prosjekt | Beslutninger og fremdrift |
+| Arbeidsminne | Midlertidig tilstand under kjøring |
+
+Brukerminne prioriteres først i MVP. Agent- og prosjektminne er videreutvikling. Arbeidsminne kan ligge i Runtime og trenger ikke lagres varig i Fabric.
+
+```mermaid
+flowchart TD
+ A[Backend / samtale] --> E[Memory-agent: vurder relevans]
+ E --> B[Backend: policy og omfang]
+ B --> F[Memory Fabric]
+ F --> P[PostgreSQL]
+ F --> S[S3-kompatibel objektlagring]
+ F --> B
+```
+
+PostgreSQL er sentral database, med S3-kompatibel objektlagring der det er hensiktsmessig. Vedvarende lagring ligger utenfor applikasjonscontainerne. Memory Fabric skal nås via backend i det planlagte isolerte nettverket. Bruker, scope, proveniens, gyldighet, tilgang, sletting og korrigering må inngå i designet. Minne kan inneholde feil og må ikke gis autoritet over verifiserte kilder.
+
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz question={"Hva er forskjellen på memory og knowledge?"} options={["Memory husker kontekst; knowledge henter kildeinformasjon","Begge er kun samtalehistorikk","Memory er alltid korrekt"]} correct={0} explanation={"En prosjektbeslutning kan ligge i minnet, mens den gjeldende prosjektmetoden ligger i kunnskapslaget."} />

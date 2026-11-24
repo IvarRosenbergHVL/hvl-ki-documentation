@@ -1,0 +1,18 @@
+---
+title: "02 · Modeller og Model Gateway"
+sidebar_position: 2
+---
+
+En LLM tolker og genererer språk, men har ikke automatisk kunnskap om HVLs interne data. Model Gateway gir et felles grensesnitt mot godkjente lokale og eksterne modeller.
+
+```mermaid
+flowchart TD
+ R[Backend / Runtime] --> G[Model Gateway]
+ G --> P[Policy og ruting]
+ P --> E[Godkjent ekstern modell]
+ P --> L[Lokal modell i godkjent miljø]
+```
+
+Modellvalg avhenger av dataklassifisering, oppgave, kapasitet, kostnad, responstid og språk. Policy må også gjelde embeddings, hjelpe- og reserve-modeller. Lokal drift er ikke i seg selv en godkjenning for røde eller svarte data.
+
+Agentbyggeren bør analysere oppgaven og foreslå modell og ressursgrenser. En framtidig språk- og syntesemodell kan formulere sluttresultatet uten at den nødvendigvis utfører hovedanalysen. Dette er et designalternativ, ikke et fast krav.

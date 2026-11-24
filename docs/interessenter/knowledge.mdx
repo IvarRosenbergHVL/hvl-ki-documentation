@@ -1,0 +1,20 @@
+---
+title: "04 · HVL Knowledge"
+sidebar_position: 4
+---
+
+KI trenger tilgang til riktig, oppdatert informasjon. HVL Knowledge skal gjøre informasjon tilgjengelig fra eksisterende systemer, ikke nødvendigvis flytte den.
+
+Personlige connectors kan koble til OneDrive. Avdelingsvise connectors kan koble til SharePoint. Prosjekter og emner kan ha egne kilder. På sikt skal HVL Knowledge tilby forvaltede institusjonelle kilder, som regelverk, HR-rutiner, IT-veiledninger og kvalitetssystem.
+
+```mermaid
+flowchart TD
+ P[Personlige kilder] --> K[HVL Knowledge]
+ A[Avdelingskilder] --> K
+ I[Forvaltede HVL-kilder] --> K
+ K --> C[KI-chat]
+ K --> G[Agenter]
+ K --> S[Andre tjenester]
+```
+
+Kildeeierne skal vedlikeholde originalinformasjonen. Knowledge Library kan gjøre kilder tilgjengelige for gjenbruk. Når en rutine oppdateres, skal agentene kunne bruke den oppdaterte kilden gjennom oppslag eller synkronisering. Brukerne får ikke automatisk tilgang til dokumenter bare fordi de bruker en agent.

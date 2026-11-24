@@ -1,0 +1,14 @@
+---
+title: "09 · Sikkerhetsarkitektur"
+sidebar_position: 9
+---
+
+Sikkerhet må være gjennomgående. FEIDE/Entra ID er planlagte identitetskilder; autentisering må skilles fra autorisasjon. Dataklassifisering styrer hvilke modeller, tjenester, lagre og integrasjoner som kan brukes. Alle utleveringer, ikke bare primærmodellkallet, omfattes.
+
+Kubernetes med mikrosegmentering, begrensede tjenestetilganger og ekstern vedvarende lagring er målbildet. Memory Fabric skal ikke være direkte eksponert; backend er den planlagte inngangen. Prinsippet om minste privilegium gjelder også connectors.
+
+Menneskelig godkjenning trengs for handlinger med vesentlige konsekvenser. Toolserver håndhever regler uavhengig av modellens output. Dokumenter og tool-resultater er potensielt upålitelige data, ikke instruksjoner. Beskytt mot prompt-injeksjon og utlevering.
+
+Sporbarhet krever hendelseslogger, versjonering og begrenset tilgang. Unngå unødvendige personopplysninger og hemmeligheter i logger. Definer livsløp, sletting, beredskap, test og evaluering. Lokal modellkjøring alene gjør ikke behandling av røde eller svarte data lovlig eller sikker.
+
+Dette er arkitekturprinsipper, ikke en gjennomført ROS, DPIA eller godkjenning.
