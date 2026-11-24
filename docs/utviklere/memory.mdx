@@ -26,6 +26,4 @@ flowchart TD
 
 PostgreSQL er sentral database, med S3-kompatibel objektlagring der det er hensiktsmessig. Vedvarende lagring ligger utenfor applikasjonscontainerne. Memory Fabric skal nås via backend i det planlagte isolerte nettverket. Bruker, scope, proveniens, gyldighet, tilgang, sletting og korrigering må inngå i designet. Minne kan inneholde feil og må ikke gis autoritet over verifiserte kilder.
 
-import Quiz from '@site/src/components/Quiz';
-
-<Quiz question={"Hva er forskjellen på memory og knowledge?"} options={["Memory husker kontekst; knowledge henter kildeinformasjon","Begge er kun samtalehistorikk","Memory er alltid korrekt"]} correct={0} explanation={"En prosjektbeslutning kan ligge i minnet, mens den gjeldende prosjektmetoden ligger i kunnskapslaget."} />
+Minne og historikk forvaltes innenfor HVLs godkjente behandlingsmiljø. Eksterne modeller får bare nødvendig, policykontrollert kontekst, ikke direkte tilgang til minnelageret eller hele brukerprofilen. Pseudonymiserte data er fortsatt personopplysninger der de kan knyttes til en person.
