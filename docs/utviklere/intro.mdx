@@ -13,7 +13,7 @@ Frontend viser samtaler, strømmede svar, vedlegg, prosjekter, agentbygger, bibl
 
 ## Backend
 
-Backend håndterer autentisering (FEIDE/Entra ID), autorisasjon, samtaler og meldinger, orkestrering, policy, tjenestekall og relevante logger. Backend verifiserer forespørsler; en klientoppgitt bruker-ID er ikke tilstrekkelig. Komponentene skal ha avgrensede ansvar.
+Backend håndterer autentisering (FEIDE/Entra ID), autorisasjon, samtaler og meldinger, orkestrering, policy, tjenestekall og relevante logger. Backend verifiserer forespørsler; en klientoppgitt bruker-ID er ikke tilstrekkelig. Komponentene skal ha avgrensede ansvar. Innebygd personvern er et grunnprinsipp: brukeridentitet og tilgang håndteres av HVL, mens modellene får en avgrenset kontekst uten direkte identitetsmetadata. Se kapitlet [Innebygd personvern](./personvern.mdx).
 
 ```mermaid
 flowchart TD
@@ -28,7 +28,3 @@ flowchart TD
 ```
 
 **Eksempel:** En prosjektleder ber om en oppsummering. Backend kontrollerer tilgang, innhenter relevant kontekst og returnerer modellens svar. Ingen av de andre tjenestene behøver å være direkte eksponert mot nettleseren.
-
-import Quiz from '@site/src/components/Quiz';
-
-<Quiz question={"Hvor håndheves privilegerte tilgangsregler?"} options={["I nettleseren alene","I backend og ansvarlige tjenester","I modellens systemprompt"]} correct={1} explanation={"Klienten og modellen er ikke sikkerhetsgrenser."} />
