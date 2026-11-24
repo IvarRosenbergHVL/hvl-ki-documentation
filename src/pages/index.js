@@ -8,7 +8,7 @@ export default function Home() {
         <div className="course-kicker">HVL / PROSJEKTOPPLÆRING</div>
         <h1>HVLs KI-økosystem</h1>
         <p>En felles plattform for KI-tjenester i utdanning, forskning og administrasjon, med innebygd personvern.</p>
-        <p className="course-note">Målarkitektur · faglig utkast</p>
+        <p className="course-note">Arkitektur- og funksjonalitetsbeskrivelse · planlagt utvikling</p>
       </section>
       <section className="course-choice" aria-label="Velg læringsløp">
         <h2>Velg ditt læringsløp</h2>
@@ -26,7 +26,6 @@ export default function Home() {
             <span className="course-arrow">Start interessentkurset →</span>
           </Link>
         </div>
-        <p className="course-note">Begge kursene beskriver det planlagte målbildet, ikke bekreftet produksjonsstatus.</p>
       </section>
     </main>
   </Layout>;
