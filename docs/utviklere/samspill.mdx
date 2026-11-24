@@ -1,6 +1,6 @@
 ---
-title: "10 · Alt i samspill"
-sidebar_position: 10
+title: "11 · Alt i samspill"
+sidebar_position: 11
 ---
 
 En prosjektleder ber om status fra GitHub og beslutninger fra forrige møte, med forslag til neste ukes prioriteringer.
@@ -22,17 +22,14 @@ sequenceDiagram
  B->>K: Hent gjeldende kilder
  B->>T: Les GitHub-status
  B-->>R: Filtrert kontekst og resultater
- R->>G: Modellkall
+ R->>G: Nødvendig kontekst uten direkte identitetsmetadata
+ G->>G: Dataminimering, PII-vask og modellpolicy
  G-->>R: Analyse
  R-->>B: Resultat med kilder
  B-->>U: Status og forslag
 ```
 
-Skills for statusrapportering styrer metode. Modellvalg skjer innenfor policy. Endringer i GitHub krever separat godkjent handling. Nye prosjektbeslutninger kan lagres i memory etter gjeldende regler.
-
-## Praktisk oppgave
-
-Design en Canvas-læringsassistent: angi brukergruppe, ansvar, emnekilder, modell, skills, memory-scope, tillatte tools, lærerens rammer og evalueringskriterier. Marker hva som krever godkjenning før pilot.
+Skills for statusrapportering styrer metode. Modellvalg skjer innenfor policy. Eksterne modeller mottar bare godkjent kontekst, ikke brukerens innloggingsidentitet eller direkte systemtilgang. Endringer i GitHub krever separat godkjent handling. Nye prosjektbeslutninger kan lagres i memory etter gjeldende regler.
 
 ## Før kode
 
