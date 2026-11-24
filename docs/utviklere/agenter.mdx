@@ -35,3 +35,5 @@ Offisielle agenter må gjennom obligatoriske evalueringer før publisering. Agen
 Runtime delegerer kodekjøring og Computer Use til en isolert Execution Platform via autorisert verktøy/API. LangGraph koordinerer arbeidet, mens sandboxen utfører det. Se [Evals](./evaluering.mdx), [Execution Platform](./kjoremiljo.mdx) og [Audit](./sporbarhet.mdx).
 
 Agentdefinisjoner, versjoner og vedvarende runtime-tilstand lagres i ekstern PostgreSQL. Filer og artefakter som skal bevares, lagres i ekstern S3-kompatibel objektlagring. Applikasjonscontainerne inneholder ikke database eller vedvarende objektlager.
+
+Agent Runtime inngår i den samlede [HVL Agent Harness](./agent-harness.mdx). Context Engine, Agent Workspace, Supervisor og felles Agent Execution Context utdypes der som logiske funksjoner med åpne tjenestegrenser og kontrakter.
