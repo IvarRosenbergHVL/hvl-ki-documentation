@@ -3,20 +3,45 @@ title: "02 · Modeller og Model Gateway"
 sidebar_position: 2
 ---
 
-En LLM tolker og genererer språk, men har ikke automatisk kunnskap om HVLs interne data. Model Gateway gir et felles grensesnitt mot godkjente lokale og eksterne modeller.
+En LLM tolker og genererer språk, men har ikke automatisk kunnskap om HVLs interne data. Model Gateway er plattformens felles grensesnitt mot godkjente KI-modeller og forvalter registeret over tilgjengelige modeller på tvers av leverandører og behandlingsmiljøer.
+
+## Modellregister
+
+Registeret omfatter kommersielle skymodeller, modeller på HVLs egen maskinvare og modeller via nasjonale skytjenester. Hver modelloppføring beskriver modell og versjon, leverandør, behandlingsmiljø, godkjente dataklasser og bruksformål, modaliteter, kontekstvindu, språkegenskaper, kostnad, kapasitet og tilgjengelighet. Brukere og agenter får bare velge modeller som er tillatt for den aktuelle behandlingen.
+
+## Manuelt og automatisk modellvalg
+
+Brukeren kan velge modell eksplisitt. Agentbyggeren kan foreslå modell, modellroller og ressursgrenser basert på agentens oppgave. Backend og Runtime kan også be om automatisk valg etter oppgave og krav til kvalitet, språk, kapasitet, pris og responstid. Model Gateway håndhever policy uavhengig av hvordan modellvalget ble gjort.
 
 ```mermaid
 flowchart TD
  R[Backend / Runtime] --> G[Model Gateway]
  G --> P[Klassifisering, dataminimering og PII-vask]
- P --> D{Tillatt behandlingsmiljø?}
- D -->|Eksternt tillatt| E[Godkjent ekstern modell]
- D -->|Internt tillatt| L[Lokal modell i godkjent miljø]
- D -->|Ikke tillatt eller uavklart| X[Stopp eller avklar]
+ P --> D{Modellregister og policy}
+ D -->|Eksternt tillatt| E[Godkjent kommersiell skymodell]
+ D -->|Nasjonal tjeneste tillatt| N[Godkjent nasjonal skytjeneste]
+ D -->|Internt tillatt| L[Modell på HVLs maskinvare]
+ D -->|Ingen tillatt modell| X[Stopp eller avklar]
 ```
 
 HVL håndterer brukeridentiteten internt. Model Gateway skal ikke sende direkte identitetsmetadata til eksterne modelltilbydere. Gatewayens PII-vaskemaskin skal redusere identifiserende opplysninger i prompt og kontekst der det er mulig. Den er ett av flere sikkerhetslag, ikke en garanti for anonymisering. Se [Innebygd personvern](./personvern.mdx).
 
-Modellvalg avhenger av dataklassifisering, oppgave, kapasitet, kostnad, responstid og språk. Policy må også gjelde embeddings, hjelpe- og reserve-modeller. Lokal drift er ikke i seg selv en godkjenning for røde eller svarte data.
+Policy gjelder også embeddings, multimodale modeller, hjelpe- og reserve-modeller. Dataklassifisering og behandlingsmiljø må vurderes for hvert modellkall; et automatisk modellbytte skal aldri omgå disse reglene.
 
-Agentbyggeren bør analysere oppgaven og foreslå modell og ressursgrenser. En framtidig språk- og syntesemodell kan formulere sluttresultatet uten at den nødvendigvis utfører hovedanalysen. Dette er et designalternativ, ikke et fast krav.
+## Flere modeller i én arbeidsflyt
+
+Runtime kan koordinere forskjellige modellroller, eksempelvis en modell for kompleks analyse og en annen for språklig syntese av sluttresponsen. Nasjonalbibliotekets åpne [Borealis-modellserie](https://huggingface.co/NbAiLab) er en aktuell kandidat til norsk responsgenerering på bokmål og nynorsk. Modellen må evalueres for oppgaven, og syntesesteget må bevare fakta, kildehenvisninger og faglige nyanser.
+
+```mermaid
+flowchart LR
+ A[Oppgave og kontekst] --> R[Runtime]
+ R --> G[Model Gateway]
+ G --> M[Analysemodell]
+ M --> R
+ R --> G
+ G --> S[Norsk språk- og syntesemodell]
+ S --> R
+ R --> F[Sluttrespons med kilder]
+```
+
+Modellregisteret og det felles grensesnittet gir mulighet for å introdusere nye modeller uten å omskrive agentene og applikasjonene som bruker plattformen.
