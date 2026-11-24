@@ -9,7 +9,7 @@ En agent kombinerer mål, instruksjoner, modell, kontekst, skills, tools og poli
 
 Agentbyggeren skal selv kunne bruke KI til å analysere behovet: formål og brukergruppe, kunnskapskilder, memory, tools, skills, modell, arbeidsflyt, kostnad, tilgang, evaluering og godkjenningskrav. Brukeren må kunne endre forslagene og teste før publisering.
 
-Et visuelt grensesnitt kan støtte arbeidsflyter, mens agentdefinisjonen lagres som en versjonert, validerbar konfigurasjon. 
+En enkel assistent kan konfigureres i et skjemabasert grensesnitt; mer avanserte arbeidsflyter kan bygges i en nodeeditor. Begge bruker samme versjonerte agentdefinisjon og grafmodell. Tilgjengelige noder, tools, skills og knowledge begrenses av rolle og rettigheter, og valideres på backend og ved kjøring.
 
 ## Agent Runtime
 
@@ -19,10 +19,17 @@ Agentbyggeren definerer; Runtime kjører. Runtime koordinerer tilstand, modellka
 flowchart TD
  A[Agentbygger] --> D[Versjonert definisjon]
  D --> R[Runtime]
- R --> M[Modell]
+ R --> G[Model Gateway]
+ G --> M[Modell]
  M --> Q{Trenger verktøy?}
  Q -->|Ja| P[Policy og eventuell godkjenning]
  P --> T[Toolserver]
  T --> R
  Q -->|Nei| S[Resultat og kilder]
 ```
+
+## Kvalitet, utførelse og livsløp
+
+Offisielle agenter må gjennom obligatoriske evalueringer før publisering. Agentbyggeren foreslår agentspesifikke tester i tillegg til standardbiblioteket. Agent Registry knytter godkjenningen til en bestemt versjon. Runtime sender relevante hendelser til Audit og observability; Quality Platform følger opp kvalitet og menneskelig vurdering. Subagenter og planlagte kjøringer har egne avgrensede capabilities og arver ikke automatisk mer omfattende tilgang.
+
+Runtime delegerer kodekjøring og Computer Use til en isolert Execution Platform via autorisert verktøy/API. LangGraph koordinerer arbeidet, mens sandboxen utfører det. Se [Evals](./evaluering.mdx), [Execution Platform](./kjoremiljo.mdx) og [Audit](./sporbarhet.mdx).

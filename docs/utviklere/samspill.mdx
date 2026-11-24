@@ -14,6 +14,8 @@ sequenceDiagram
  participant K as HVL Knowledge
  participant T as Toolserver
  participant G as Model Gateway
+ participant A as Audit
+ participant Q as Quality Platform
  U->>B: Forespørsel
  B->>B: Identitet, tilgang og policy
  B->>R: Start godkjent agent
@@ -25,8 +27,12 @@ sequenceDiagram
  R->>G: Nødvendig kontekst uten direkte identitetsmetadata
  G->>G: Dataminimering, PII-vask og modellpolicy
  G-->>R: Analyse
+ R->>A: Relevante kjøringshendelser og versjoner
  R-->>B: Resultat med kilder
  B-->>U: Status og forslag
+ A-->>Q: Autorisert evidens for kvalitetsoppfølging
 ```
 
 Skills for statusrapportering styrer metode. Modellvalg skjer innenfor policy. Eksterne modeller mottar bare godkjent kontekst, ikke brukerens innloggingsidentitet eller direkte systemtilgang. Endringer i GitHub krever separat godkjent handling. Nye prosjektbeslutninger kan lagres i memory etter gjeldende regler.
+
+Ved behov benytter agenten Execution Platform til å produsere og validere en rapportfil. Produksjonsfunn kan bli nye regresjonstester i Evals. Quality Platform koordinerer gjennomgang og publisering av forbedrede versjoner. Planlagte kjøringer kan initieres av Automation Platform med samme policy og godkjenningskrav.

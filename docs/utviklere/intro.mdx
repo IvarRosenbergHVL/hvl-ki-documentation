@@ -25,6 +25,12 @@ flowchart TD
  B --> K[HVL Knowledge]
  B --> G[Model Gateway]
  B --> L[Biblioteker]
+ R --> X[Execution Platform via kontrollert API]
+ B --> E[Evals og Quality Platform]
+ B --> A[Audit og observability]
+ B --> W[Automation Platform]
 ```
 
 **Eksempel:** En prosjektleder ber om en oppsummering. Backend kontrollerer tilgang, innhenter relevant kontekst og returnerer modellens svar. Ingen av de andre tjenestene behøver å være direkte eksponert mot nettleseren.
+
+Plattformens kontroll- og kvalitetslag omfatter [Evals og Quality Platform](./evaluering.mdx), [Execution Platform](./kjoremiljo.mdx) og [Audit og tracing](./sporbarhet.mdx). Diagrammet viser logiske funksjoner, ikke alle nettverksforbindelser.

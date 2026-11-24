@@ -22,6 +22,9 @@ flowchart TD
  P --> F[Memory Fabric]
  P --> T[Toolserver og connectors]
  P --> W[Agent Runtime og skills]
+ P --> E[Evals og Quality Platform]
+ P --> A1[Audit og observability]
+ W --> X[Execution Platform]
  G --> H[Godkjente modeller og behandlingsmiljøer]
 ```
 
@@ -79,3 +82,5 @@ Nye tjenester kan utvikles uten at hvert prosjekt gjentar arbeidet med modellint
 Felles grunnmur betyr ikke at alle data, agenter eller brukere får felles tilgang. Hver tjeneste har egne formål, tillatelser, datagrenser og ansvar. Plattformen må håndheve disse også når den brukes fra andre systemer enn KI-chatten.
 
 Eksemplene viser ulike muligheter for utvikling ved HVL. Fagmiljøer, tjenesteeiere og forskningsmiljøer må involveres i prioritering, utforming og evaluering. Felles plattformutvikling gjør at innsatsen i større grad kan rettes mot faglig verdi og arbeidsprosesser fremfor gjentatt utvikling av grunnleggende KI-infrastruktur.
+
+Alle offisielle tjenester med agenter bruker plattformens felles kvalitetssikring, kontrollert utførelse og sporbarhet. Se [evaluering](./evaluering.mdx), [virtuelle arbeidsmiljøer](./kjoremiljo.mdx) og [sporbarhet](./sporbarhet.mdx).

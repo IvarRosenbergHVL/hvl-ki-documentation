@@ -1,0 +1,54 @@
+---
+title: "11 · Evaluering og kontinuerlig forbedring"
+sidebar_position: 11
+---
+
+En KI-agent er en tjeneste som må kvalitetssikres og forvaltes gjennom hele levetiden. En god demonstrasjon er ikke tilstrekkelig: agenten må fungere på representative oppgaver, håndtere vanskelige situasjoner og fortsette å levere når modeller, kunnskapskilder og integrasjoner endres.
+
+HVL etablerer to komplementære funksjoner: **Evals**, som gjennomfører og dokumenterer evalueringer, og **Quality Platform**, som følger opp kvaliteten over tid og organiserer forbedringsarbeidet.
+
+## Obligatorisk kvalitetssikring
+
+Alle offisielle HVL-agenter skal gjennom obligatoriske evalueringer før publisering. Agentbyggeren analyserer agentens formål, instruksjoner, modeller, kunnskapskilder, skills og verktøy. Et felles bibliotek med standardtester suppleres med agentspesifikke tester som KI kan foreslå. Fagansvarlige kvalitetssikrer testene og vurderingskriteriene.
+
+| Hva evalueres? | Eksempel |
+|---|---|
+| Faglig kvalitet og kildebruk | Mime finner gjeldende regelverk og henviser til riktig kilde. |
+| Pedagogikk | En Canvas-agent gir veiledning innenfor faglærerens rammer. |
+| Sikkerhet og personvern | Agenten avviser forsøk på å hente informasjon brukeren ikke har tilgang til. |
+| Verktøy og handlinger | Agenten bruker korrekt verktøy og ber om godkjenning når det kreves. |
+| Samarbeid mellom agenter | Hele arbeidsflyten gir et korrekt resultat, også ved feil i en deloppgave. |
+| Tilgjengelighet og språk | Tjenesten fungerer for brukergruppen og håndterer bokmål, nynorsk og relevant fagterminologi. |
+| Ressursbruk | Kvalitet, responstid og kostnad vurderes samlet. |
+
+Tester kan være automatiske, KI-støttede eller gjennomført av fagpersoner. KI-vurderinger er hjelpemidler, ikke en erstatning for faglig kontroll.
+
+## Fra publisering til kontinuerlig forbedring
+
+```mermaid
+flowchart TD
+ A[Agentbygger og testgrunnlag] --> B[Evals]
+ B --> C{Godkjent kvalitet?}
+ C -->|Nei| D[Forbedre agenten]
+ D --> B
+ C -->|Ja| E[Faglig godkjenning og publisering]
+ E --> F[Bruk og kvalitetsovervåking]
+ F --> G[Quality Platform]
+ G --> H[Menneskelig gjennomgang og forbedringsforslag]
+ H --> I[Ny agentversjon og regresjonstester]
+ I --> B
+```
+
+Quality Platform analyserer tillatte produksjonsspor, brukerfeedback og evalueringsresultater. Feil og avvik kan grupperes, prioriteres og omsettes til forslag om bedre instruksjoner, kilder, modellvalg, skills eller verktøy. Fagansvarlige kan gjennomgå utvalgte interaksjoner og episoder med nødvendig tilgang, og avgjøre hva som bør endres.
+
+En feil som avdekkes i drift kan bli en ny regresjonstest, slik at samme feil ikke gjeninnføres i senere versjoner. Nye versjoner evalueres før de erstatter den publiserte agenten. Alvorlige feil kan medføre at en versjon trekkes tilbake eller at agenten midlertidig deaktiveres.
+
+Dette er kontrollert forbedring, ikke at agenten på egen hånd endrer sine instrukser, rettigheter eller modellvekter. Mennesker har ansvar for kvalitet, prioritering og godkjenning.
+
+## Eksempel: Mime v2.0
+
+En student spør om en frist. Mime gir et svar basert på en gammel rutine. Etter tilbakemelding undersøker tjenesteeier om feilen skyldes kilden, søket eller agentens instruksjoner. Riktig kilde og en ny test inngår i en forbedret versjon som evalueres før publisering. Dermed kan også andre tjenester som bruker samme kunnskapskilde få nytte av forbedringen.
+
+Kvalitetsoppfølging må gjennomføres med innebygd personvern. Ikke alle samtaler skal lagres eller leses; utvalg, formål, tilgang, slettefrister og behandling av personopplysninger skal styres.
+
+Se også [Sporbarhet og KI-forordningen](./sporbarhet.mdx).
