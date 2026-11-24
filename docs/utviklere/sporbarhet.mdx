@@ -44,7 +44,7 @@ Backend etablerer requestId og runId. Run Context formidler intern pseudonym akt
 
 Dette er en logisk kontrakt, ikke krav om at hvert event inneholder alle feltene. Rå prompts, dokumenter, credentials, PII-verdier og komplette tool-resultater inngår ikke i standard audit. Når innhold er nødvendig som evidens, håndteres det separat med eksplisitt formål, tilgang og levetid. Bruk evidensreferanser og integritetskontroller der det er hensiktsmessig.
 
-Audit-hendelser skal være beskyttet mot uautorisert endring og sletting, ha versjonert schema, pålitelig tidsgrunnlag, idempotent innsending og kontrollert oppbevaring. Append-only gjelder ordinære skrivere; godkjent livsløpshåndtering og lovpålagt sletting må fortsatt kunne gjennomføres. Tjenesteeide datalagre ligger utenfor containerne. Kritiske handlinger må ha en definert strategi ved utilgjengelig audit; eksempelvis sikker stans eller pålitelig utboks med avklart risiko. Tilgang til revisjonsspor logges også.
+Audit-hendelser skal være beskyttet mot uautorisert endring og sletting, ha versjonert schema, pålitelig tidsgrunnlag, idempotent innsending og kontrollert oppbevaring. Append-only gjelder ordinære skrivere; godkjent livsløpshåndtering og lovpålagt sletting må fortsatt kunne gjennomføres. Audit bruker ekstern PostgreSQL for strukturerte revisjonshendelser, med beskyttede skriverettigheter og integritetskontroller. Eventuelle godkjente evidensobjekter lagres i ekstern S3-kompatibel objektlagring. Datalagrene ligger utenfor containerne. Kritiske handlinger må ha en definert strategi ved utilgjengelig audit; eksempelvis sikker stans eller pålitelig utboks med avklart risiko. Tilgang til revisjonsspor logges også.
 
 ## Krav i EU AI Act
 

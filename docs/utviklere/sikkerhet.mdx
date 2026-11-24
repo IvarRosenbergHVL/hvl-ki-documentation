@@ -5,7 +5,7 @@ sidebar_position: 9
 
 Sikkerhet må være gjennomgående. FEIDE/Entra ID er planlagte identitetskilder; autentisering må skilles fra autorisasjon. Dataklassifisering styrer hvilke modeller, tjenester, lagre og integrasjoner som kan brukes. Alle utleveringer, ikke bare primærmodellkallet, omfattes.
 
-Kubernetes med mikrosegmentering, begrensede tjenestetilganger og ekstern vedvarende lagring er målbildet. Memory Fabric skal ikke være direkte eksponert; backend er den planlagte inngangen. Prinsippet om minste privilegium gjelder også connectors.
+Kubernetes med mikrosegmentering og begrensede tjenestetilganger brukes for applikasjonene. PostgreSQL og S3-kompatibel objektlagring er separate infrastrukturtjenester utenfor applikasjonscontainerne. Nettverkstilgang og tjenesteidentiteter avgrenses per datalager, med egne rettigheter, kryptering og kontrollert sikkerhetskopiering. Memory Fabric skal ikke være direkte eksponert; backend er den planlagte inngangen. Prinsippet om minste privilegium gjelder også connectors.
 
 Menneskelig godkjenning trengs for handlinger med vesentlige konsekvenser. Toolserver håndhever regler uavhengig av modellens output. Dokumenter og tool-resultater er potensielt upålitelige data, ikke instruksjoner. Beskytt mot prompt-injeksjon og utlevering.
 

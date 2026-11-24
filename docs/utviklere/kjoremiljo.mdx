@@ -15,7 +15,7 @@ flowchart TD
  C --> S[Isolert sandbox / VM]
  S --> W[Kode, interpreter og nettleser]
  S --> X[Kontrollert artefakteksport]
- X --> O[Godkjent objektlager]
+ X --> O[Eksternt S3-kompatibelt objektlager]
  S --> L[Strukturerte hendelser og metrics]
  L --> T[Audit og observability]
 ```
@@ -55,7 +55,7 @@ flowchart LR
 - Ingen direkte tilgang til internnett, metadataendepunkter, container-runtime-socket, cluster-admin eller brukerens autentiseringstokens.
 - Minste privilegium, ikke-root der mulig, ingen uautoriserte host mounts, godkjente images og avgrensede fil-/pakkeoperasjoner.
 - CPU-, minne-, disk-, tids-, prosess-, nettverks- og kostnadsgrenser; automatisk TTL, avbrudd og sikker rydding også ved feil.
-- Arbeidsfiler hentes via autoriserte, kortlivede grensesnitt. Artefakter valideres, skannes der relevant og eksporteres til tilgangsstyrt, ekstern objektlagring (S3-kompatibel eller Azure Blob i godkjent miljø).
+- Arbeidsfiler hentes via autoriserte, kortlivede grensesnitt. Artefakter valideres, skannes der relevant og eksporteres til tilgangsstyrt, ekstern S3-kompatibel objektlagring i godkjent miljø.
 - Innhold fra nettsider, filer og skjermbilder er potensielt upålitelige data. Prompt-injeksjon skal ikke kunne utvide nettverkstilgang eller verktøyrettigheter.
 - Fagsystemoperasjoner går via godkjent Toolserver/connector; ingen gjenbruk av brukerens åpne nettlesersesjon som generell adgang. Eventuelle spesifikke nettleserintegrasjoner må håndtere autentisering og hemmeligheter særskilt.
 
@@ -68,3 +68,5 @@ ExecutionSession beskriver sessionId, runId, eier/scope, miljøprofil, ressursbu
 Strukturerte hendelser korreleres med executionId, sessionId, runId, requestId og eventuelt threadId, uten å logge rått sensitivt innhold som standard. Kontrollplanet og sandboxen har separate tillatelser. Execution Platform skal kunne testes for isolasjon, egress, rydding, samtidighet og artefaktintegritet gjennom Evals.
 
 Se [Audit, tracing og KI-forordningen](./sporbarhet.mdx).
+
+Execution Platform og Agent Runtime bruker ekstern PostgreSQL for vedvarende sesjonsmetadata, jobbstatus og checkpoints der det er nødvendig, og ekstern S3-kompatibel objektlagring for godkjente artefakter. Sandboxens lokale filsystem er midlertidig. Sandboxen får ikke direkte tilgang til databasen eller generelle S3-nøkler.

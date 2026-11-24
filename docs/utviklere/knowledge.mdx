@@ -52,3 +52,7 @@ flowchart LR
 ```
 
 Faseforslag: dokumenter og RAG; personlige connectors; delte avdelingskilder; forvaltet katalog; autoritet og kvalitetskontroll. Datamodell og tilgangsarkitektur må ta høyde for framtidige scopes allerede tidlig.
+
+## Datalagring
+
+HVL Knowledge benytter ekstern PostgreSQL til metadata, kilderegistre og vedvarende indeksdata der dette er egnet, samt ekstern S3-kompatibel objektlagring til godkjente dokumentkopier og øvrige objekter. Dokumentrettigheter, sletting og synkronisering gjelder også kopier og indekser. Ingen vedvarende lagring i Knowledge-containerne. Valg av indekseringsmekanisme endrer ikke plattformens felles lagringsprinsipp.

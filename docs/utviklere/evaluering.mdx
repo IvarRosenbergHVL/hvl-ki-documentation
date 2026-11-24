@@ -3,7 +3,7 @@ title: "12 · Evals og Quality Platform"
 sidebar_position: 12
 ---
 
-HVL skiller mellom kjøring av evalueringer og forvaltning av kvalitet gjennom agentens livsløp. Evals-tjenesten (hvl-ai-evals) kjører tester og vurderere; Quality Platform (hvl-ai-quality-platform) analyserer resultater og tillatte produksjonsepisoder, organiserer menneskelig gjennomgang, forbedringsforslag og ny evaluering. Tjenestene har egne ansvarsområder og vedvarende lagring utenfor containerne.
+HVL skiller mellom kjøring av evalueringer og forvaltning av kvalitet gjennom agentens livsløp. Evals-tjenesten (hvl-ai-evals) kjører tester og vurderere; Quality Platform (hvl-ai-quality-platform) analyserer resultater og tillatte produksjonsepisoder, organiserer menneskelig gjennomgang, forbedringsforslag og ny evaluering. Tjenestene har egne ansvarsområder og bruker ekstern PostgreSQL til strukturerte evaluerings- og kvalitetsdata og ekstern S3-kompatibel objektlagring til godkjente testartefakter. Ingen vedvarende lagring i tjenestenes containere.
 
 ## Evalueringsmotor og testbibliotek
 

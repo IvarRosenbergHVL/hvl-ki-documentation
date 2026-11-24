@@ -33,3 +33,5 @@ flowchart TD
 Offisielle agenter må gjennom obligatoriske evalueringer før publisering. Agentbyggeren foreslår agentspesifikke tester i tillegg til standardbiblioteket. Agent Registry knytter godkjenningen til en bestemt versjon. Runtime sender relevante hendelser til Audit og observability; Quality Platform følger opp kvalitet og menneskelig vurdering. Subagenter og planlagte kjøringer har egne avgrensede capabilities og arver ikke automatisk mer omfattende tilgang.
 
 Runtime delegerer kodekjøring og Computer Use til en isolert Execution Platform via autorisert verktøy/API. LangGraph koordinerer arbeidet, mens sandboxen utfører det. Se [Evals](./evaluering.mdx), [Execution Platform](./kjoremiljo.mdx) og [Audit](./sporbarhet.mdx).
+
+Agentdefinisjoner, versjoner og vedvarende runtime-tilstand lagres i ekstern PostgreSQL. Filer og artefakter som skal bevares, lagres i ekstern S3-kompatibel objektlagring. Applikasjonscontainerne inneholder ikke database eller vedvarende objektlager.

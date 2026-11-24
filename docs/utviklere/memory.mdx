@@ -19,11 +19,11 @@ flowchart TD
  A[Backend / samtale] --> E[Memory-agent: vurder relevans]
  E --> B[Backend: policy og omfang]
  B --> F[Memory Fabric]
- F --> P[PostgreSQL]
- F --> S[S3-kompatibel objektlagring]
+ F --> P[Ekstern PostgreSQL]
+ F --> S[Ekstern S3-kompatibel objektlagring]
  F --> B
 ```
 
-PostgreSQL er sentral database, med S3-kompatibel objektlagring der det er hensiktsmessig. Vedvarende lagring ligger utenfor applikasjonscontainerne. Memory Fabric skal nås via backend i det planlagte isolerte nettverket. Bruker, scope, proveniens, gyldighet, tilgang, sletting og korrigering må inngå i designet. Minne kan inneholde feil og må ikke gis autoritet over verifiserte kilder.
+Memory Fabric bruker ekstern PostgreSQL som database og ekstern S3-kompatibel objektlagring for objekter. Ingen database eller vedvarende objektlagring kjøres inne i Memory Fabric-containeren. Se [felles krav til database og lagring](./intro.mdx#felles-krav-til-database-og-lagring). Memory Fabric skal nås via backend i det planlagte isolerte nettverket. Bruker, scope, proveniens, gyldighet, tilgang, sletting og korrigering må inngå i designet. Minne kan inneholde feil og må ikke gis autoritet over verifiserte kilder.
 
 Minne og historikk forvaltes innenfor HVLs godkjente behandlingsmiljø. Eksterne modeller får bare nødvendig, policykontrollert kontekst, ikke direkte tilgang til minnelageret eller hele brukerprofilen. Pseudonymiserte data er fortsatt personopplysninger der de kan knyttes til en person.

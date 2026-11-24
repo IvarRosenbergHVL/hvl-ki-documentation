@@ -34,3 +34,32 @@ flowchart TD
 **Eksempel:** En prosjektleder ber om en oppsummering. Backend kontrollerer tilgang, innhenter relevant kontekst og returnerer modellens svar. Ingen av de andre tjenestene behøver å være direkte eksponert mot nettleseren.
 
 Plattformens kontroll- og kvalitetslag omfatter [Evals og Quality Platform](./evaluering.mdx), [Execution Platform](./kjoremiljo.mdx) og [Audit og tracing](./sporbarhet.mdx). Diagrammet viser logiske funksjoner, ikke alle nettverksforbindelser.
+
+## Felles krav til database og lagring
+
+PostgreSQL er standard database for hele KI-økosystemet. S3-kompatibel objektlagring brukes til filer, vedlegg, dokumentkopier og andre objekter som skal bevares. Begge leveres som separate infrastrukturtjenester utenfor applikasjonscontainerne. Database og objektlager skal ikke pakkes inn i tjenestenes container-images eller følge med som lokale lagringstjenester i produksjonsdeployments.
+
+Applikasjonscontainerne skal kunne erstattes, restartes og skaleres uten tap av vedvarende data. Lokale filer i containerne brukes bare til midlertidig arbeid, aldri som autoritativ lagring. Agentenes isolerte arbeidsmiljøer følger samme prinsipp.
+
+```mermaid
+flowchart TD
+ subgraph APP[Applikasjoner i Kubernetes]
+ B[Backend]
+ M[Memory Fabric]
+ K[HVL Knowledge]
+ R[Agent Runtime og øvrige tjenester]
+ end
+ subgraph DATA[Separat datainfrastruktur]
+ P[PostgreSQL]
+ S[S3-kompatibel objektlagring]
+ end
+ B --> P
+ M --> P
+ M --> S
+ K --> P
+ K --> S
+ R --> P
+ R --> S
+```
+
+Diagrammet viser lagringsprinsippet, ikke en felles database eller bøtte som alle tjenester får tilgang til. Hver tjeneste eier sine data og har egne avgrensede database- og objektlagringstilganger. Andre tjenester bruker eierens API, ikke direkte oppslag i fremmede tabeller. Forbindelser, autentisering, kryptering, sikkerhetskopiering, gjenoppretting og migrering må håndteres uavhengig av applikasjonscontainerens livsløp. Fysisk inndeling i PostgreSQL-instanser og S3-miljøer bestemmes av sikkerhet, dataklassifisering og driftsbehov.
