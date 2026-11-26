@@ -28,7 +28,7 @@ export default function Home() {
           <Link className="course-tile" to="/docs/prodekanforum/intro">
             <span className="course-kicker">03 / BESLUTNINGSGRUNNLAG</span>
             <h3>For prodekanforum</h3>
-            <p>Fra enkel KI-chat til en moderne, HVL-styrt KI-tjeneste med interne integrasjoner, agenter og en felles grunnmur. Kort beslutningsgrunnlag.</p>
+            <p>Fra enkel KI-chat til en moderne, HVL-styrt KI-tjeneste med interne integrasjoner, agenter og en felles grunnmur. Beslutningsgrunnlag på ca. 2 minutter, med valgfri fordypning.</p>
             <span className="course-arrow">Les beslutningsgrunnlaget →</span>
           </Link>
         </div>
