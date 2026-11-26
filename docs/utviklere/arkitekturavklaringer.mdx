@@ -28,7 +28,7 @@ LangGraph er kjernen for enkeltagenter og multiagentgrafer. Selektiv kontekstdel
 
 Se [leveranser og utviklingsstatus](./leveranser.mdx). Nettsøk med kildehenvisninger er et lanseringskrav. SearXNG er planlagt for metasøk; søkeleverandører, egress, SSRF-beskyttelse, prompt-injeksjon, kvalitet og vilkår må verifiseres. Gravitee.io er planlagt for API-publisering av agenter; bruk som grunnlag for Toolserver, lisens og tjenesteautentisering er åpne valg. Felles artefaktkontrakt, godkjente generative UX-komponenter, inferenskøer og kvoter må konkretiseres før berørte funksjoner lanseres.
 
-Model Gateway MVP avgrenses til modellregister, manuelt valg, leverandøradaptere og policy. LangGraph eier valgfri responskomponering med lokal Borealis. Avklar JSON-schema, modellvariant og ressursbruk, semantisk trofasthet, kildevalidering, streaming og policybevarende fallback. Se [modellroller](./modeller.mdx).
+Model Gateway MVP avgrenses til modellregister, manuelt valg, leverandøradaptere og policy. LangGraph eier valgfri responskomponering i sluttnoden, med avkrysningsboks og betinget målformvalg; ingen egen synlig node i MVP. Borealis 2 26B-A4B prioriteres på én dedikert GB10. Avklar JSON-schema, feltstier for språkbehandling i API-output, uendrede kilder og artefakter, modellversjon, vLLM-støtte, kø, batching og målt kapasitet, semantisk trofasthet, kildevalidering, streaming og policybevarende fallback. Se [modellroller](./modeller.mdx).
 
 ## Avklaringer for Agent Harness
 

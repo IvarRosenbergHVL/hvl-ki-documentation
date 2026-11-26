@@ -44,24 +44,37 @@ Toolserver, Knowledge, Memory Fabric, Execution Platform og øvrige tjenester m�
 
 ## Flere modeller i én arbeidsflyt: Response Composer i LangGraph
 
-Første iterasjon kan tilby tre kjøremåter: direkte svar fra valgt modell, kombinert kjøring med en egen norsk responsmodell, og helt lokal kjøring med godkjente lokale modeller. Brukeren kan velge kombinert kjøring og ønsket målform. Nasjonalbibliotekets [Borealis-modellserie](https://ai.nb.no/borealis/) er foreslått som lokal Response Composer på HVLs GB10-infrastruktur. Konkret modellvariant, lisens, kvalitet og kapasitet må verifiseres.
+Første iterasjon kan tilby tre kjøremåter: direkte svar fra valgt modell, kombinert kjøring med en egen norsk responsmodell, og helt lokal kjøring med godkjente lokale modeller. Brukeren kan velge kombinert kjøring og ønsket målform. Nasjonalbibliotekets [Borealis-modellserie](https://ai.nb.no/borealis/) er foreslått som lokal Response Composer. Borealis 2 26B-A4B er prioritert kandidat, med én av HVLs fire GB10-maskiner dedikert til tjenesten i første utrulling. Modellversjon, lisens, inferensstøtte, kvalitet og faktisk kapasitet verifiseres før produksjon. Den opprinnelige Borealis 12B eller 27B kan vurderes som reserve dersom den nye varianten ikke møter kravene.
 
-LangGraph koordinerer arbeidsflyten. Hovedmodellen løser oppgaven, eventuelt med tools og RAG. Deretter bygger Runtime en strukturert responspakke av grafens tilstand og autoriserte kildereferanser. En egen, valgfri Response Composer-node kaller Borealis via Model Gateway. Borealis formulerer sluttresponsen på bokmål eller nynorsk, uten å overta hovedmodellens oppgave eller verktøytilganger.
+LangGraph koordinerer arbeidsflyten. Hovedmodellen løser oppgaven, eventuelt med tools og RAG. Deretter bygger Runtime en strukturert responspakke av grafens tilstand og autoriserte kildereferanser. En valgfri intern Response Composer-operasjon i sluttnoden kaller Borealis via Model Gateway. Borealis formulerer utvalgte tekstfelt på bokmål eller nynorsk, uten å overta hovedmodellens oppgave eller verktøytilganger. Det er ikke en egen synlig node i React Flow i MVP-en.
 
 ```mermaid
 flowchart TD
  A[Brukerens oppgave og modellvalg] --> B[LangGraph: oppgaveløsning]
  B --> G1[Model Gateway: valgt hovedmodell]
  G1 --> B
- B --> D{Responskomponering valgt?}
- D -->|Nei| F[Direkte respons]
+ B --> E[Sluttnode: samle og validere resultater]
+ E --> D{Bruk Borealis?}
+ D -->|Nei| F[Uendret innhold]
  D -->|Ja| C[Bygg og valider responspakke]
- C --> R[LangGraph: Response Composer]
+ C --> R[Intern tekstkomponering]
  R --> G2[Model Gateway: lokal Borealis]
- G2 --> V[Valider respons og kildereferanser]
- V -->|Godkjent| S[Sluttrespons]
+ G2 --> V[Valider bearbeidede tekstfelt]
+ V -->|Godkjent| J[Sett tilbake tekst; behold øvrige felt]
+ F --> J
+ J --> S[Valider output-schema og lever til chat eller API]
  V -->|Avvik| H[Kontrollert fallback eller avklar]
 ```
+
+### Sluttnodens konfigurasjon og ansvarsdeling
+
+I MVP-en vises én avkrysningsboks i sluttnodens konfigurasjonsskjema: «Bruk Nasjonalbibliotekets Borealis». Når den er valgt, vises et obligatorisk nedtrekksfelt med Bokmål og Nynorsk. Innstillingene lagres i den versjonerte agentdefinisjonen, eksempelvis `responseComposer.enabled` og `responseComposer.locale` (illustrative feltnavn). Backend validerer konfigurasjonen og kompilerer den til sluttnodens interne LangGraph-arbeidsflyt. Avkrysning er av som standard; ingen ekstra synlig node er nødvendig. Senere kan komponering tilbys etter enkelte agentnoder eller som eksplisitt nodetype dersom det er nyttig.
+
+I multiagentgrafer utveksles strukturerte delresultater mellom agentene uten språklig omskriving som standard. Sluttnoden samler relevante resultater, kilder, verktøyresultater, forbehold og artefaktreferanser fra autorisert grafstate og persistent arbeidskontekst. Runtime velger ut nødvendig kontekst innenfor modellens kontekstvindu og oppretter responspakken.
+
+Sluttnoden er uavhengig av publiseringskanalen. For både chat og API beholdes opprinnelig responsstruktur. I API-agenter angir agentens output-kontrakt eksplisitt hvilke fritekstfelt som kan språkbehandles, eksempelvis gjennom godkjente feltstier. Borealis får bare nødvendige tekstdata og relevante kilde- og artefaktreferanser. Den får ikke i oppgave å bearbeide eller generere bilder, dokumenter, regneark, kode, diagrammer eller generative UI-komponenter på nytt. Tallfelt, ID-er, filreferanser, struktur og ikke-valgte felt skal videreføres uendret. Runtime setter bearbeidede tekstfelt tilbake i responsen og validerer output-schema; chat kan deretter rendere tekst, kilder og artefakter, mens API returnerer den avtalte strukturen.
+
+**Borealis komponerer språket. Sluttnoden komponerer den komplette responsen.** Ved strukturert JSON-output kan inferensserverens schema-begrensning benyttes hvis modellen og serveren støtter dette; Runtime validerer uansett resultatet. Ved feil brukes en policygodkjent fallback eller en eksplisitt feilhåndtering, ikke en umerket endring av API-kontrakten.
 
 ### Foreslått strukturert responspakke
 
@@ -73,6 +86,8 @@ Runtime bygger en versjonert JSON-kontrakt. Den inneholder brukerens spørsmål,
   "question": "Hva viser analysen?",
   "locale": "nn-NO",
   "format": "markdown",
+  "text_fields": ["/answer"],
+  "answer": "Resultatet gjelder bare det undersøkte materialet.",
   "findings": [
     {
       "text": "Resultatet er avgrenset til det undersøkte materialet.",
@@ -95,5 +110,11 @@ Runtime bygger en versjonert JSON-kontrakt. Den inneholder brukerens spørsmål,
 Kilderegister og artefaktreferanser forvaltes av Runtime, ikke av responsmodellen. Kildeinnhold behandles som data, ikke instruksjoner. JSON valideres før komponering. Response Composer skal bevare fakta, tall, forbehold og faglige nyanser, ikke introdusere nye påstander eller oppdiktede kilder. Runtime kontrollerer referanse-ID-er og rendrer lenker fra autoritative metadata. Slik validering sikrer ikke alene at påstandene er faglig underbygget; evals må også måle semantisk trofasthet, språkkvalitet på bokmål og nynorsk, kildegrunnlag og responstid. Ved feil kan Runtime bruke en allerede godkjent direkte respons eller avstå og forklare begrensningen; fallback må aldri omgå modellpolicy. Direkte streaming bør ikke vise hovedmodellens råutkast som endelig svar når komponering er valgt.
 
 Dette er en avgrenset, valgfri MVP-funksjon, ikke et krav om at alle svar skal gå gjennom Borealis. Lokal komponering gjør ikke et tidligere eksternt modellkall lokalt. Ved helt lokal kjøring må også embeddings, hjelpe- og reservekall samt relevante tools følge den lokale behandlingspolicyen.
+
+### Lokal drift av Borealis-tjenesten
+
+Planlagt første oppsett er én dedikert Dell GB10-maskin i Kubernetes. Borealis 2 26B-A4B prioriteres for utprøving, med omtrent 26 milliarder totale og fire milliarder aktive parametere per token etter modellens oppgitte arkitektur; færre aktive parametere kan gi effektiv inferens, men alle vektene krever minne og faktisk ytelse må måles. Modellens status og egnethet for produksjon kontrolleres ved valg av konkret versjon. Tjenesten skal holdes varm i minnet, med vLLM som aktuell inferensserver dersom modellstøtten er tilfredsstillende, kontinuerlig batching, avgrenset kø, kvoter og prioritering av interaktive kall foran automatiserte bakgrunnsoppgaver.
+
+Model Gateway eksponerer en logisk modell-ID for Borealis-komponering; konkret modellversjon registreres i kjøringens sporbarhet. Sentral oppgradering eller horisontal skalering med en ekstra instans skal ikke kreve endring i agentdefinisjonene, men nye versjoner må evalueres og godkjennes. Én maskin gir ikke maskinvareredundans. Kapasitets- og driftsprøver må omfatte forespørsler per minutt, input- og outputlengde, tid til første token, total responstid, kø, samtidighet, minnebruk og feilhåndtering, samt norsk språkkvalitet, faktabevaring og uendrede ikke-tekstfelt. De øvrige tre GB10-maskinene er tilgjengelige for andre lokale KI-tjenester, utvikling og testing etter behov. Kapasitet for hele HVL er ikke målt eller lovet.
 
 Modellregisteret og det felles grensesnittet gir mulighet for å introdusere nye modeller uten å omskrive agentene og applikasjonene som bruker plattformen.

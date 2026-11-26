@@ -30,7 +30,7 @@ flowchart TD
 
 ## Modellroller og Response Composer
 
-LangGraph koordinerer også valgfrie arbeidsflyter med flere modeller. Hovedmodellen løser oppgaven; en egen Response Composer-node kan deretter formulere svaret med Nasjonalbibliotekets Borealis lokalt på GB10. Runtime bygger en versjonert JSON-responspakke fra grafens tilstand med resultat, kilder, forbehold, språk og artefaktreferanser, og validerer sluttresponsen. Begge modellkall går gjennom Model Gateway og gjeldende policy. Gateway eier modelltilgang, ikke grafens arbeidsflyt. Se [modellroller og strukturert responspakke](./modeller.mdx#flere-modeller-i-én-arbeidsflyt-response-composer-i-langgraph).
+LangGraph koordinerer også valgfrie arbeidsflyter med flere modeller. Hovedmodellen løser oppgaven; i MVP-en aktiveres lokal responskomponering med en avkrysningsboks «Bruk Nasjonalbibliotekets Borealis» i sluttnodens skjema, og et betinget målformvalg (bokmål eller nynorsk). Ingen egen synlig Response Composer-node er nødvendig. Runtime samler relevante agent- og verktøyresultater, kilder, forbehold og artefaktreferanser i en versjonert JSON-responspakke fra autorisert grafstate. Den interne komponeringen bearbeider bare valgte tekstfelt; sluttnoden bevarer øvrig innhold og validerer output-schema for både chat og API. Borealis 2 26B-A4B er prioritert kandidat på én dedikert GB10. Intern agentkommunikasjon omskrives ikke som standard. Begge modellkall går gjennom Model Gateway og gjeldende policy. Gateway eier modelltilgang, ikke grafens arbeidsflyt. Se [modellroller og strukturert responspakke](./modeller.mdx#flere-modeller-i-én-arbeidsflyt-response-composer-i-langgraph).
 
 ## Kvalitet, utførelse og livsløp
 
