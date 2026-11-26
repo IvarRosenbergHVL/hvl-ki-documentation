@@ -1,58 +1,59 @@
 ---
 title: "HVLs KI-økosystem – strategisk beslutningsgrunnlag"
-sidebar_label: "Kortversjon"
+sidebar_label: "Beslutningsgrunnlag"
 sidebar_position: 1
 description: "Beslutningsgrunnlag for prodekanforum for KI og digitalisering."
 ---
 
 **Prodekanforum for KI og digitalisering**
 
-## Hvorfor og hva?
+## Hvorfor?
 
-Dagens grunnleggende KI-chat fra UiO dekker ikke lenger behovene til studenter og ansatte. Brukerne ønsker funksjonalitet fra blant annet Claude, ChatGPT og Google. HVL kan selv tilby mye av dette – med et viktig fortrinn: kontrollert tilgang til egne informasjonskilder, systemer og arbeidsprosesser.
+Dagens grunnleggende KI-chat fra UiO dekker ikke lenger behovene til studenter og ansatte. Brukerne etterspør funksjonalitet de kjenner fra Claude, ChatGPT og Googles tjenester: nettsøk, dokumentarbeid, hukommelse og KI som kan gjennomføre oppgaver.
 
-**Fra å svare på spørsmål til å utføre oppgaver.** Brukerne blir vant til agentisk funksjonalitet i tjenester som ChatGPT og Claude: KI som kan planlegge og gjennomføre sammensatte oppgaver, søke etter informasjon, bruke verktøy, analysere filer og produsere ferdige dokumenter og andre arbeidsresultater. Vi vil tilby slike muligheter i HVL, også med tilgang til godkjente interne systemer, under menneskelig kontroll. Dette er et hovedmål for satsingen, ikke bare en utvidelse av chat. Målbildet omfatter også kontrollert nettleserbruk, tilgang til utvalgte filer på brukerens egen PC, virtuelle datamaskiner der agentene kan kjøre kode og lage filer, og automatisering av arbeidsoppgaver. HVLs egen infrastruktur og sikkerhetsarkitektur gir mulighet til å tilby slik funksjonalitet innenfor godkjente rammer.
+HVL kan selv tilby mye av denne funksjonaliteten, med et viktig fortrinn: kontrollert tilgang til egne informasjonskilder, systemer og arbeidsprosesser. Vi trenger ikke utvikle egne språkmodeller, men vi må ha kontroll over hvordan de brukes.
 
-**To ulike måter å sikre agentisk KI på.** For å tilby eksterne tjenester som Claude Enterprise med avansert agentfunksjonalitet kan det, avhengig av risikovurderingen, være nødvendig å avgrense bruken til et separat virtuelt arbeidsmiljø uten fri tilgang til brukerens PC og HVLs interne systemer. Det kan begrense nytten. HVLs foreslåtte plattform legger i stedet opp til at brukeren arbeider fra sin vanlige PC, mens agentenes utførelse isoleres og styres i HVLs infrastruktur. Slik kan vi legge til rette for kontrollert tilgang til filer, nettjenester og interne systemer i den ordinære arbeidshverdagen. Sikkerhet og personvern er integrert i arkitekturen og utviklingsarbeidet.
+## Hva vil vi bygge?
 
-**Nettsøk kan være avgjørende for om tjenesten tas i bruk.** Tilbakemeldinger fra ansatte peker på manglende nettsøk som en sentral grunn til at de velger bort tidligere HVL KI, Sikt KI og UiO-GPT. Personvern og informasjonssikkerhet er sentrale hensyn bak slike begrensninger. Vår hypotese er at tilgang til nettsøk også er en viktig grunn til at ansatte velger private KI-abonnementer som ChatGPT og Claude. Vi har identifisert en søkeløsning som kan driftes ved HVL, med kontroll over søkeleverandører og hvilke opplysninger som sendes ut. Løsningen må sikkerhets- og personvernvurderes før produksjon.
+En felles, agentbasert KI-plattform med innebygd personvern. Agentene skal kunne bruke godkjente verktøy, søke, analysere data, samarbeide og produsere ferdige arbeidsresultater under menneskelig kontroll.
 
-**Tilgang til de nyeste KI-modellene.** Nye modeller blir ofte tilgjengelige i amerikanske eller globale tjenester før de tilbys med avgrenset europeisk databehandling. Dette kan begrense hvor raskt HVL kan tilby dem. Vi vil tilby gode, oppdaterte modeller fra flere leverandører innenfor godkjente juridiske og sikkerhetsmessige rammer. Den nyeste eller største modellen er ikke nødvendigvis best egnet til alle oppgaver; kvalitet, formål, personvern, responstid og kostnad må ses i sammenheng.
+Fra første versjon planlegges to innganger:
 
-**Målet er en HVL-styrt, agentbasert KI-plattform.** Første leveranse skal kunne erstatte UiO-GPT som grunnleggende KI-chat. Vi skal utnytte eksisterende KI-modeller, ikke konkurrere med de internasjonale leverandørene om å utvikle dem.
+- **For mennesker:** En moderne KI-assistent som kan overta for UiO-GPT når den er godkjent og driftsklar.
+- **For applikasjoner:** Et kontrollert API for å bygge KI-funksjonalitet inn i blant annet Canvas, Mime, saksbehandling og forskningsverktøy.
 
-Fra første godkjente versjon planlegger vi to innganger:
+Første leveranse omfatter chat, enkle assistenter, personlig hukommelse, dokumentforståelse med kilder, modellvalg, bildegenerering og **nettsøk med kildehenvisninger som lanseringskrav**. Agentpublisering via API planlegges ved lansering eller i neste delleveranse. Avanserte agenter, virtuelle arbeidsmiljøer, automatisering og tilgang til utvalgte lokale filer utvikles trinnvis.
 
-- **For mennesker:** KI-chat med mål om dokumentarbeid, hukommelse, kontrollert nettsøk og agenter som kan utføre og samarbeide om oppgaver.
-- **For applikasjoner:** Et felles integrasjonsgrensesnitt (API) for å bygge KI og agenter direkte inn i for eksempel Canvas og saksbehandling.
-
-Første versjon skal tilby chat og enkle assistenter, god dokumentforståelse med kildebaserte svar, personlig hukommelse, modellvalg, bildegenerering og **nettsøk med kildehenvisninger**. Nettsøk er et lanseringskrav fordi det er viktig for brukernes daglige nytte. Et kontrollert API skal være på plass fra første versjon; publisering av egne agenter som API-er planlegges ved lansering eller i neste delleveranse.
-
-Videre skal brukere kunne bygge, dele og gjenbruke egne agenter, la flere agenter samarbeide, og automatisere avgrensede arbeidsprosesser. Mer avansert agentfunksjonalitet innføres trinnvis med kvalitetssikring, sporbarhet og nødvendige godkjenninger.
-
-Den samme grunnmuren kan gi forskere og masterstudenter tilgang til KI i SILAF, med automatisk begrensning av modeller og funksjoner etter sikkerhetskravene. Funksjonalitet innføres trinnvis og etter nødvendige godkjenninger.
+[Fra språkmodeller til agentiske KI-systemer](./beslutningsgrunnlag.mdx) · [Konkrete bruksmuligheter](./brukseksempler.mdx)
 
 ## Hvorfor er dette gjennomførbart?
 
-Arkitekturen er designet, betydelig utviklingsarbeid er allerede gjort, og HVL har kompetansen. Modulær, trinnvis utvikling kan gi relativt kort vei til første lansering. Det avgjørende nå er prioritering og kapasitet. Foreslått organisering er fem deltidsutviklere med tydelig komponentansvar og en prosjektleder, støttet av øvrige ITT-enheter. Vi bygger først sammenhengende minimumsversjoner av komponentene og utvider dem etter behov.
+Arkitekturen er designet, betydelig utviklingsarbeid er gjort, og HVL har kompetansen. Vi gjenbruker etablerte verktøy med åpen kildekode, blant annet LangGraph, og bygger først sammenhengende minimumsversjoner. Det avgjørende nå er prioritering og skjermet utviklingskapasitet.
 
-**Vi bygger ikke alt fra bunnen av.** Vi gjenbruker etablerte verktøy med åpen kildekode og har allerede tatt i bruk LangGraph i utviklingsarbeidet for å styre KI-agenter. Før komponenter innføres, vurderer vi sikkerhet og egnethet for HVLs infrastruktur. Det reduserer utviklingsbehovet og lar oss prioritere HVLs egne behov.
+Vi vil søke sektorsamarbeid, med UiB som første dialogpartner. Klarsignal til dialog er gitt; en samarbeidsavtale er ikke inngått.
 
-Vi vil søke sektorsamarbeid, med UiB som første dialogpartner. Vårt inntrykk fra sektordialogen så langt er at mye av utviklingsarbeidet vi kjenner til, ligger nærmere enkel KI-chat enn et helhetlig agentøkosystem. Det gir HVL en strategisk mulighet.
+[Utviklingsstatus og gjennomføring](./gjennomforing.mdx) · [Nasjonal forankring](./sektorsamarbeid.mdx)
 
 ## Hva ber vi prodekanforum støtte?
 
-1. **Strategisk prioritering:** Etabler prosjektet som et prioritert strategisk utviklingsprosjekt med mandat, prosjekteier og avsatt kapasitet.
-2. **Utviklerressurser:** Sikre skjermet kapasitet for et foreslått team på fem deltidsutviklere og en prosjektleder, inkludert frikjøp eller dedikering av de to utviklerne fra andre deler av HVL. Ressursandeler avklares.
-3. **Forpliktende bidrag fra ITT:** Involver System og infrastruktur, Informasjonsforvaltning og -sikkerheit og Brukarretta tenester fra starten, sammen med Digital tenesteutvikling. Brukarretta tenester bidrar med brukerbehov, opplæring og support.
-4. **Sektorsamarbeid:** Støtt videre dialog med UiB og andre UH-aktører.
-5. **Regnekraft:** HVL har allerede anskaffet fire maskiner for lokal KI-kjøring. Gi mandat til å utrede ytterligere kapasitet ved behov. Høyere digital suverenitet kan kreve investeringer på rundt 2 millioner kroner på sikt, avhengig av nasjonale tilbud og behov. Dette er en foreløpig størrelsesorden, ikke en innkjøpsbeslutning.
+1. **Strategisk prioritering:** Et prioritert utviklingsprosjekt med mandat, prosjekteier og avsatt kapasitet.
+2. **Utviklerressurser:** Fem deltidsutviklere og en prosjektleder, med skjermet arbeidstid og formell dedikering eller frikjøp av de to utviklerne fra andre deler av HVL. Ressursandeler avklares.
+3. **Forpliktende bidrag fra ITT:** System og infrastruktur, Informasjonsforvaltning og -sikkerheit og Brukarretta tenester deltar fra starten sammen med Digital tenesteutvikling.
+4. **Sektorsamarbeid:** Støtte videre dialog med UiB og andre UH-aktører.
+5. **Regnekraft:** Mandat til å utrede behov for ytterligere kapasitet utover de fire anskaffede GB10-maskinene. En mulig senere investering på rundt 2 millioner kroner er en foreløpig størrelsesorden, ikke en innkjøpsbeslutning.
 
-**Beslutningen nå gjelder prioritering og ressurser til videre utvikling.** Maskinvareanskaffelser og konkret lanseringstidspunkt avklares senere.
+**Beslutningen nå gjelder prioritering og ressurser til videre utvikling.** Maskinvareanskaffelser, konkret lanseringstidspunkt og godkjenning av tjenester avklares senere.
 
----
+[Ressurser og organisering](./ressurser.mdx) · [KI-modeller og regnekraft](./fordypning.mdx)
 
-## Vil du lese mer?
+## Les mer – valgfri fordypning
 
-- [Les hele beslutningsgrunnlaget – begrunnelse, eksempler og figurer](./beslutningsgrunnlag.mdx)
-- [Fordypning – alternativer, sikkerhet, ressurser og diskusjonsspørsmål](./fordypning.mdx)
+| Tema | Hva du får vite |
+|---|---|
+| [Agentiske KI-systemer og Agent Harness](./beslutningsgrunnlag.mdx) | Hvordan moderne KI utfører arbeid, og hvorfor HVL må kontrollere laget rundt modellene. |
+| [Personvern og sikkerhet](./sikkerhet.mdx) | Isolert utførelse, nettsøk, tilgangsstyring og kvalitet. |
+| [Brukseksempler](./brukseksempler.mdx) | Canvas, Mime, saksbehandling og SILAF. |
+| [KI-modeller og regnekraft](./fordypning.mdx) | Modellalternativer, behandlingsgeografi og lokal kapasitet. |
+| [Nasjonal forankring og sektorsamarbeid](./sektorsamarbeid.mdx) | NOU 2026: 14 og UiB. |
+| [Utviklingsstatus og gjennomføring](./gjennomforing.mdx) | Eksisterende arbeid, leveranser og lanseringskriterier. |
+| [Organisering og ressursbehov](./ressurser.mdx) | Team, ITT-enheter, investeringer og fakultetenes bidrag. |

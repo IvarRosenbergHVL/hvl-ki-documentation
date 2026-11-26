@@ -1,149 +1,63 @@
 ---
-title: "Fra enkel KI-chat til HVLs eget KI-økosystem"
-sidebar_label: "Hele beslutningsgrunnlaget"
+title: "Fra språkmodeller til agentiske KI-systemer"
+sidebar_label: "Agentiske KI-systemer"
 sidebar_position: 2
-description: "Strategisk beslutningsgrunnlag for prodekanforum for KI og digitalisering."
+description: "Hva en Agent Harness er, og hvorfor HVL bør kontrollere laget rundt KI-modellene."
 ---
 
-**Prodekanforum for KI og digitalisering · Utfyllende beslutningsgrunnlag**
+## Fra å svare til å utføre arbeid
 
-[Tilbake til kortversjonen](./intro.mdx)
+En språkmodell behandler kontekst og genererer svar eller forslag til handlinger. En enkel KI-chat gir brukeren en samtale med modellen. Et agentisk KI-system kan i tillegg la modellen arbeide mot et mål gjennom flere steg, bruke verktøy, undersøke resultater og tilpasse neste handling.
 
-## 1. Dagens KI-tilbud er ikke tilstrekkelig
-
-HVL tilbyr i dag blant annet UiO-GPT og Microsoft Copilot. En enkel chat med tilgang til en språkmodell dekker grunnleggende behov, men er ikke lenger tilstrekkelig som generelt KI-tilbud for studenter og ansatte.
-
-Brukerne etterspør funksjonalitet de kjenner fra blant annet Claude, ChatGPT og Googles KI-tjenester: dokumentarbeid, søk, hukommelse, verktøy, agenter og selvstendig utførelse av sammensatte oppgaver.
-
-### Fra KI-chat til agentisk arbeid
-
-En viktig endring i brukerforventningene er at moderne KI-tjenester ikke bare svarer på spørsmål. De kan arbeide mot et mål over flere steg: planlegge, søke i kilder, bruke verktøy, utføre kode i avgrensede arbeidsmiljøer, bearbeide data, kontrollere resultater og produsere dokumenter, regneark eller andre leveranser. Brukerne kan også bygge og gjenbruke spesialiserte agenter. Slike muligheter er en sentral del av målbildet for HVL, ikke et tillegg til en ordinær chatløsning.
-
-For HVL er det særlig viktig å kunne koble agentene til egne godkjente informasjonskilder og fagsystemer, slik at de kan bidra i reelle arbeidsprosesser. Agentene skal operere innenfor avgrensede rettigheter, med menneskelig godkjenning der handlinger har vesentlige konsekvenser, og med systematisk evaluering og sporbarhet.
-
-Målbildet omfatter blant annet:
-
-- **Kontrollert nettleserbruk:** Agenter kan navigere på nettsider og bruke godkjente nettbaserte tjenester, ikke bare søke etter informasjon.
-- **Tilgang til lokale filer:** Brukeren kan gi en agent avgrenset tilgang til bestemte filer eller mapper på egen PC. Tilgang til øvrige filer gis ikke automatisk; lesing og endring krever separate rettigheter.
-- **Virtuelle arbeidsmiljøer:** Agenter kan få egne isolerte virtuelle datamaskiner der de kan utvikle og kjøre kode, analysere data, opprette filer og kontrollere arbeidsresultater.
-- **Automatisering:** Agenter kan utføre avgrensede oppgaver på avtalte tidspunkt eller ved godkjente hendelser, også uten at brukeren har chatten åpen.
-
-Når utførelse og integrasjoner forvaltes i HVLs infrastruktur, kan institusjonen kontrollere hvilke data, systemer og funksjoner agentene får tilgang til. Dette gir et bedre utgangspunkt for forsvarlig bruk, men er ikke i seg selv en garanti for sikkerhet. Tilgang til lokale filer og nettlesere krever særskilt godkjent mekanisme, og virtuelle arbeidsmiljøer må være isolert fra andre brukere og systemer. Agentene må kunne stanses, og handlinger må logges og kunne etterprøves. Funksjonene inngår i målbildet og lanseres trinnvis etter testing og godkjenning.
-
-### To ulike sikkerhets- og bruksmodeller
-
-Et forslag som har vært reist, er å tilby Claude Enterprise eller tilsvarende tjenester gjennom et separat, isolert virtuelt brukermiljø. Dette er en mulig sikkerhetsstrategi dersom avanserte eksterne agentfunksjoner ellers ville få for omfattende tilgang til lokale filer eller interne systemer. Brukeren må da forholde seg til et avgrenset arbeidsmiljø, og integrasjoner og filtilgang kan bli begrenset. Isolering av klientmiljøet hindrer ikke i seg selv at data sendes til modellleverandøren. Det konkrete behovet for isolasjon avhenger av tjenestens funksjoner, konfigurasjon, behandlingsvilkår og HVLs risikovurdering; en separat virtuell maskin er ikke et universelt krav for alle eksterne KI-tjenester.
-
-HVLs foreslåtte løsning snur perspektivet: Vi isolerer agentenes utførelse fremfor å isolere brukerens ordinære arbeidsmiljø. Studenter og ansatte kan bruke KI-plattformen fra sin vanlige PC. Når en agent trenger å bruke nettleser, kjøre kode eller produsere filer, kan arbeidet utføres i et kontrollert virtuelt arbeidsmiljø i HVLs infrastruktur. Tilgang til brukerens valgte lokale filer og godkjente interne systemer formidles gjennom avgrensede og tilbakekallbare rettigheter. Utgående modellkall styres av plattformen, som også kan bruke godkjente eksterne modeller.
-
-Det strategiske handlingsrommet ligger i å kombinere tilgjengelighet og avansert funksjonalitet med institusjonell kontroll. Sikkerhetsarkitektur, personvern, testing, evaluering og sporbarhet er ordinære, integrerte deler av utviklingen av hver komponent. Det er ikke en påstand om at egenutvikling automatisk er sikrere enn en etablert kommersiell tjeneste, men om at HVL kan utforme sikkerhetsmekanismene rundt egne arbeidsprosesser og behov. Eksterne tjenester kan fortsatt ha verdi for avgrensede bruksområder.
-
-**Nettsøk og faktisk bruk.** Tilbakemeldinger fra ansatte peker på manglende nettsøk som en sentral grunn til at de ikke bruker tidligere HVL KI, Sikt KI og UiO-GPT. Personvern og informasjonssikkerhet er sentrale hensyn når slike tjenester begrenser nettsøk. Prosjektets hypotese er at muligheten for å hente aktuell informasjon fra nettet med kildehenvisninger også er en viktig grunn til at ansatte velger private abonnementer på ChatGPT, Claude og lignende tjenester. Dette er en hypotese basert på tilbakemeldinger, ikke en dokumentert kartlegging av omfang eller årsaker. HVL har identifisert SearXNG som en søkeløsning som kan driftes internt, med styring av søkeleverandører og utgående søkeforespørsler. Intern drift betyr ikke at alle søkedata forblir ved HVL: løsningen må konfigureres, testes og godkjennes med hensyn til personvern og informasjonssikkerhet. Målet er å tilby kontrollert nettsøk fra første lansering og dermed gjøre det institusjonelle tilbudet mer attraktivt.
-
-Ønsket om lisenser til internasjonale tjenester handler i stor grad om mulighetene brukerne savner i dagens tilbud. Ambisjonen er å dekke mange av disse behovene internt, med funksjonalitet vesentlig nærmere de store internasjonale løsningene enn de grunnleggende norske chattilbudene fra UiO og Sikt. Vi trenger ikke full funksjonsparitet for å gi brukerne et attraktivt alternativ.
-
-Samtidig må HVL kunne gi KI tilgang til interne informasjonskilder og fagsystemer på en forsvarlig måte. Eksterne KI-tjenester kan ikke uten videre få slike tilganger. Personvern, informasjonssikkerhet, leverandørvilkår og kontroll med handlinger må være ivaretatt. Også nettsøk krever et behandlingsoppsett som HVL kan godkjenne.
-
-**Tilgang til de nyeste KI-modellene.** Nye modeller blir ofte tilgjengelige i amerikanske eller globale tjenester før de tilbys med avgrenset europeisk databehandling. Dette kan begrense hvor raskt HVL kan tilby dem. Vi vil tilby gode, oppdaterte modeller fra flere leverandører innenfor godkjente juridiske og sikkerhetsmessige rammer. Den nyeste eller største modellen er ikke nødvendigvis best egnet til alle oppgaver; kvalitet, formål, personvern, responstid og kostnad må ses i sammenheng. Se [fordypning om modelltilgjengelighet](./fordypning.mdx#geografisk-og-juridisk-tilgjengelighet-av-ki-modeller).
-
-## 2. Forslaget: HVLs eget KI-økosystem
-
-**Målet er en felles agentbasert KI-plattform for HVL.** Første godkjente versjon skal kunne erstatte behovet for UiO-GPT som grunnleggende KI-chat og tilby vesentlig mer funksjonalitet. Dette er første leveranse, ikke sluttmålet.
-
-Vi skal ikke konkurrere med Anthropic, OpenAI eller Google om å utvikle grunnmodeller eller kopiere hele deres produktporteføljer. Vi kan bruke godkjente modeller fra flere leverandører og bygge et langt mer anvendelig tjenestelag selv, tilpasset HVL.
-
-| Funksjon | Hva HVL ønsker å tilby |
+| Enkel KI-chat | Agentisk KI-system |
 |---|---|
-| Moderne KI-assistent | Chat, dokumenter, kontekst og hukommelse innenfor godkjente rammer. |
-| Interne informasjonskilder | Søk og kildebaserte svar med brukerens tillatte tilganger. |
-| Interne systemintegrasjoner | Kontrollerte oppslag og handlinger gjennom godkjente verktøy. |
-| Nettsøk | Lanseringskrav: kontrollert søk, innholdshenting og kildebaserte svar med etterprøvbare referanser. |
-| Agentisk arbeid og multiagentsystemer | KI som kan planlegge, delegere, bruke verktøy, analysere data, produsere arbeidsresultater og utføre oppgaver i avgrensede kjøremiljøer. |
-| Egne agenter og automatisering | Brukere og utviklere kan bygge, teste, dele og gjenbruke spesialiserte agenter, også i applikasjoner og planlagte arbeidsprosesser. |
-| Gjenbruk og kvalitet | Delbare agenter, systematiske evalueringer, kvalitetskontroll og sporbarhet. |
+| Svarer på spørsmål | Kan planlegge og utføre en oppgave |
+| Analyserer vedlagt informasjon | Kan hente tillatt informasjon selv |
+| Foreslår handlinger | Kan utføre godkjente handlinger |
+| Genererer tekst og kode | Kan kjøre kode og produsere ferdige filer |
+| Reagerer på brukerens spørsmål | Kan arbeide videre over tid og ved avtalte hendelser |
 
-Dette er funksjoner i målbildet. Første versjon skal tilby chat og enkle assistenter, god dokumentforståelse med kildebaserte svar, personlig hukommelse, modellvalg, bildegenerering og **nettsøk med kildehenvisninger**. Nettsøk er et lanseringskrav fordi det er viktig for brukernes daglige nytte. Et kontrollert API skal være på plass fra første versjon; publisering av egne agenter som API-er planlegges ved lansering eller i neste delleveranse.
+Flere agenter kan også samarbeide, eksempelvis ved at én innhenter kilder, en annen analyserer dem og en tredje kontrollerer leveransen. Autonomien tilpasses oppgaven; en enkel forespørsel krever ikke et komplekst agentsystem.
 
-Konkret omfang ved første lansering må prioriteres; ikke alle funksjoner må være like omfattende som i kommersielle Enterprise-produkter.
+## Hva er en Agent Harness?
 
-## 3. To innganger fra første versjon – én felles KI-plattform
-
-- **For mennesker:** Et moderne chatgrensesnitt der studenter og ansatte kan bruke KI direkte.
-- **For applikasjoner:** Et felles integrasjonsgrensesnitt (API) som gjør at HVLs utviklere kan bygge KI og agenter direkte inn i nye og eksisterende verktøy.
-
-En saksbehandler kan få hjelp til å kontrollere dokumentasjon og utarbeide et saksnotat i selve saksbehandlingsapplikasjonen. I Canvas kan vi utvikle emnetilpassede læringsverktøy og agentbaserte utvidelser innenfor faglærerens pedagogiske rammer. Brukeren trenger ikke åpne en separat KI-chat.
-
-Begge inngangene benytter de samme felles plattformtjenestene, med formålsbestemte tilganger, kvalitetssikring og sporbarhet.
+En språkmodell alene har ikke vedvarende hukommelse, tilgang til HVLs systemer eller en egen datamaskin. **Agent Harness** er apparatet rundt modellen som gjør slike funksjoner tilgjengelige, koordinerer arbeidet og håndhever grensene for hva agenten kan gjøre.
 
 ```mermaid
 flowchart TD
- U[Studenter og ansatte] --> C[HVL KI-assistent]
- A[Canvas, saksbehandling og andre applikasjoner] --> I[Felles integrasjonsgrensesnitt / API]
- C --> P[Felles HVL-styrt KI-plattform]
- I --> P
- P --> K[Interne kilder og systemer]
- P --> W[Kontrollert søk og agentkjøring]
- P --> M[Godkjente lokale og eksterne KI-modeller]
+ U[Brukerens oppgave] --> R
+ subgraph H[Agent Harness – laget HVL styrer]
+ R[Arbeidsflyt og orkestrering]
+ R --> C[Kontekst, hukommelse og kunnskap]
+ R --> T[Verktøy, skills og integrasjoner]
+ R --> X[Isolert arbeidsmiljø]
+ R --> G[Kontrollert modelltilgang]
+ P[Policy, personvern, evaluering og sporbarhet] -.-> R
+ P -.-> T
+ P -.-> X
+ P -.-> G
+ end
+ G --> M[Godkjente KI-modeller – lokale, nasjonale og eksterne]
 ```
 
-HVL kan eie brukerrelasjonen, integrasjonene og styringen av data og agenthandlinger, samtidig som vi utnytter utviklingen hos modellleverandørene. Det gir et annet handlingsrom enn en frittstående ekstern chat.
+Harness samler blant annet:
 
-Egen drift gir muligheter for kontroll, men er ikke alene tilstrekkelig for GDPR-etterlevelse. Tilgang, dataminimering, modellvalg, isolasjon, evaluering og sporbarhet må håndheves og dokumenteres. Interne systemer beholder sine tilgangsregler.
-
-## 4. En grunnmur for hele HVL
-
-KI-assistenten og integrasjonsgrensesnittet er de to inngangene fra første versjon. Plattformen åpner dermed for utvikling av flere spesialiserte tjenester som:
-
-- Faglærerstyrt personlig læringsstøtte og samarbeidslæring i Canvas.
-- Videreutvikling av Mime for student- og ansattservice.
-- KI-støtte i saksbehandling og andre administrative fagsystemer.
-- **SILAF:** KI-chat og spesialiserte forskningsverktøy for forskere og masterstudenter i HVLs forskningsmiljø, med særskilte sikkerhetsmekanismer og begrensninger.
-
-På SILAF kan KI komme til forskerens arbeidsmiljø, fremfor at forskeren må flytte data til en ekstern KI-tjeneste. Systemet begrenser automatisk hvilke KI-modeller, agenter og funksjoner som er tilgjengelige på SILAF, ut fra sikkerhetskravene i forskningsmiljøet og prosjektet. Forskeren får dermed bare tilgang til godkjente alternativer. Se [fordypning om SILAF](./fordypning.mdx).
-
-Felles komponenter kan gjenbrukes på tvers av fakulteter og tjenester. Canvas er et eksempel på hva grunnmuren muliggjør, ikke en forutsetning for satsingen.
-
-Retningen samsvarer med flere temaer i Malthe-Sørenssen-utvalgets NOU 2026: 14, blant annet fagtilpasning, forvaltning, digital suverenitet og samarbeid. Se [prosjektets gjennomgang av kapittel 4 og 8](../interessenter/nou-2026-14.mdx). HVL vil aktivt søke utviklingssamarbeid i sektoren, med Universitetet i Bergen (UiB) som første dialogpartner. Det er gitt klarsignal til å innlede dialog, men ingen samarbeidsavtale er inngått.
-
-Ut fra dialogen vi hittil har hatt med sektoren, er vårt inntrykk at mye av utviklingsarbeidet vi kjenner til, ligger nærmere en grunnleggende KI-chat som UiO-GPT enn et helhetlig, agentbasert økosystem. Det gir HVL en mulighet til å bidra med en mer ambisiøs, gjenbrukbar arkitektur og invitere andre institusjoner inn i felles utvikling. Dette er prosjektets erfaringsbaserte situasjonsbilde, ikke en fullstendig kartlegging av sektoren.
-
-## 5. Vi starter ikke på bar bakke – kortere vei til første lansering
-
-Prosjektet er ambisiøst, men prosjektgruppens vurdering er at det er gjennomførbart med kompetansen vi allerede har i HVL, forutsatt prioritering og dedikerte ressurser. Arkitekturen er allerede designet, og betydelig utviklingsarbeid er gjennomført. Det vi ber om nå, er forankring og ressurser til å videreføre, integrere, kvalitetssikre og ferdigstille arbeidet, ikke å starte et helt nytt prosjekt fra bunnen av.
-
-**Vi bygger videre på etablerte verktøy med åpen kildekode.** Vi har allerede tatt i bruk [LangGraph](https://github.com/langchain-ai/langgraph) i utviklingsarbeidet for å organisere agenters arbeidsflyt og samspill. Før nye komponenter innføres, vurderer vi blant annet informasjonssikkerhet, lisensvilkår, vedlikehold, driftsbehov og egnethet for HVLs infrastruktur og arkitektur. Slik kan vi konsentrere utviklingsressursene om integrasjoner, sikkerhet, styring og funksjonalitet som er spesifikk for HVL, fremfor å utvikle generelle byggeklosser på nytt. Gjenbruk erstatter ikke testing eller sikkerhetsgodkjenning av den samlede tjenesten.
-
-Chat og enkle assistenter bygger på eksisterende frontend og backend. Grunnleggende RAG, promptbasert bildegenerering og et blokkbasert arbeidsområde (Notebook) har fungerende grunnimplementasjoner. Personlig hukommelse, dokumentbehandling, grafbasert agentbygger og lydtjenester er under utvikling. Dette er prosjektets rapporterte status, ikke verifisert produksjonsmodenhet.
-
-Utviklingen skjer modulært og trinnvis, også innenfor hver modul. Teamet etablerer først en sammenhengende grunnversjon av hver prioritert komponent, med felles kontrakter og kontinuerlig integrasjon. Arbeidet styres av detaljerte krav, tekniske spesifikasjoner, tester og menneskelig kodegjennomgang, med GitHub Copilot som utviklingsstøtte. Tale-til-tekst og stemmesamtaler på norsk og engelsk prioriteres tidlig, blant annet for tilgjengelighet. Podcastgenerering vurderes senere; videogenerering har svært lav prioritet. Vi kan prioritere en sammenhengende første versjon som dekker de viktigste brukerbehovene, og deretter utvide funksjonaliteten uten å vente på at hele økosystemet er ferdig.
-
-```mermaid
-flowchart LR
- A[Designet arkitektur og eksisterende utviklingsarbeid] --> B[Ferdigstille og integrere prioriterte funksjoner]
- B --> C[Godkjent første lansering]
- C --> D[Trinnvis utvidelse av moduler og tjenester]
-```
-
-Dette kan gi en relativt kort vei til første lansering. Konkret lanseringstidspunkt avhenger av kapasitet, faktisk modenhet, integrasjon, testing og nødvendige godkjenninger. En første versjon er ikke det samme som en ferdig utbygd plattform.
-
-## 6. Beslutningspunkter – hva trenger prosjektet nå?
-
-Prodekanforum bes støtte følgende anbefalinger til HVLs ledelse:
-
-| Beslutningspunkt | Hva må forankres? |
+| Funksjon | Hva den gir agenten |
 |---|---|
-| **1. Strategisk prioritering** | Etabler HVLs KI-økosystem som et prioritert strategisk utviklingsprosjekt med tydelig mandat, prosjekteier og avsatt kapasitet. Første hovedleveranse er moderne KI-chat og integrasjonsgrensesnitt for HVLs applikasjoner. |
-| **2. Dedikerte utviklerressurser** | Foreslått team: fem deltidsutviklere og en prosjektleder, med avtalte ressursandeler og spesialansvar. To utviklere i andre deler av organisasjonen har relevant kompetanse og ønsker å bidra. De må formelt frikjøpes eller få en avtalt, skjermet andel av arbeidstiden dedikert til prosjektet. |
-| **3. Forpliktende bidrag fra ITT** | Involver System og infrastruktur, Informasjonsforvaltning og -sikkerheit og Brukarretta tenester fra starten, med avtalte ressurser og ansvar i samarbeid med Digital tenesteutvikling. |
-| **4. Sektorsamarbeid** | Støtt aktivt utviklingssamarbeid i UH-sektoren, med UiB som første dialogpartner, om felles utvikling, gjenbruk og nasjonale KI-tjenester. |
-| **5. Regnekraft og investeringer** | Gi mandat til å utrede behovet for ytterligere lokal KI-maskinvare. Et mulig investeringsbehov på rundt 2 millioner kroner på sikt er en foreløpig størrelsesorden, ikke et kostnadsestimat eller en innkjøpsbeslutning. |
+| Hukommelse og kunnskap | Relevant kontekst fra tidligere arbeid og institusjonens informasjonskilder. |
+| Verktøy og skills | Godkjente systemfunksjoner og gjenbrukbare faglige arbeidsmetoder. |
+| Arbeidsmiljø | Avgrenset datamaskin for kode, filer, nettleser og dokumentproduksjon. |
+| Orkestrering | Planlegging, fremdrift, samarbeid mellom agenter og kontroll av resultater. |
+| Kontroll og kvalitet | Tillatelser, ressursgrenser, avbrudd, evaluering og revisjonsspor. |
 
-**Hvorfor involvere hele ITT tidlig?** System og infrastruktur må bidra med nettverk, drift og kapasitet. Informasjonsforvaltning og -sikkerheit må bidra til at sikkerhet og personvern bygges inn fra start. Brukarretta tenester har innsikt i behovene studenter og ansatte melder inn, og må delta i prioritering, utprøving, opplæring og brukerstøtte – ikke først etter lansering.
+Dette tjenestelaget er i stor grad det som skiller moderne produkter som ChatGPT og Claude fra enkel tilgang til en språkmodell.
 
-Fire Dell-maskiner med GB10 er anskaffet for utvikling, testing og gradvis lokal produksjon, supplert med godkjente eksterne modeller. Mulig tilgang til nasjonal kapasitet må avklares. Høyere ambisjoner om digital suverenitet og lokal modellkjøring kan kreve større egne investeringer, særlig frem til egnede nasjonale tjenester er tilgjengelige. Omfanget av lokal kapasitet skal vurderes mot sikkerhetskrav, etterspørsel og samlet kostnad. Se [fordypning om ressurser og investeringer](./fordypning.mdx).
+## Hvorfor kontrollen må ligge hos HVL
 
-Det som trengs nå, er en reell prioritering og tilgang til mennesker med riktig kompetanse. Mandat, ressursandeler og finansiering må besluttes av rett myndighet. Maskinvareanskaffelse behandles separat når behovet er dokumentert. UiO-GPT fases først ut når erstatningen er godkjent og driftsklar; Microsoft Copilot omfattes ikke automatisk.
+Når en agent skal hente interne dokumenter eller utføre en handling i et fagsystem, må HVL kontrollere brukeridentiteten, hvilke data som utleveres, hvilke rettigheter agenten får, og hva den kan gjøre på brukerens vegne. Fagmiljøene må kunne definere arbeidsmetoder og kvalitetskrav. Handlinger med vesentlige konsekvenser krever passende menneskelig kontroll.
 
----
+Med et HVL-styrt tjenestelag kan identitet, hukommelse og integrasjoner holdes under institusjonell kontroll, mens modellene kan byttes ut etter oppgave, sikkerhetskrav, kvalitet og kostnad. En ekstern modell får bare den konteksten som er godkjent for behandlingen, ikke direkte tilgang til fagsystemene. Egen infrastruktur gir kontrollmuligheter, men sikkerhet og etterlevelse må dokumenteres.
 
-**Dette er hovedbildet.** Les eventuelt [fordypning og diskusjonsspørsmål](./fordypning.mdx), eller gå til [interessentløpet](../interessenter/intro.mdx).
+**Vi trenger ikke utvikle egne språkmodeller.** Vi kan utnytte utviklingen hos kommersielle og nasjonale modelltilbydere, samtidig som HVL styrer hvordan modellene brukes. Agent Harness er en samlet arkitektur av gjenbrukbare komponenter, ikke et krav om å bygge alle komponentene fra bunnen av.
+
+[Hvordan sikkerheten ivaretas](./sikkerhet.mdx) · [Hva dette kan brukes til](./brukseksempler.mdx) · [Teknisk arkitektur for HVL Agent Harness](../utviklere/agent-harness.mdx)

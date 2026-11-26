@@ -1,0 +1,36 @@
+---
+title: "Personvern, sikkerhet og kontroll"
+sidebar_label: "Personvern og sikkerhet"
+sidebar_position: 3
+---
+
+## Isolere brukerens miljø eller agentens utførelse?
+
+Et forslag som har vært reist, er å tilby Claude Enterprise eller tilsvarende tjenester gjennom et separat virtuelt brukermiljø. Det kan være en hensiktsmessig avgrensning dersom avanserte agentfunksjoner ellers får for omfattende tilgang til PC og interne systemer.
+
+HVLs foreslåtte arkitektur snur perspektivet: brukeren arbeider fra sin vanlige PC, mens agentens praktiske utførelse skjer i et kontrollert arbeidsmiljø i HVLs infrastruktur.
+
+| | Ekstern tjeneste i separat brukermiljø | HVL-styrt agentutførelse |
+|---|---|---|
+| Arbeidsflate | Brukeren arbeider i et avgrenset virtuelt miljø. | Brukeren beholder ordinær arbeidsflate. |
+| Systemer og filer | Tilgang begrenses av det godkjente oppsettet. | Avgrensede connectors og eksplisitt valgte filer eller mapper; separate lese- og skriverettigheter. |
+| Utførelse | Styres av tjenestens funksjoner og konfigurasjon. | Agentens kode, nettleser og filer isoleres med kontrollerte tillatelser. |
+| Modellbehandling | Styres av leverandørvilkår og konfigurasjon. | HVLs Model Gateway kontrollerer modellvalg og utgående kontekst. |
+
+Sammenligningen gjelder det foreslåtte isolerte oppsettet, ikke alle mulige Enterprise-konfigurasjoner. Isolering av klienten hindrer ikke i seg selv dataoverføring til modelltilbyder. Lokal drift gjør heller ikke HVLs løsning automatisk sikrere.
+
+## Privacy by Design og kontrollert nettsøk
+
+Brukeridentitet forvaltes av HVL. Pseudonymisering, dataminimering, PII-vask i Model Gateway, tilgangsstyring og godkjente behandlingsmiljøer reduserer eksponeringen. Pseudonymisering er ikke anonymisering; PII-vask gir ikke i seg selv tillatelse til ekstern behandling.
+
+Nettsøk er et viktig lanseringskrav. Prosjektet har identifisert SearXNG, som kan driftes ved HVL med styring av søkeleverandører og utgående forespørsler. Intern drift betyr ikke at alle søkedata blir ved HVL. Søk, innholdshenting og behandling må testes og godkjennes.
+
+Tilgang til utvalgte filer på egen PC krever en særskilt godkjent, tilbakekallbar mekanisme. Agenter får ikke fri tilgang til maskinen eller nettverket.
+
+## Felles kvalitetskontroll
+
+Offisielle agenter må gjennom obligatoriske evalueringer før publisering. Feil i drift kan bli nye regresjonstester, og forbedrede versjoner godkjennes før de tas i bruk. Revisjonsspor dokumenterer relevante modellvalg, verktøyhandlinger, policybeslutninger og godkjenninger uten å lagre alle samtaler ukritisk.
+
+Krav etter GDPR og KI-forordningen vurderes per tjeneste, formål og risikoklasse.
+
+[Innebygd personvern](../interessenter/personvern.mdx) · [Evaluering](../interessenter/evaluering.mdx) · [Virtuelle arbeidsmiljøer](../interessenter/kjoremiljo.mdx) · [Sporbarhet og KI-forordningen](../interessenter/sporbarhet.mdx)
