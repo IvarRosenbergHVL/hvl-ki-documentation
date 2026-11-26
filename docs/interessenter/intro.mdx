@@ -22,6 +22,10 @@ flowchart TD
  A --> D[Administrasjon]
 ```
 
+Første versjon skal tilby chat og enkle assistenter, god dokumentforståelse med kildebaserte svar, personlig hukommelse, modellvalg, bildegenerering og **nettsøk med kildehenvisninger**. Nettsøk er et lanseringskrav fordi det er viktig for brukernes daglige nytte. Et kontrollert API skal være på plass fra første versjon; publisering av egne agenter som API-er planlegges ved lansering eller i neste delleveranse.
+
+Tale-til-tekst og stemmesamtaler på norsk og engelsk prioriteres tidlig, blant annet for tilgjengelighet. Podcastgenerering vurderes senere, og videogenerering har svært lav prioritet.
+
 Arkitekturen er designet og betydelig utviklingsarbeid er gjennomført. Utviklingen skjer trinnvis, både mellom og innenfor modulene. Første versjon trenger ikke omfatte alle fremtidige tjenester. Se [veien til lansering](./pilot.mdx).
 
 **Vi bygger videre på eksisterende åpen kildekode.** LangGraph er allerede tatt i bruk i utviklingsarbeidet for å organisere KI-agentenes arbeidsflyt. Sikkerhet, lisensvilkår, vedlikehold og egnethet for HVLs infrastruktur vurderes før nye komponenter innføres. Dette frigjør kapasitet til HVLs egne behov og integrasjoner.

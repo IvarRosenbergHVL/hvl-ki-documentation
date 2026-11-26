@@ -9,7 +9,7 @@ En agent kombinerer mål, instruksjoner, modell, kontekst, skills, tools og poli
 
 Agentbyggeren skal selv kunne bruke KI til å analysere behovet: formål og brukergruppe, kunnskapskilder, memory, tools, skills, modell, arbeidsflyt, kostnad, tilgang, evaluering og godkjenningskrav. Brukeren må kunne endre forslagene og teste før publisering.
 
-En enkel assistent kan konfigureres i et skjemabasert grensesnitt; mer avanserte arbeidsflyter kan bygges i en nodeeditor. Begge bruker samme versjonerte agentdefinisjon og grafmodell. Tilgjengelige noder, tools, skills og knowledge begrenses av rolle og rettigheter, og valideres på backend og ved kjøring.
+En enkel assistent kan konfigureres i et skjemabasert grensesnitt; mer avanserte arbeidsflyter kan bygges i en nodeeditor. Begge bruker samme versjonerte agentdefinisjon og grafmodell. React Flow er påbegynt som visuell nodeeditor. Backend validerer og lagrer definisjoner og parametere i PostgreSQL og bygger kjørbare LangGraph-grafer; frontend er ikke autoritativ. Skille mellom utkast og publiserte uforanderlige versjoner. Chat og API er publiseringsformer av samme agent, med stabile Agent ID-er, input/output-schema og separat autorisasjon. Gravitee.io planlegges som API-forvaltningslag. Tilgjengelige noder, tools, skills og knowledge begrenses av rolle og rettigheter, og valideres på backend og ved kjøring.
 
 ## Agent Runtime
 

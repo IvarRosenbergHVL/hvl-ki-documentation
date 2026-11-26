@@ -1,0 +1,46 @@
+---
+title: "17 · Leveranser og utviklingsstatus"
+sidebar_position: 17
+---
+
+Dette er prosjektets rapporterte status og foreslåtte leveranserekkefølge. Ingen kalenderfestet plan eller produksjonsgodkjenning er fastsatt her. Implementeringsstatus må verifiseres mot hovedrepo og tester.
+
+## Rapportert utgangspunkt
+
+| Komponent | Status |
+|---|---|
+| Frontend og backend | Modernisert og ryddet; chat og enkle assistenter fungerer. LangGraph-integrasjon trenger videre arbeid. |
+| React Flow | Grafbasert agentbygger påbegynt. |
+| Memory Fabric | Under utvikling; personlig hukommelse først. |
+| Dokument-ingest og RAG | Ingest under utvikling; grunnleggende RAG finnes. |
+| Notebook | Grunnleggende blokkbasert frontend og backend; KI-genererte bilder fungerer. |
+| Bildegenerering | Promptbasert generering fungerer; parametergrensesnitt for FLUX.2 Pro er utviklet. GPT Image er en mulig godkjenningsavhengig modell. |
+| Lyd | Separat repo under utvikling; Nasjonalbibliotekets Whisper planlagt for STT, Chatterbox-endepunkter for enkel TTS fungerer; podcastgenerator under utvikling. |
+| Lokal inferens | Fire Dell GB10-maskiner anskaffet; gradvis produksjonssetting planlegges. |
+| Video | Tidligere prototype med klippgenerering og FFmpeg; ikke integrert, svært lav prioritet. |
+| Interne tools og connectors | Ikke påbegynt mot interne systemer. |
+
+## Første MVP: lanseringskrav
+
+- Chat, enkle assistenter, grunnleggende Model Gateway med modellvalg, personlig Memory Fabric, Document Intelligence og god dokument-RAG med kilder.
+- Nettsøk med SearXNG, kontrollert innholdshenting og kildebaserte svar. Dette er et obligatorisk funksjonskrav og må evalueres for relevans, aktualitet, kildekvalitet og personvern.
+- Grunnleggende Toolserver, promptbasert bildegenerering og kontrollert applikasjons-API.
+- Felles autentisering, autorisasjon, logging, grunnleggende evals, integrasjonstester, tilgjengelighet og nødvendige drifts- og sikkerhetsgodkjenninger.
+
+Ved lansering eller i neste delleveranse planlegges publisering av agenter som API-er gjennom Gravitee.io, med Agent ID, versjon, schema og kontrollert applikasjonstilgang. Dette er samme agentdefinisjon og runtime som chat. Avansert multiagentfunksjonalitet og omfattende interne connectors er ikke krav til første MVP.
+
+## Videre prioriteringer
+
+Tale-til-tekst og naturlige stemmesamtaler på norsk og engelsk får tidlig prioritet, blant annet for universell utforming. Tale krever avbruddshåndtering, strømming og måling av samlet responstid; lokal og godkjent ekstern modellkapasitet kan benyttes. Selvstendig lydproduksjon og podcastgenerering vurderes separat. Video har svært lav prioritet.
+
+Generative UX bygges med HVLs variant av Designsystemet.no og LangGraph-baserte mekanismer for å vise registrerte, versjonerte UI-komponenter. Modellen foreslår komponent og parametere; backend validerer rettigheter og input. Ikke kjør vilkårlig modellgenerert frontendkode med brukerens sesjon. ComfyUI er en mulig administrert kjøremotor for forhåndsgodkjente bilde- og videoarbeidsflyter; noder, modeller, nettverk og lisens må vurderes.
+
+En felles artefaktmodell skal støtte chat, Notebook, agenter og applikasjoner med eierskap, versjoner, tilgang, proveniens og referanser til ekstern S3-kompatibel objektlagring. PostgreSQL brukes for metadata og tilstand; datalagre er separate fra applikasjonscontainerne. Endelig kontrakt må avklares.
+
+## Gjennomføring
+
+Foreslått team er fem deltidsutviklere og en prosjektleder med avtalte ressursandeler, komponentansvar og støtte fra ITT. Memory Fabric og ny RAG er en mulig felles arbeidsstrøm; Toolserver og tools er en annen. Øvrig ansvarsdeling avklares i mandatet. Etabler integrerte MVP-er i bredden før avansert funksjonalitet modnes i dybden.
+
+Arbeidet er spesifikasjonsdrevet: PRD, tekniske spesifikasjoner, ADR, API- og datakontrakter, akseptansekriterier, automatiserte tester, kontinuerlig integrasjon og menneskelig kodegjennomgang. GitHub Copilot er utviklingsstøtte, ikke erstatning for arkitekturansvar, sikkerhetsvurdering eller test. Gjenbruk av åpne komponenter vurderes for kvalitet, lisens, sikkerhet og infrastruktur før innføring.
+
+Utvidelser som SILAF, automatisering, isolerte arbeidsmiljøer, avanserte evals og kunnskapsintegrasjoner innføres trinnvis. Se [åpne arkitekturvalg](./arkitekturavklaringer.mdx).

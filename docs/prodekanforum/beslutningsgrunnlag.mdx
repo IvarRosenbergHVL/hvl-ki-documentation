@@ -30,11 +30,13 @@ Vi skal ikke konkurrere med Anthropic, OpenAI eller Google om å utvikle grunnmo
 | Moderne KI-assistent | Chat, dokumenter, kontekst og hukommelse innenfor godkjente rammer. |
 | Interne informasjonskilder | Søk og kildebaserte svar med brukerens tillatte tilganger. |
 | Interne systemintegrasjoner | Kontrollerte oppslag og handlinger gjennom godkjente verktøy. |
-| Nettsøk | En HVL-kontrollert, eventuelt selvhostet søkeløsning med nødvendige personvern- og sikkerhetsvurderinger. |
+| Nettsøk | Lanseringskrav: kontrollert søk, innholdshenting og kildebaserte svar med etterprøvbare referanser. |
 | Agenter og multiagentsystemer | KI som kan planlegge, delegere, bruke verktøy og utføre oppgaver i avgrensede kjøremiljøer. |
 | Gjenbruk og kvalitet | Delbare agenter, systematiske evalueringer, kvalitetskontroll og sporbarhet. |
 
-Dette er funksjoner i målbildet. Konkret omfang ved første lansering må prioriteres; ikke alle funksjoner må være like omfattende som i kommersielle Enterprise-produkter.
+Dette er funksjoner i målbildet. Første versjon skal tilby chat og enkle assistenter, god dokumentforståelse med kildebaserte svar, personlig hukommelse, modellvalg, bildegenerering og **nettsøk med kildehenvisninger**. Nettsøk er et lanseringskrav fordi det er viktig for brukernes daglige nytte. Et kontrollert API skal være på plass fra første versjon; publisering av egne agenter som API-er planlegges ved lansering eller i neste delleveranse.
+
+ Konkret omfang ved første lansering må prioriteres; ikke alle funksjoner må være like omfattende som i kommersielle Enterprise-produkter.
 
 ## 3. To innganger fra første versjon – én felles KI-plattform
 
@@ -83,7 +85,9 @@ Prosjektet er ambisiøst, men prosjektgruppens vurdering er at det er gjennomfø
 
 **Vi bygger videre på etablerte verktøy med åpen kildekode.** Vi har allerede tatt i bruk [LangGraph](https://github.com/langchain-ai/langgraph) i utviklingsarbeidet for å organisere agenters arbeidsflyt og samspill. Før nye komponenter innføres, vurderer vi blant annet informasjonssikkerhet, lisensvilkår, vedlikehold, driftsbehov og egnethet for HVLs infrastruktur og arkitektur. Slik kan vi konsentrere utviklingsressursene om integrasjoner, sikkerhet, styring og funksjonalitet som er spesifikk for HVL, fremfor å utvikle generelle byggeklosser på nytt. Gjenbruk erstatter ikke testing eller sikkerhetsgodkjenning av den samlede tjenesten.
 
-Utviklingen skjer modulært og trinnvis, også innenfor hver modul. Vi kan prioritere en sammenhengende første versjon som dekker de viktigste brukerbehovene, og deretter utvide funksjonaliteten uten å vente på at hele økosystemet er ferdig.
+Chat og enkle assistenter bygger på eksisterende frontend og backend. Grunnleggende RAG, promptbasert bildegenerering og et blokkbasert arbeidsområde (Notebook) har fungerende grunnimplementasjoner. Personlig hukommelse, dokumentbehandling, grafbasert agentbygger og lydtjenester er under utvikling. Dette er prosjektets rapporterte status, ikke verifisert produksjonsmodenhet.
+
+Utviklingen skjer modulært og trinnvis, også innenfor hver modul. Teamet etablerer først en sammenhengende grunnversjon av hver prioritert komponent, med felles kontrakter og kontinuerlig integrasjon. Arbeidet styres av detaljerte krav, tekniske spesifikasjoner, tester og menneskelig kodegjennomgang, med GitHub Copilot som utviklingsstøtte. Tale-til-tekst og stemmesamtaler på norsk og engelsk prioriteres tidlig, blant annet for tilgjengelighet. Podcastgenerering vurderes senere; videogenerering har svært lav prioritet. Vi kan prioritere en sammenhengende første versjon som dekker de viktigste brukerbehovene, og deretter utvide funksjonaliteten uten å vente på at hele økosystemet er ferdig.
 
 ```mermaid
 flowchart LR
@@ -101,14 +105,14 @@ Prodekanforum bes støtte følgende anbefalinger til HVLs ledelse:
 | Beslutningspunkt | Hva må forankres? |
 |---|---|
 | **1. Strategisk prioritering** | Etabler HVLs KI-økosystem som et prioritert strategisk utviklingsprosjekt med tydelig mandat, prosjekteier og avsatt kapasitet. Første hovedleveranse er moderne KI-chat og integrasjonsgrensesnitt for HVLs applikasjoner. |
-| **2. Dedikerte utviklerressurser** | Sikre utviklingskapasitet. To utviklere i andre deler av organisasjonen har relevant kompetanse og ønsker å bidra. De må formelt frikjøpes eller få en avtalt, skjermet andel av arbeidstiden dedikert til prosjektet. |
+| **2. Dedikerte utviklerressurser** | Foreslått team: fem deltidsutviklere og en prosjektleder, med avtalte ressursandeler og spesialansvar. To utviklere i andre deler av organisasjonen har relevant kompetanse og ønsker å bidra. De må formelt frikjøpes eller få en avtalt, skjermet andel av arbeidstiden dedikert til prosjektet. |
 | **3. Forpliktende bidrag fra ITT** | Involver System og infrastruktur, Informasjonsforvaltning og -sikkerheit og Brukarretta tenester fra starten, med avtalte ressurser og ansvar i samarbeid med Digital tenesteutvikling. |
 | **4. Sektorsamarbeid** | Støtt aktivt utviklingssamarbeid i UH-sektoren, med UiB som første dialogpartner, om felles utvikling, gjenbruk og nasjonale KI-tjenester. |
 | **5. Regnekraft og investeringer** | Gi mandat til å utrede behovet for ytterligere lokal KI-maskinvare. Et mulig investeringsbehov på rundt 2 millioner kroner på sikt er en foreløpig størrelsesorden, ikke et kostnadsestimat eller en innkjøpsbeslutning. |
 
 **Hvorfor involvere hele ITT tidlig?** System og infrastruktur må bidra med nettverk, drift og kapasitet. Informasjonsforvaltning og -sikkerheit må bidra til at sikkerhet og personvern bygges inn fra start. Brukarretta tenester har innsikt i behovene studenter og ansatte melder inn, og må delta i prioritering, utprøving, opplæring og brukerstøtte – ikke først etter lansering.
 
-Høyere ambisjoner om digital suverenitet og lokal modellkjøring kan kreve større egne investeringer, særlig frem til egnede nasjonale tjenester er tilgjengelige. Omfanget av lokal kapasitet skal vurderes mot sikkerhetskrav, etterspørsel og samlet kostnad. Se [fordypning om ressurser og investeringer](./fordypning.mdx).
+Fire Dell-maskiner med GB10 er anskaffet for utvikling, testing og gradvis lokal produksjon, supplert med godkjente eksterne modeller. Mulig tilgang til nasjonal kapasitet må avklares. Høyere ambisjoner om digital suverenitet og lokal modellkjøring kan kreve større egne investeringer, særlig frem til egnede nasjonale tjenester er tilgjengelige. Omfanget av lokal kapasitet skal vurderes mot sikkerhetskrav, etterspørsel og samlet kostnad. Se [fordypning om ressurser og investeringer](./fordypning.mdx).
 
 Det som trengs nå, er en reell prioritering og tilgang til mennesker med riktig kompetanse. Mandat, ressursandeler og finansiering må besluttes av rett myndighet. Maskinvareanskaffelse behandles separat når behovet er dokumentert. UiO-GPT fases først ut når erstatningen er godkjent og driftsklar; Microsoft Copilot omfattes ikke automatisk.
 

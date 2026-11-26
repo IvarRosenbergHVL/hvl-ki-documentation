@@ -9,6 +9,10 @@ En LLM tolker og genererer språk, men har ikke automatisk kunnskap om HVLs inte
 
 Registeret omfatter kommersielle skymodeller, modeller på HVLs egen maskinvare og modeller via nasjonale skytjenester. Hver modelloppføring beskriver modell og versjon, leverandør, behandlingsmiljø, godkjente dataklasser og bruksformål, modaliteter, kontekstvindu, språkegenskaper, kostnad, kapasitet og tilgjengelighet. Brukere og agenter får bare velge modeller som er tillatt for den aktuelle behandlingen.
 
+## Lokal inferens og ressursstyring
+
+Fire Dell GB10-maskiner er anskaffet til utvikling, testing og gradvis produksjon i Kubernetes. Planlagt hybridmodell omfatter også godkjente Azure Foundry-modeller i egnet behandlingsmiljø og eventuell nasjonal kapasitet (tilgang til NTNU-datasenteret er ikke avklart). Lokal inferens får kø, prioritet, kvoter og kapasitetsstyring; interaktive kall prioriteres foran batchjobber, som kjøres ved ledig kapasitet. Lyd-, bilde- og eventuell videogenerering kan få egne kvoter. Sammenkobling av to GB10-maskiner vurderes ved behov, avhengig av kompatibilitet og målt ytelse. Lokal kjøring eller EØS-region alene gir ikke godkjenning for en dataklasse.
+
 ## Manuelt og automatisk modellvalg
 
 Brukeren kan velge modell eksplisitt. Agentbyggeren kan foreslå modell, modellroller og ressursgrenser basert på agentens oppgave. Backend og Runtime kan også be om automatisk valg etter oppgave og krav til kvalitet, språk, kapasitet, pris og responstid. Model Gateway håndhever policy uavhengig av hvordan modellvalget ble gjort.

@@ -7,6 +7,8 @@ sidebar_position: 1
 
 HVLs KI-økosystem er en felles plattform under utvikling. Målarkitekturen er designet, og utviklingsarbeid er gjennomført, men komponentenes faktiske modenhet og integrasjonsstatus må verifiseres mot hovedrepoet. Første godkjente lansering skal ha både KI-chat for studenter og ansatte og et kontrollert API for HVL-applikasjoner. Ambisjonen er å erstatte UiO-GPT som grunnleggende KI-chat når tjenesten er driftsklar. Utvikling og leveranser skjer modulært og trinnvis.
 
+Se [leveranseomfang og rapportert utviklingsstatus](./leveranser.mdx) for første MVP, videre prioriteringer og tekniske avklaringer. Nettsøk med kildehenvisninger er et lanseringskrav.
+
 ## Gjenbruk av åpen kildekode
 
 LangGraph er allerede tatt i bruk i utviklingsarbeidet og er orkestreringsmotoren i målarkitekturen. Gjenbruk av etablerte komponenter skal prioriteres der det er egnet. Før innføring vurderes sikkerhet, lisens, vedlikehold, avhengigheter, driftsbehov og kompatibilitet med HVLs infrastruktur. Valg dokumenteres og testes; gjenbruk erstatter ikke integrasjonstesting og produksjonsgodkjenning. Se [åpne arkitekturvalg](./arkitekturavklaringer.mdx) og [strategisk beslutningsgrunnlag](../prodekanforum/intro.mdx).
@@ -21,6 +23,8 @@ Canvas-utvidelser (eksempelvis LTI), HVL Skjema, saksbehandlingsapplikasjoner og
 
 Kontrakter for synkrone og asynkrone operasjoner, strømming, status, avbrudd, resultat og godkjenning må konkretiseres. Det er API-et som inngår i første leveranse, ikke nødvendigvis alle eksempelapplikasjonene.
 
+Agent Registry beholder eierskap til Agent ID, versjoner, schema og publiseringsstatus. En agent kan publiseres til chat, API eller begge. Gravitee.io er planlagt som API-forvaltningslag for registrering, tilgang, abonnement og kvoter; integrasjon og lisens avklares. Generelt applikasjons-API inngår i første MVP, mens selvbetjent API-publisering av agenter planlegges ved lansering eller i neste delleveranse. Backend håndhever alltid agentens effektive rettigheter og validerer input og output.
+
 ## Backend
 
 Backend håndterer autentisering (FEIDE/Entra ID), autorisasjon, samtaler og meldinger, orkestrering, policy, tjenestekall og relevante logger. Backend verifiserer forespørsler; en klientoppgitt bruker-ID er ikke tilstrekkelig. Komponentene skal ha avgrensede ansvar. Innebygd personvern er et grunnprinsipp: brukeridentitet og tilgang håndteres av HVL, mens modellene får en avgrenset kontekst uten direkte identitetsmetadata. Se kapitlet [Innebygd personvern](./personvern.mdx).
@@ -34,6 +38,7 @@ flowchart TD
  B --> R[Agent Runtime]
  B --> M[Memory Fabric]
  B --> T[Toolserver]
+ T --> WS[Web Service / SearXNG]
  B --> K[HVL Knowledge]
  B --> G[Model Gateway]
  B --> L[Biblioteker]

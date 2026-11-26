@@ -41,13 +41,13 @@ Trinnene er et forslag til gjennomføring, ikke en kalenderfestet leveranseplan.
 
 Første versjon skal ha både chatgrensesnitt for mennesker og et kontrollert integrasjonsgrensesnitt (API) for applikasjoner. Eksempelvis kan en Canvas-utvidelse (via LTI der egnet) eller en saksbehandlingsapplikasjon kalle godkjente agenter og motta strukturerte resultater. Brukeridentitet, tjenesteidentitet, formål, tilganger og nødvendige godkjenninger må håndheves også ved slike kall. Dette er et mål for plattformens grensesnitt, ikke et løfte om at alle eksempelapplikasjoner er ferdige ved lansering.
 
-- **Moderne KI-assistent:** Dokumenter, kontekst og relevante verktøy i tillegg til grunnleggende chat.
-- **Integrasjoner:** Demonstrere kontrollert bruk av minst én godkjent intern informasjonskilde og relevante systemintegrasjoner, med tilgangsstyring og tydelig skille mellom lesing og handling.
-- **Nettsøk:** Vurdere selvhostet eller annen HVL-kontrollert søkeinfrastruktur, inkludert dataminimering, utgående søk, kilder og leverandørvilkår. Selvhosting fjerner ikke alle personvernrisikoer.
-- **Agentisk arbeid:** Demonstrere verktøybruk, delegering, multiagentorkestrering og kvalitetssikring innenfor definerte budsjett- og sikkerhetsgrenser.
+- **Moderne KI-assistent:** Chat, enkle assistenter, personlig hukommelse, god dokumentforståelse og dokumentbaserte svar med kilder, modellvalg og bildegenerering.
+- **Nettsøk:** Obligatorisk lanseringskrav med kontrollert søk, innholdshenting og etterprøvbare kildehenvisninger. Selvhosting fjerner ikke alle personvernrisikoer.
+- **Integrasjoner:** Grunnleggende verktøytjeneste og kontrollert applikasjons-API. Publisering av agenter som API-er planlegges ved lansering eller i neste delleveranse. Interne informasjonskilder og fagsystemer innføres gradvis.
+- **Agentisk arbeid:** Enkle agenter først; avansert delegering, multiagentorkestrering og isolerte kjøremiljøer modnes senere.
 - **Driftsklarhet:** Dokumentere kvalitet, brukervennlighet, personvern, sikkerhet, tilgjengelighet, kostnader, support, migrering og forvaltning før utfasing av eksisterende tilbud.
 
-Den nøyaktige minimumsleveransen og kriteriene for overgang fra UiO-GPT må avklares i mandatet. Listen er et forslag til prioritering, ikke en allerede vedtatt lanseringsplan.
+Den nøyaktige minimumsleveransen og kriteriene for overgang fra UiO-GPT må avklares i mandatet. Listen beskriver foreslått minimumsomfang, med nettsøk som ufravikelig funksjonskrav, ikke en vedtatt lanseringsplan.
 
 ## Videre anvendelse: hva kan en utdanningspilot vise?
 
@@ -82,6 +82,7 @@ Prosjektet trenger en tydelig strategisk prioritering, ikke bare generell støtt
 
 | Bidrag | Behov i prosjektet |
 |---|---|
+| Prosjektleder og fem deltidsutviklere | Foreslått organisering med skjermet kapasitet, spesialansvar per komponent og koordinert integrasjon. Ressursandeler avklares. |
 | Digital tenesteutvikling (ITDT) | Kontinuitet i utvikling, arkitektur, integrasjon, koordinering og teknisk kvalitet. |
 | To utviklere fra andre deler av HVL | Relevant kompetanse og motivasjon er identifisert. Avtal formelt frikjøp eller dedikert arbeidstid med linjelederne. Ressursandeler må avklares. |
 | System og infrastruktur (ITSI) | Nettverk, drift, plattforminfrastruktur, regnekraft, kapasitetsplanlegging og driftsberedskap. |
@@ -93,7 +94,7 @@ Enhetsnavnene følger [HVLs oversikt over Avdeling for informasjonsteknologi og 
 
 ### Lokal regnekraft og digital suverenitet
 
-Plattformen skal kunne benytte en kombinasjon av godkjente kommersielle, nasjonale og lokalt kjørte modeller. Økt grad av lokal kontroll og kapasitet kan være nødvendig for enkelte dataklasser og forskningsbehov. Før nasjonale tjenester tilbyr egnet kapasitet og godkjente behandlingsmiljøer, kan dette bety høyere investeringer ved HVL.
+Fire Dell GB10-maskiner er anskaffet til utvikling, testing og gradvis produksjon. Kapasitet og samtidighet må måles før utrulling. Plattformen skal kunne benytte en kombinasjon av godkjente kommersielle, nasjonale og lokalt kjørte modeller. Økt grad av lokal kontroll og kapasitet kan være nødvendig for enkelte dataklasser og forskningsbehov. Før nasjonale tjenester tilbyr egnet kapasitet og godkjente behandlingsmiljøer, kan dette bety høyere investeringer ved HVL.
 
 En mulig senere investering i KI-maskinvare på rundt 2 millioner kroner er et foreløpig planleggingstall basert på prosjektets innspill. Det foreligger ikke her et dimensjonert kostnadsestimat, tilbud, budsjett eller vedtatt anskaffelse. Behovet må vurderes ut fra dataklasser, samtidige brukere, modellkvalitet, kapasitet, nasjonale alternativer, anskaffelse, energi, drift og kompetanse. Eksisterende kapasitet og trinnvis oppskalering bør vurderes først.
 
