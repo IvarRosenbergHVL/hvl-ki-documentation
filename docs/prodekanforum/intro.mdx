@@ -34,13 +34,21 @@ Vi skal ikke konkurrere med Anthropic, OpenAI eller Google om å utvikle grunnmo
 
 Dette er funksjoner i målbildet. Konkret omfang ved første lansering må prioriteres; ikke alle funksjoner må være like omfattende som i kommersielle Enterprise-produkter.
 
-## 3. Hvorfor utvikle et eget tjenestelag?
+## 3. To innganger fra første versjon – én felles KI-plattform
+
+- **For mennesker:** Et moderne chatgrensesnitt der studenter og ansatte kan bruke KI direkte.
+- **For applikasjoner:** Et felles integrasjonsgrensesnitt (API) som gjør at HVLs utviklere kan bygge KI og agenter direkte inn i nye og eksisterende verktøy.
+
+En saksbehandler kan få hjelp til å kontrollere dokumentasjon og utarbeide et saksnotat i selve saksbehandlingsapplikasjonen. I Canvas kan vi utvikle emnetilpassede læringsverktøy og agentbaserte utvidelser, for eksempel via LTI, med faglærerens pedagogiske rammer. Brukeren trenger ikke åpne en separat KI-chat.
+
+Begge inngangene benytter de samme felles plattformtjenestene, med formålsbestemte tilganger, kvalitetssikring og sporbarhet.
 
 ```mermaid
 flowchart TD
  U[Studenter og ansatte] --> C[HVL KI-assistent]
- A[HVLs eksisterende applikasjoner] --> P
+ A[Canvas, saksbehandling og andre applikasjoner] --> I[Felles integrasjonsgrensesnitt / API]
  C --> P[Felles HVL-styrt KI-plattform]
+ I --> P
  P --> K[Interne kilder og systemer]
  P --> W[Kontrollert søk og agentkjøring]
  P --> M[Godkjente lokale og eksterne KI-modeller]
@@ -52,7 +60,7 @@ Egen drift gir muligheter for kontroll, men er ikke alene tilstrekkelig for GDPR
 
 ## 4. En grunnmur for hele HVL
 
-Den moderne KI-assistenten er første anvendelse, men plattformen kan også brukes direkte fra andre tjenester:
+KI-assistenten og integrasjonsgrensesnittet er de to inngangene fra første versjon. Plattformen åpner dermed for spesialiserte tjenester som:
 
 - Faglærerstyrt personlig læringsstøtte og samarbeidslæring i Canvas.
 - Videreutvikling av Mime for student- og ansattservice.
@@ -81,7 +89,7 @@ Dette kan gi en relativt kort vei til første lansering. Konkret lanseringstidsp
 
 **Forslag til anbefaling fra prodekanforum:**
 
-- Støtte formell forankring og videreføring av utviklingsarbeidet med HVLs modulære KI-økosystem, med en moderne KI-assistent for studenter og ansatte som første hovedleveranse.
+- Støtte formell forankring og videreføring av utviklingsarbeidet med HVLs modulære KI-økosystem, med både en moderne KI-assistent og et kontrollert API for integrasjon i HVLs applikasjoner som første hovedleveranse.
 - Legge til grunn at tjenesten skal kunne overta for UiO-GPT når den har tilstrekkelig funksjonalitet, dokumentert kvalitet, godkjenning og driftsberedskap.
 - Bidra til prioritering av behov, fagmiljøer og videre anvendelser, og støtte avklaring av utviklingssamarbeid, mandat, ressurser og forvaltning.
 
