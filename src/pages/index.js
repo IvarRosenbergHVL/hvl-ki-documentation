@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 export default function Home() {
-  return <Layout title="Prosjektopplæring" description="To læringsløp for HVLs KI-økosystem">
+  return <Layout title="Prosjektopplæring" description="Tre innganger til HVLs KI-økosystem">
     <main className="course-home">
       <section className="course-hero">
         <div className="course-kicker">HVL / PROSJEKTOPPLÆRING</div>
@@ -24,6 +24,12 @@ export default function Home() {
             <h3>For interessenter</h3>
             <p>Forstå mulighetene, gevinstene, informasjonsforvaltningen, personvernet og beslutningene som kreves.</p>
             <span className="course-arrow">Start interessentkurset →</span>
+          </Link>
+          <Link className="course-tile" to="/docs/prodekanforum/intro">
+            <span className="course-kicker">03 / BESLUTNINGSGRUNNLAG</span>
+            <h3>For prodekanforum</h3>
+            <p>En kort strategisk gjennomgang for KI og digitalisering: hvorfor starte arbeidet, hva utdanning kan få igjen, og hvilke beslutninger som trengs.</p>
+            <span className="course-arrow">Les beslutningsgrunnlaget →</span>
           </Link>
         </div>
       </section>

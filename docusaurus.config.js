@@ -17,6 +17,7 @@ module.exports = {
     navbar: { title: 'HVL KI / prosjektopplæring', items: [
       {to:'/docs/utviklere/intro',label:'Utviklere',position:'left'},
       {to:'/docs/interessenter/intro',label:'Interessenter',position:'left'},
+      {to:'/docs/prodekanforum/intro',label:'Prodekanforum',position:'left'},
       {to:'/docs/felles/begreper',label:'Begreper',position:'right'}
     ]},
     footer: {style:'dark',copyright:'HVL KI-økosystem · Prosjektutkast · Målarkitektur'},
