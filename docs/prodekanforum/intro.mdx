@@ -1,79 +1,75 @@
 ---
-title: "KI i utdanning – fra enkeltverktøy til felles satsing"
+title: "Fra enkel KI-chat til HVLs eget KI-økosystem"
 sidebar_label: "Beslutningsgrunnlag"
 sidebar_position: 1
-description: "Kort strategisk beslutningsgrunnlag for prodekanforum for KI og digitalisering."
+description: "Strategisk beslutningsgrunnlag for prodekanforum for KI og digitalisering."
 ---
 
-**Prodekanforum for KI og digitalisering · Forslag til oppstart · Ca. 5 minutters lesing**
+**Prodekanforum for KI og digitalisering · Forslag til oppstart · Ca. 4–5 minutters lesing**
 
-## 1. Hva ønsker vi å beslutte?
+## 1. Dagens KI-tilbud er ikke tilstrekkelig
 
-**Anbefaling:** Still dere bak at HVL starter et avgrenset, tverrfaglig arbeid med å utvikle et felles KI-økosystem, med utdanningsfaglige behov som en sentral drivkraft. Arbeidet skal frembringe en demonstrerbar løsning, et kunnskapsgrunnlag og en anbefaling om videre satsing.
+HVL tilbyr i dag blant annet UiO-GPT og Microsoft Copilot. En enkel chat med tilgang til en språkmodell dekker grunnleggende behov, men er ikke lenger tilstrekkelig som generelt KI-tilbud for studenter og ansatte.
 
-Dette er et forslag om å starte arbeidet, ikke om å godkjenne full utbygging, innkjøp eller produksjonsbruk. En eventuell ressursbeslutning må tas av riktig beslutningsmyndighet.
+Brukerne etterspør funksjonalitet de kjenner fra blant annet Claude, ChatGPT og Googles KI-tjenester: dokumentarbeid, søk, hukommelse, verktøy, agenter og selvstendig utførelse av sammensatte oppgaver.
 
-## 2. Hvorfor nå?
+Samtidig må HVL kunne gi KI tilgang til interne informasjonskilder og fagsystemer på en forsvarlig måte. Eksterne KI-tjenester kan ikke uten videre få slike tilganger. Personvern, informasjonssikkerhet, leverandørvilkår og kontroll med handlinger må være ivaretatt. Også nettsøk krever et behandlingsoppsett som HVL kan godkjenne.
 
-HVL har allerede UiO-GPT og Microsoft Copilot. Samtidig etterspør brukere mer funksjonsrike KI-tjenester, eksempelvis Claude, som kan arbeide med større oppgaver, kunnskapskilder og andre systemer.
+## 2. Forslaget: HVLs eget KI-økosystem
 
-Enkeltstående verktøy kan løse mange behov, men gir også risiko for fragmentert kontekst, ulik tilgang og gjentatte vurderinger av integrasjoner, personvern og sikkerhet. Eksterne agenter kan ikke uten videre få tilgang til interne HVL-systemer. Fagmiljøene trenger dessuten mer enn generell chat: de må kunne forme KI-støtten etter pedagogiske og faglige behov.
+**Målet er at første godkjente versjon av HVLs KI-tjeneste skal kunne erstatte behovet for UiO-GPT som grunnleggende KI-chat, og tilby vesentlig mer funksjonalitet.**
 
-Spørsmålet er derfor ikke bare hvilken KI-modell HVL skal tilby, men hvordan institusjonen skal kunne utvikle og forvalte egne KI-tjenester over tid.
+Vi skal ikke konkurrere med Anthropic, OpenAI eller Google om å utvikle grunnmodeller eller kopiere hele deres produktporteføljer. Vi kan bruke godkjente modeller fra flere leverandører og bygge et langt mer anvendelig tjenestelag selv, tilpasset HVL.
 
-## 3. Forslaget: én grunnmur, mange tjenester
+| Funksjon | Hva HVL ønsker å tilby |
+|---|---|
+| Moderne KI-assistent | Chat, dokumenter, kontekst og hukommelse innenfor godkjente rammer. |
+| Interne informasjonskilder | Søk og kildebaserte svar med brukerens tillatte tilganger. |
+| Interne systemintegrasjoner | Kontrollerte oppslag og handlinger gjennom godkjente verktøy. |
+| Nettsøk | En HVL-kontrollert, eventuelt selvhostet søkeløsning med nødvendige personvern- og sikkerhetsvurderinger. |
+| Agenter og multiagentsystemer | KI som kan planlegge, delegere, bruke verktøy og utføre oppgaver i avgrensede kjøremiljøer. |
+| Gjenbruk og kvalitet | Delbare agenter, systematiske evalueringer, kvalitetskontroll og sporbarhet. |
+
+Dette er funksjoner i målbildet. Konkret omfang ved første lansering må prioriteres; ikke alle funksjoner må være like omfattende som i kommersielle Enterprise-produkter.
+
+## 3. Hvorfor utvikle et eget tjenestelag?
 
 ```mermaid
 flowchart TD
- P[Felles HVL KI-plattform] --> U[Personlig læringsstøtte i Canvas]
- P --> M[Student- og ansattservice]
- P --> F[Forskningsstøtte]
- P --> A[Administrative tjenester]
- P --- K[Felles modelltilgang, kunnskap, integrasjoner og kvalitetskontroll]
+ U[Studenter og ansatte] --> C[HVL KI-assistent]
+ A[HVLs eksisterende applikasjoner] --> P
+ C --> P[Felles HVL-styrt KI-plattform]
+ P --> K[Interne kilder og systemer]
+ P --> W[Kontrollert søk og agentkjøring]
+ P --> M[Godkjente lokale og eksterne KI-modeller]
 ```
 
-HVL utvikler et modulært tjenestelag med felles tilgang til godkjente modeller, kunnskapskilder, verktøy og agenter. Det skal kunne brukes fra eksisterende systemer, ikke bare fra en ny chat. Modeller kan byttes eller suppleres uten at alle tjenester bygges om.
+HVL kan eie brukerrelasjonen, integrasjonene og styringen av data og agenthandlinger, samtidig som vi utnytter utviklingen hos modellleverandørene. Det gir et annet handlingsrom enn en frittstående ekstern chat.
 
-Felles personvern, tilgangsstyring, avgrensede kjøremiljøer, evaluering og sporbarhet bygges inn fra start. Fagmiljøene beholder ansvaret for formål og kvalitet. Dette er ikke et forslag om å utvikle egne grunnmodeller eller erstatte alle eksisterende tilbud.
+Egen drift gir muligheter for kontroll, men er ikke alene tilstrekkelig for GDPR-etterlevelse. Tilgang, dataminimering, modellvalg, isolasjon, evaluering og sporbarhet må håndheves og dokumenteres. Interne systemer beholder sine tilgangsregler.
 
-## 4. Hva kan utdanningen få igjen?
+## 4. En grunnmur for hele HVL
 
-**Eksempel: personlig læringsstøtte i Canvas.** Faglærer setter rammer ut fra emnets læringsutbytte, pensum, oppgaver og vurderingskriterier. Studenten får veiledning, hint, øving og formative tilbakemeldinger – ikke automatisk ferdige svar. Tjenesten kan også støtte samarbeidslæring og dialog med faglærer.
+Den moderne KI-assistenten er første anvendelse, men plattformen kan også brukes direkte fra andre tjenester:
 
-På sikt kan læringsstøtten følge studenten på tvers av emner innenfor avklarte personvernrammer. Faglærerstyring skal ikke innebære automatisk innsyn i private studentsamtaler.
+- Faglærerstyrt personlig læringsstøtte og samarbeidslæring i Canvas.
+- Videreutvikling av Mime for student- og ansattservice.
+- Forskningsstøtte og KI-funksjoner i administrative fagsystemer.
 
-Gevinstene vi ønsker å undersøke:
+Felles komponenter kan gjenbrukes på tvers av fakulteter og tjenester. Canvas er et eksempel på hva grunnmuren muliggjør, ikke en forutsetning for satsingen.
 
-- Bedre tilpasset læringsstøtte og likeverdig tilgang.
-- Større faglig og pedagogisk handlingsrom for undervisere.
-- Gjenbruk av løsninger og erfaringer på tvers av fakulteter.
-- Mer kontroll over data, integrasjoner, ressursbruk og leverandøravhengighet.
+Retningen samsvarer med flere temaer i Malthe-Sørenssen-utvalgets NOU 2026: 14, blant annet fagtilpasning, forvaltning, digital suverenitet og samarbeid. Se [prosjektets gjennomgang av kapittel 4 og 8](../interessenter/nou-2026-14.mdx). HVL bør undersøke utviklingssamarbeid med UiB og andre UH-aktører og gjenbruke nasjonal infrastruktur der det er egnet.
 
-Dette er forventede muligheter, ikke dokumenterte gevinster.
-
-## 5. Hvorfor felles, og hvorfor samarbeid?
-
-Malthe-Sørenssen-utvalgets NOU 2026: 14 løfter blant annet fagtilpasning, institusjonell forvaltning, digital suverenitet og samarbeid i sektoren. Prosjektets målarkitektur er utformet for å møte flere av disse behovene; se [prosjektets gjennomgang av kapittel 4 og 8](../interessenter/nou-2026-14.mdx).
-
-HVL bør undersøke samarbeid med UiB og andre relevante UH-aktører om gjenbrukbare komponenter og felles utvikling, samt benytte nasjonal infrastruktur der det er egnet. Lokal faglig tilpasning kan kombineres med felles sektorløsninger. Samarbeidets omfang og finansiering er ikke avklart.
-
-## 6. Fra idé til beslutning om videre satsing
-
-| Første arbeidsfase | Hva skal leveres? |
-|---|---|
-| Forankre behov | Fagmiljøer, studenter, IT, personvern og sikkerhet velger en avgrenset utdanningscase og målekriterier. |
-| Utvikle og prøve | Demonstrer gjenbrukbar plattformfunksjonalitet og en læringsstøtte i avgrenset testmiljø. Bruk godkjente testdata. |
-| Evaluere | Undersøk læringsverdi, faglig kvalitet, sikkerhet, tilgjengelighet, ressursbruk og gjennomførbarhet. |
-| Anbefale neste steg | Legg frem ressursbehov, samarbeid, risiko, forvaltning og alternativer for videre beslutning. |
+## 5. Beslutningen vi trenger nå
 
 **Forslag til anbefaling fra prodekanforum:**
 
-- Støtte oppstart av et avgrenset, tverrfaglig arbeid med HVLs KI-økosystem.
-- Bidra til å identifisere fagmiljøer og utdanningsbehov for en første pilot.
-- Be om at mandat, nødvendige ressurser og mulig sektorsamarbeid avklares, og at resultatene legges frem for ny beslutning før eventuell videre utrulling.
+- Støtte oppstart av arbeidet med HVLs modulære KI-økosystem, med en moderne KI-assistent for studenter og ansatte som første hovedleveranse.
+- Legge til grunn at tjenesten skal kunne overta for UiO-GPT når den har tilstrekkelig funksjonalitet, dokumentert kvalitet, godkjenning og driftsberedskap.
+- Bidra til prioritering av behov, fagmiljøer og videre anvendelser, og støtte avklaring av utviklingssamarbeid, mandat, ressurser og forvaltning.
 
-Omfang, finansiering, ansvarlig eier og tidsplan må konkretiseres i oppstartsmandatet. Ingen produksjonssetting eller behandling av studentdata følger automatisk av en slik anbefaling.
+Første arbeidsfase skal konkretisere leveranseomfanget, utvikle og teste kjernen og dokumentere nytte, sikkerhet, kostnader og driftsbehov. En eventuell utfasing av UiO-GPT gjennomføres først når erstatningen er klar. Forslaget innebærer ikke automatisk utfasing av Microsoft Copilot, innkjøp eller produksjonsgodkjenning.
 
 ---
 
-**Dette er hovedbildet.** For mer om alternativer, kontroll og hvordan en pilot kan vurderes, se [Fordypning og spørsmål til diskusjon](./fordypning.mdx). For hele arkitektur- og funksjonalitetsbeskrivelsen, se [interessentløpet](../interessenter/intro.mdx).
+**Dette er hovedbildet.** Les eventuelt [fordypning og diskusjonsspørsmål](./fordypning.mdx), eller gå til [interessentløpet](../interessenter/intro.mdx).
