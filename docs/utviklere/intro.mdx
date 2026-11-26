@@ -5,11 +5,17 @@ sidebar_position: 1
 
 **Læringsmål:** Forstå grensen mellom brukergrensesnitt, backend og spesialiserte tjenester.
 
-HVLs KI-økosystem er en planlagt felles plattform for studenter og ansatte. Chat er én inngang; Canvas, HVL Skjema og andre applikasjoner skal også kunne bruke de samme tjenestene. Dokumentasjonen beskriver arkitektur og funksjonalitet for planlagt utvikling.
+HVLs KI-økosystem er en felles plattform under utvikling. Målarkitekturen er designet, og utviklingsarbeid er gjennomført, men komponentenes faktiske modenhet og integrasjonsstatus må verifiseres mot hovedrepoet. Første godkjente lansering skal ha både KI-chat for studenter og ansatte og et kontrollert API for HVL-applikasjoner. Ambisjonen er å erstatte UiO-GPT som grunnleggende KI-chat når tjenesten er driftsklar. Utvikling og leveranser skjer modulært og trinnvis.
 
 ## Frontend
 
 Frontend viser samtaler, strømmede svar, vedlegg, prosjekter, agentbygger, biblioteker og godkjenningsdialoger. Den håndterer brukerinteraksjon, ikke privilegerte modellnøkler, databaseforbindelser eller direkte tilgang til interne systemer.
+
+## Applikasjons-API
+
+Canvas-utvidelser (eksempelvis LTI), HVL Skjema, saksbehandlingsapplikasjoner og andre HVL-tjenester skal kunne kalle plattformen uten å bruke chatgrensesnittet. Backend er den kontrollerte inngangen for applikasjonskall, inkludert oppstart av agentkjøringer og mottak av strukturerte resultater. Bruker- og tjenesteidentitet, formål, tilgang, miljøkontekst og agentversjon må valideres på serversiden. Integrasjoner skal ikke få direkte tilgang til interne plattformtjenester eller lagring.
+
+Kontrakter for synkrone og asynkrone operasjoner, strømming, status, avbrudd, resultat og godkjenning må konkretiseres. Det er API-et som inngår i første leveranse, ikke nødvendigvis alle eksempelapplikasjonene.
 
 ## Backend
 
@@ -17,8 +23,10 @@ Backend håndterer autentisering (FEIDE/Entra ID), autorisasjon, samtaler og mel
 
 ```mermaid
 flowchart TD
- U[Bruker eller HVL-applikasjon] --> F[Frontend / API-klient]
+ U[Bruker] --> F[KI-chat / Frontend]
+ AP[HVL-applikasjon] --> I[Applikasjons-API]
  F --> B[Backend: identitet og policy]
+ I --> B
  B --> R[Agent Runtime]
  B --> M[Memory Fabric]
  B --> T[Toolserver]
@@ -34,6 +42,10 @@ flowchart TD
 **Eksempel:** En prosjektleder ber om en oppsummering. Backend kontrollerer tilgang, innhenter relevant kontekst og returnerer modellens svar. Ingen av de andre tjenestene behøver å være direkte eksponert mot nettleseren.
 
 Plattformens kontroll- og kvalitetslag omfatter [Evals og Quality Platform](./evaluering.mdx), [Execution Platform](./kjoremiljo.mdx) og [Audit og tracing](./sporbarhet.mdx). Diagrammet viser logiske funksjoner, ikke alle nettverksforbindelser.
+
+## Miljøavhengig sikkerhet
+
+I SILAF skal KI-chat og applikasjoner kunne tilbys med en særskilt sikkerhetsprofil. Betrodd miljø- og prosjektkontekst følger hele kjøringen, inkludert underagenter. Model Gateway håndhever modellrestriksjoner, mens øvrige tjenester håndhever begrensninger på kontekst, verktøy, kommunikasjon, lagring og utførelse. Ingen komponent kan utvide effektive rettigheter. Se [Model Gateway](./modeller.mdx). Konkret utrulling og sikkerhetsprofil krever egen avklaring og godkjenning.
 
 ## Felles krav til database og lagring
 

@@ -36,3 +36,9 @@ sequenceDiagram
 Skills for statusrapportering styrer metode. Modellvalg skjer innenfor policy. Eksterne modeller mottar bare godkjent kontekst, ikke brukerens innloggingsidentitet eller direkte systemtilgang. Endringer i GitHub krever separat godkjent handling. Nye prosjektbeslutninger kan lagres i memory etter gjeldende regler.
 
 Ved behov benytter agenten Execution Platform til å produsere og validere en rapportfil. Produksjonsfunn kan bli nye regresjonstester i Evals. Quality Platform koordinerer gjennomgang og publisering av forbedrede versjoner. Planlagte kjøringer kan initieres av Automation Platform med samme policy og godkjenningskrav.
+
+## Samme arbeidsflyt fra en HVL-applikasjon
+
+En Canvas-utvidelse eller saksbehandlingsapplikasjon kan initiere en godkjent agent via applikasjons-API-et og motta et strukturert resultat i egen arbeidsflate. Backend validerer både bruker- og applikasjonsidentitet, formål og tilganger. Runtime, Model Gateway, Toolserver og kvalitetssikring følger samme grunnleggende regler som for KI-chatten. Det betyr ikke at alle applikasjoner får samme rettigheter eller tilgang til samme kontekst. For handlinger med konsekvenser må godkjenning og resultat formidles gjennom applikasjonen på en kontrollert måte.
+
+Ved kjøring i SILAF skal den betrodde miljø- og prosjektkonteksten begrense modellvalg, verktøy, dataflyt og lagring også for underagenter og hjelpefunksjoner. Ved manglende godkjent behandlingsalternativ stoppes eller avklares oppgaven. Se [Model Gateway](./modeller.mdx).

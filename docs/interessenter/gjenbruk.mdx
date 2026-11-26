@@ -9,7 +9,8 @@ HVLs KI-økosystem består av spesialiserte komponenter som kan gjenbrukes på t
 
 | Komponent | Funksjonalitet og betydning |
 |---|---|
-| Frontend | Felles brukergrensesnitt for KI-chat, dokumenter, prosjekter og agenter. Brukerne kan velge tilgjengelige modeller, finne ferdige KI-tjenester og bygge egne agenter innenfor sine rettigheter. Andre HVL-applikasjoner kan også benytte plattformens tjenester. |
+| Frontend | Felles brukergrensesnitt for KI-chat, dokumenter, prosjekter og agenter. Brukerne kan velge tilgjengelige modeller, finne ferdige KI-tjenester og bygge egne agenter innenfor sine rettigheter. |
+| Integrasjonsgrensesnitt (API) | Felles inngang for HVL-applikasjoner som trenger KI, agenter og kunnskapsoppslag direkte i sin egen arbeidsflate. Planlegges fra første lansering sammen med KI-chatten. |
 | Backend | Koordinerer plattformen, håndterer innlogging, brukeridentitet, rettigheter, samtaler og tjenestekall. Sørger for at brukernes kontekst og identitet forvaltes av HVL fremfor av modellleverandørene. |
 | Model Gateway | Felles modellregister og tilgangspunkt for godkjente, tilgjengelige KI-modeller: kommersielle skymodeller, modeller på HVLs egen maskinvare og modeller via nasjonale skytjenester. Brukeren kan velge modell, eller systemet kan velge automatisk ut fra oppgave, kvalitet, språk, kostnad, kapasitet og datasikkerhet. Gateway håndhever modellpolicy og inkluderer PII-vaskemaskinen. |
 | Agentbygger | Gjør det mulig å sette sammen KI-tjenester med formål, instrukser, modeller, kunnskapskilder, verktøy, arbeidsmetoder og tilgangsrammer. Fagmiljøene kan definere behov og teste løsninger før deling. |
@@ -40,7 +41,7 @@ flowchart TD
  R --> N[Godkjente nasjonale skytjenester]
 ```
 
-Automatisk modellvalg gjør det mulig å bruke en rimelig, rask modell til en enkel oppgave, en kraftigere modell til kompleks analyse og en modell i et godkjent internt miljø når data ikke kan sendes ut. Brukerens modellvalg må også respektere de samme sikkerhetsreglene.
+Automatisk modellvalg gjør det mulig å bruke en rimelig, rask modell til en enkel oppgave, en kraftigere modell til kompleks analyse og en modell i et godkjent internt miljø når data ikke kan sendes ut. Brukerens modellvalg må også respektere de samme sikkerhetsreglene. I forskningsmiljøet SILAF skal systemet automatisk begrense hvilke modeller og funksjoner som er tilgjengelige etter miljøets og prosjektets krav. Dette gjelder også når agenter velger modeller selv. Andre plattformtjenester håndhever tilsvarende regler for verktøy, dataflyt og lagring. Se [KI-tjenester i SILAF](./skreddersydde-tjenester.mdx).
 
 Flere modeller kan samarbeide om én oppgave. En modell kan analysere data, mens en annen bearbeider resultatet til en god norsk respons. Nasjonalbibliotekets åpne [Borealis-modellserie](https://ai.nb.no/borealis/) er en aktuell kandidat til en slik språk- og synteserolle på bokmål og nynorsk. Kvaliteten på faktainnhold og kildehenvisninger må bevares også når svaret omformuleres.
 

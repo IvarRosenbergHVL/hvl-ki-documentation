@@ -9,7 +9,7 @@ Denne siden er et arbeidsregister for arkitekturbeslutninger. Den skiller mellom
 
 | Område | Førende retning |
 |---|---|
-| Plattform | Modulær, gjenbrukbar KI-plattform for chat, utdanning, forskning og administrasjon. |
+| Plattform | Modulær, gjenbrukbar KI-plattform for chat, utdanning, forskning og administrasjon. Første lansering omfatter både KI-chat og kontrollert applikasjons-API; modulene utvikles og lanseres trinnvis. |
 | Identitet og personvern | FEIDE/Entra ID, HVL-forvaltet identitet, pseudonymisering, dataminimering og PII-vask i Model Gateway. |
 | Infrastruktur | Kubernetes med avgrensede tjenestetilganger og mikrosegmentering. |
 | Lagring | PostgreSQL som standard database. S3-kompatibel objektlagring. Begge utenfor applikasjonscontainerne; ingen vedvarende lagring i sandboxer. |
@@ -49,7 +49,7 @@ En egen mikrotjeneste skal bare etableres når det finnes en begrunnet ansvars-,
 
 | ID | Avklaringsbehov | Hva må besluttes |
 |---|---|---|
-| P01 | API- og hendelseskontrakter | Felles feilkoder, versioning, identifikatorer, streaming, async-jobber og kompatibilitet. |
+| P01 | API- og hendelseskontrakter | Applikasjons-API fra første versjon: autentisering, delegert identitet, formål, agentkall, strukturerte resultater, feilkoder, versjonering, streaming, async-jobber, godkjenninger og kompatibilitet. |
 | P02 | Databasetopologi | Separat PostgreSQL-instans, database eller schema per tjeneste; isolasjon, migreringer, HA, backup og restore. Ingen DB i applikasjonscontainere. |
 | P03 | Objektlagring | S3-miljøer, buckets, nøkler, policy, livsløp, integritet og gjenoppretting per dataklasse. |
 | P04 | Modellregister og router | Kvalitetsdata, kostnads- og kapasitetsgrenser, automatisk modellvalg, fallback og norsk syntese med Borealis som kandidat. |
@@ -73,6 +73,8 @@ En egen mikrotjeneste skal bare etableres når det finnes en begrunnet ansvars-,
 | D06 | KI-forordningen og GDPR | Risikoklassifisering per tjeneste, tilbyder-/idriftsetterroller, relevante plikter, DPIA/ROS og dokumentasjon. |
 | D07 | Produksjonsdrift | SLO-er, ressurskvoter, køer, backup/restore, beredskap, hendelseshåndtering og release-/rollback-prosess. |
 | D08 | Nettverks- og tjenesteidentiteter | Tillatte forbindelser, interne identiteter, secrets, sertifikater og avgrensning mot forskningsmiljøer. |
+| D09 | SILAF | Betrodd miljø- og prosjektidentitet, effektiv modellpolicy i Model Gateway, restriksjoner for verktøy, dataflyt og lagring, samt eventuell isolert utrulling. Avklares med tjenesteeier. |
+| D10 | Første lansering | Kartlegg eksisterende komponentmodenhet og avhengigheter; fastsett minimumsleveranse for chat og API, integrasjonstester, driftsklarhet og kriterier for å erstatte UiO-GPT. |
 
 ## Håndtering av arkitekturbeslutninger
 
