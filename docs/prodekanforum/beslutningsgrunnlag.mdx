@@ -15,6 +15,12 @@ HVL tilbyr i dag blant annet UiO-GPT og Microsoft Copilot. En enkel chat med til
 
 Brukerne etterspør funksjonalitet de kjenner fra blant annet Claude, ChatGPT og Googles KI-tjenester: dokumentarbeid, søk, hukommelse, verktøy, agenter og selvstendig utførelse av sammensatte oppgaver.
 
+### Fra KI-chat til agentisk arbeid
+
+En viktig endring i brukerforventningene er at moderne KI-tjenester ikke bare svarer på spørsmål. De kan arbeide mot et mål over flere steg: planlegge, søke i kilder, bruke verktøy, utføre kode i avgrensede arbeidsmiljøer, bearbeide data, kontrollere resultater og produsere dokumenter, regneark eller andre leveranser. Brukerne kan også bygge og gjenbruke spesialiserte agenter. Slike muligheter er en sentral del av målbildet for HVL, ikke et tillegg til en ordinær chatløsning.
+
+For HVL er det særlig viktig å kunne koble agentene til egne godkjente informasjonskilder og fagsystemer, slik at de kan bidra i reelle arbeidsprosesser. Agentene skal operere innenfor avgrensede rettigheter, med menneskelig godkjenning der handlinger har vesentlige konsekvenser, og med systematisk evaluering og sporbarhet.
+
 **Nettsøk og faktisk bruk.** Tilbakemeldinger fra ansatte peker på manglende nettsøk som en sentral grunn til at de ikke bruker tidligere HVL KI, Sikt KI og UiO-GPT. Personvern og informasjonssikkerhet er sentrale hensyn når slike tjenester begrenser nettsøk. Prosjektets hypotese er at muligheten for å hente aktuell informasjon fra nettet med kildehenvisninger også er en viktig grunn til at ansatte velger private abonnementer på ChatGPT, Claude og lignende tjenester. Dette er en hypotese basert på tilbakemeldinger, ikke en dokumentert kartlegging av omfang eller årsaker. HVL har identifisert SearXNG som en søkeløsning som kan driftes internt, med styring av søkeleverandører og utgående søkeforespørsler. Intern drift betyr ikke at alle søkedata forblir ved HVL: løsningen må konfigureres, testes og godkjennes med hensyn til personvern og informasjonssikkerhet. Målet er å tilby kontrollert nettsøk fra første lansering og dermed gjøre det institusjonelle tilbudet mer attraktivt.
 
 Ønsket om lisenser til internasjonale tjenester handler i stor grad om mulighetene brukerne savner i dagens tilbud. Ambisjonen er å dekke mange av disse behovene internt, med funksjonalitet vesentlig nærmere de store internasjonale løsningene enn de grunnleggende norske chattilbudene fra UiO og Sikt. Vi trenger ikke full funksjonsparitet for å gi brukerne et attraktivt alternativ.
@@ -25,7 +31,7 @@ Samtidig må HVL kunne gi KI tilgang til interne informasjonskilder og fagsystem
 
 ## 2. Forslaget: HVLs eget KI-økosystem
 
-**Målet er at første godkjente versjon av HVLs KI-tjeneste skal kunne erstatte behovet for UiO-GPT som grunnleggende KI-chat, og tilby vesentlig mer funksjonalitet.**
+**Målet er en felles agentbasert KI-plattform for HVL.** Første godkjente versjon skal kunne erstatte behovet for UiO-GPT som grunnleggende KI-chat og tilby vesentlig mer funksjonalitet. Dette er første leveranse, ikke sluttmålet.
 
 Vi skal ikke konkurrere med Anthropic, OpenAI eller Google om å utvikle grunnmodeller eller kopiere hele deres produktporteføljer. Vi kan bruke godkjente modeller fra flere leverandører og bygge et langt mer anvendelig tjenestelag selv, tilpasset HVL.
 
@@ -35,12 +41,13 @@ Vi skal ikke konkurrere med Anthropic, OpenAI eller Google om å utvikle grunnmo
 | Interne informasjonskilder | Søk og kildebaserte svar med brukerens tillatte tilganger. |
 | Interne systemintegrasjoner | Kontrollerte oppslag og handlinger gjennom godkjente verktøy. |
 | Nettsøk | Lanseringskrav: kontrollert søk, innholdshenting og kildebaserte svar med etterprøvbare referanser. |
-| Agenter og multiagentsystemer | KI som kan planlegge, delegere, bruke verktøy og utføre oppgaver i avgrensede kjøremiljøer. |
+| Agentisk arbeid og multiagentsystemer | KI som kan planlegge, delegere, bruke verktøy, analysere data, produsere arbeidsresultater og utføre oppgaver i avgrensede kjøremiljøer. |
+| Egne agenter og automatisering | Brukere og utviklere kan bygge, teste, dele og gjenbruke spesialiserte agenter, også i applikasjoner og planlagte arbeidsprosesser. |
 | Gjenbruk og kvalitet | Delbare agenter, systematiske evalueringer, kvalitetskontroll og sporbarhet. |
 
 Dette er funksjoner i målbildet. Første versjon skal tilby chat og enkle assistenter, god dokumentforståelse med kildebaserte svar, personlig hukommelse, modellvalg, bildegenerering og **nettsøk med kildehenvisninger**. Nettsøk er et lanseringskrav fordi det er viktig for brukernes daglige nytte. Et kontrollert API skal være på plass fra første versjon; publisering av egne agenter som API-er planlegges ved lansering eller i neste delleveranse.
 
- Konkret omfang ved første lansering må prioriteres; ikke alle funksjoner må være like omfattende som i kommersielle Enterprise-produkter.
+Konkret omfang ved første lansering må prioriteres; ikke alle funksjoner må være like omfattende som i kommersielle Enterprise-produkter.
 
 ## 3. To innganger fra første versjon – én felles KI-plattform
 
