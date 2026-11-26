@@ -16,6 +16,18 @@ Denne siden er valgfri. [Gå tilbake til kortversjonen](./intro.mdx) eller [les 
 
 Retningene er ikke gjensidig utelukkende. Anbefalingen er å utvikle det tredje alternativet som en reell erstatning for den grunnleggende UiO-GPT-tjenesten og som grunnmur for andre anvendelser. Dagens tilbud videreføres frem til en godkjent erstatning er klar. Bygg, kjøp og sektorfelles tjenester vurderes for hver komponent. Microsoft Copilot har egne bruksområder og omfattes ikke automatisk av utfasing.
 
+## Isolere brukerens miljø eller agentens utførelse?
+
+| | Ekstern KI i separat virtuelt brukermiljø | HVLs foreslåtte agentplattform |
+|---|---|---|
+| Brukeropplevelse | Brukeren arbeider i et separat, avgrenset miljø. | Brukeren når tjenesten fra sin vanlige PC. |
+| Filer og interne systemer | Tilgang må begrenses eller formidles gjennom særskilt godkjente integrasjoner. | Plattformen formidler kontrollert tilgang til valgte filer og godkjente systemer. |
+| Agentens utførelse | Styres i stor grad av den eksterne tjenesten, innenfor tillatt oppsett. | Isolerte arbeidsmiljøer og verktøy styres av HVL. |
+| Modellbehandling | Avhenger av leverandørens behandlingsvilkår og konfigurasjon. | Modellvalg og dataflyt håndheves gjennom HVLs felles policy, også for eksterne modeller. |
+| Utvikling og forvaltning | Etablert produkt med eksisterende funksjoner; lokal integrasjon og styring kreves. | Krever egen utvikling og forvaltning; gir mulighet til lokal tilpasning og gjenbruk. |
+
+Sammenligningen gjelder det foreslåtte isolerte oppsettet for Claude Enterprise eller tilsvarende tjenester, ikke alle mulige Enterprise-konfigurasjoner. Begge tilnærminger kan kombineres og må vurderes ut fra konkret bruk. HVLs mål er å gjøre avansert KI tilgjengelig i ordinære arbeidsprosesser, med sikkerhet og personvern bygget inn i plattformen. Dette innebærer ikke fri lokal tilgang eller at ekstern modellbehandling automatisk blir godkjent.
+
 ## Mulighet for sektorsamarbeid
 
 Prosjektets erfaring fra dialog med sektoren så langt er at mye av utviklingsarbeidet vi kjenner til, er rettet mot relativt enkle KI-chatløsninger, nærmere dagens UiO-GPT-tilbud enn en felles plattform for agenter, multiagentsystemer, interne integrasjoner og spesialiserte KI-tjenester. Det kan gi HVL et verdifullt utgangspunkt for samarbeid og deling. Inntrykket er ikke en uttømmende oversikt over andre institusjoners arbeid og skal ikke forstås som at ingen andre utvikler avanserte løsninger.
