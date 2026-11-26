@@ -15,7 +15,7 @@ flowchart TD
  L[Læringsverktøy i Canvas] --> B
  M[Mime v2.0] --> B
  A[Administrative fagsystemer] --> B
- R[Forskningsserver og forskningsverktøy] --> B
+ R[SILAF og forskningsverktøy] --> B
  B --> P[Identitet, tilgang, policy og orkestrering]
  P --> G[Model Gateway og PII-vask]
  P --> K[HVL Knowledge]
@@ -56,9 +56,9 @@ Et eksempel er behandling av søknader om tilrettelegging. En tjeneste kan struk
 
 Saksbehandler vurderer grunnlaget, korrigerer utkastet og tar beslutningen. Fagsystemet og arkivet beholder autoritativ informasjon og dokumentasjon. KI-støtten må ivareta saksbehandlingsregler, taushetsplikt, sporbarhet, likebehandling og relevante krav til risikoklassifisering.
 
-## 4. KI-tjenester på forskningsserveren
+## 4. KI-tjenester i SILAF
 
-Forskere kan få tilgang til KI-funksjoner fra godkjente forskningsmiljøer, for eksempel via et kontrollert API, et notebook-miljø eller et tilpasset analyseverktøy.
+Forskere og masterstudenter benytter HVLs forskningsservermiljø SILAF via fjernskrivebord med tofaktorautentisering. Målbildet er å tilgjengeliggjøre HVLs KI-chat og andre KI-funksjoner i dette miljøet, for eksempel via et kontrollert API, et notebook-miljø eller et tilpasset analyseverktøy. En strengere sikkerhetsprofil må kunne begrense modellvalg, verktøy, nettsøk, ekstern kommunikasjon, agenthandlinger og deling av samtaler og artefakter etter prosjektets behov. En separat instans av nødvendige komponenter kan vurderes dersom datagrensene krever det. Tilgang til SILAF er ikke i seg selv godkjenning for KI-behandling.
 
 Mulige tjenester er transkripsjon, strukturering og koding av intervjumateriale, dokumentanalyse, søk i forskningsmateriale og programmeringsstøtte. Forskningsprosjektet velger kilder, analysemetoder, godkjent modell og behandlingsmiljø i tråd med prosjektets rammer.
 
@@ -73,7 +73,7 @@ Modellversjon, metode og relevante parametere kan dokumenteres for å støtte et
 | Canvas | Knowledge, skills, Memory Fabric, Gateway, emneintegrasjon | Pedagogikk, emnerammer, læringskvalitet |
 | Mime v2.0 | Knowledge, Gateway, connectors, Runtime | Servicekvalitet, kilder, eskalering |
 | Saksbehandling | Knowledge, Gateway, Toolserver, policy, revisjonsspor | Saksansvar, rettslige vurderinger, arkiv |
-| Forskningsserver | Godkjent modelltilgang, skills, avgrenset kontekst | Forskningsdata, metode, prosjektgodkjenning |
+| SILAF | Godkjent modelltilgang, skills, avgrenset kontekst | Forskningsdata, metode, prosjektgodkjenning |
 
 ## Hvorfor bygge felles?
 
