@@ -45,6 +45,12 @@ En feil som avdekkes i drift kan bli en ny regresjonstest, slik at samme feil ik
 
 Dette er kontrollert forbedring, ikke at agenten på egen hånd endrer sine instrukser, rettigheter eller modellvekter. Mennesker har ansvar for kvalitet, prioritering og godkjenning.
 
+## Kvalitetskontroll under faktisk bruk
+
+Planen er at agentene får en dokumentert kvalitetsprofil fra evalueringene før publisering. Under drift kan en uavhengig kvalitetssikringsagent kontrollere en leveranse mot disse kriteriene og kravene til den aktuelle oppgaven. Ved mangler kan resultatet forbedres innenfor fastsatte grenser eller sendes til menneskelig vurdering. En slik kontroll er ikke en garanti for feilfri KI.
+
+Kvalitetsavvik rapporteres tilbake til Quality Platform, slik at fagmiljøet kan analysere gjentakende problemer og lage nye tester. Ressursbruk vurderes også: unødvendige modellkall og ineffektive arbeidsprosesser skal kunne identifiseres. Kontrollomfanget tilpasses risiko og kompleksitet. Produksjonsagenten endres ikke ukontrollert; forbedringer går gjennom ny evaluering og godkjenning.
+
 ## Eksempel: Mime v2.0
 
 En student spør om en frist. Mime gir et svar basert på en gammel rutine. Etter tilbakemelding undersøker tjenesteeier om feilen skyldes kilden, søket eller agentens instruksjoner. Riktig kilde og en ny test inngår i en forbedret versjon som evalueres før publisering. Dermed kan også andre tjenester som bruker samme kunnskapskilde få nytte av forbedringen.

@@ -14,7 +14,7 @@ HVL Agent Harness er en logisk sammensetning av plattformens tjenester, ikke et 
 | Agent Control Plane | Agentbygger, versjonerte definisjoner, Agent Registry, testing, godkjenning og publisering i Agent Library. |
 | Agent Runtime | LangGraph-basert orkestrering, agent loop, planlegging, subagenter, tilstand, avbrudd og gjenopptakelse. |
 | Model Gateway | Godkjent modellregister, ruting, PII-vask og kontroll av modellkall. |
-| Kontekststyring | Sammenstille relevant, tillatt kontekst for hvert modellkall. Context Engine som egen logisk funksjon må konkretiseres. |
+| Kontekststyring | Sammenstille relevant, tillatt kontekst for hvert modellkall. Selektiv kontekstdelegering og Context on Demand som felles mekanismer i Runtime, med kontrollert tilgang til arbeidskontekst. |
 | Memory Fabric | Vedvarende kontekst på bruker-, prosjekt- og agentnivå, med kontrollerte scopes. Backend er inngangen til minnelageret. |
 | HVL Knowledge | Tilgangsstyrt søk, RAG, kildegrunnlag og versjoner. |
 | Toolserver og connectors | Validerte verktøykall og tilgang til eksterne og interne systemer. |
@@ -67,7 +67,11 @@ flowchart TD
  T --> S[Oppdater tilstand og checkpoint]
  S --> P
  D -->|Svar| Q[Kontroller leveranse mot oppgaven]
- Q --> F[Returner svar eller artefakt]
+ Q --> E{Kvalitetskrav oppfylt?}
+ E -->|Ja| F[Returner svar eller artefakt]
+ E -->|Nei, innenfor budsjett| P
+ E -->|Stopp eller eskaler| X
+ Q --> L[Rapporter kvalitetsavvik]
  D -->|Avklar eller stopp| X[Pause, spør eller avslutt]
 ```
 
@@ -81,7 +85,23 @@ Den må kunne prioritere system- og agentinstruksjoner, brukerens aktuelle oppga
 
 Tilgang og dataklasse må kontrolleres før kontekst settes sammen; ekstern modellbehandling kontrolleres igjen i Model Gateway. Upålitelige dokumenter og verktøyresultater er data, ikke privilegerte instrukser. Komprimering kan miste informasjon og må derfor kunne evalueres; referanser til originalgrunnlaget beholdes der det er nødvendig og tillatt.
 
-Det må avklares om funksjonen plasseres i backend, Runtime eller en gjenbrukbar intern modul/tjeneste. Ingen ny direkte tilgang til Memory Fabric innføres som følge av dette.
+### Selektiv kontekst og Context on Demand
+
+Orkestratoren har tilgang til den overordnede autoriserte arbeidskonteksten, men behøver ikke laste alt i modellens kontekstvindu. Ved delegering velger den initial kontekst. Underagenten har egne versjonerte instrukser, tools, skills og kunnskapskilder, og kan selv hente ytterligere relevant informasjon fra den aktuelle arbeidsprosessen.
+
+| Konteksttype | Ansvar |
+|---|---|
+| Delegert kontekst | Oppgavepakken som orkestratoren setter sammen. |
+| Arbeidskontekst ved behov | Autoriserte meldinger, tidligere oppgaver, delresultater og artefakter fra samme arbeidsprosess. |
+| Persistent hukommelse | Memory Fabric med egne scopes, livssyklus og tilgangsregler. |
+
+Samtale er her et generelt begrep for en identifiserbar interaksjon eller arbeidsprosess, også ved API-kall, automatisering og integrasjoner uten chatgrensesnitt. Målbildet er vedvarende samtaler, meldinger og relevante kjøringshendelser i ekstern PostgreSQL, med referanser til større artefakter i ekstern S3-kompatibel objektlagring. En samtale kan ha flere kjøringer, og en kjøring kan ha flere oppgaver og underkjøringer.
+
+Underagenten får Conversation ID, Run ID og Task ID. Et kontrollert grensesnitt, foreslått eksponert gjennom Toolserver, kan tilby operasjoner som `context.search`, `context.get_message`, `context.get_task_result`, `context.list_artifacts` og `context.read_artifact`. Disse er illustrative navn, ikke implementerte API-er. Underagenten får ikke direkte databaseaksess.
+
+ID-er er referanser, ikke adgangsbevis. Tilgang filtreres på identitet, scope, dataklasse, agentens rettigheter og gjeldende policy, også for treffmetadata og søskenagenters resultater. Gjenfinning begrenses av budsjett og paginering; kilde- og versjonsreferanser bevares. Innhentet innhold behandles som data, ikke privilegerte instrukser. Hemmeligheter, skjult modellresonnement og unødvendige rådata inngår ikke i generell samtalehistorikk. Oppbevaring og sletting styres etter formål.
+
+Kontekstdelegering hører naturlig hjemme i LangGraph-orkestreringen. Felles kontekstverktøy og policy kan gjenbrukes av alle agenter uten en ny selvstendig konteksttjeneste. Eksakt API, eierskap og tjenestegrense avklares. Ingen ny direkte tilgang til Memory Fabric innføres.
 
 ## 3. Agent Workspace – logisk arbeidsområde
 
@@ -122,6 +142,45 @@ Run Context er allerede del av plattformens planlagte sporbarhet og utførelse. 
 
 Kontrakten etableres av en betrodd tjeneste, valideres ved hvert kall og kan ikke utvides av modelloutput. Subagenter får bare delegert en delmengde av tillatte rettigheter og budsjett. Tilgang må kontrolleres på nytt ved sensitive handlinger og ved gjenopptakelse, slik at tilbakekalte rettigheter ikke lever videre i en checkpoint. Eksterne modeller får ikke den interne identitetskontrakten.
 
+### Standardisert delegeringskontrakt
+
+Hver delegering skal ha mål, initial kontekst, akseptansekriterier, kvalitetsprofil, forventet output, agentversjon, identifikatorer og avgrensede ressurser. Runtime utsteder og validerer autorisasjonsreferanse og budsjett. Eksempel på foreslått kontrakt:
+
+```json
+{
+  "schemaVersion": "0.1",
+  "conversationId": "conv_123",
+  "parentRunId": "run_001",
+  "runId": "run_002",
+  "parentTaskId": "task_001",
+  "taskId": "task_002",
+  "agent": {"id": "document-reviewer", "version": "1.2.0"},
+  "objective": "Vurder dokumentets samsvar med angitte krav.",
+  "initialContext": {
+    "summary": "Vurder tilgangsstyring og sporbarhet.",
+    "references": ["artifact_17", "message_42"]
+  },
+  "acceptanceCriteria": [
+    "Alle relevante krav er vurdert.",
+    "Funn har etterprøvbare kildereferanser.",
+    "Usikkerhet er eksplisitt angitt."
+  ],
+  "qualityProfileRef": "document-reviewer-quality@1.2.0",
+  "outputContractRef": "document-review-result@1",
+  "resourceBudget": {
+    "maxTotalTokens": 12000,
+    "maxToolCalls": 15,
+    "maxIterations": 4,
+    "maxWallTimeSeconds": 180
+  },
+  "authorizationRef": "runtime_grant_002"
+}
+```
+
+Verdier og navn er illustrative. Effektiv agentkonfigurasjon løses fra Agent Registry og gjeldende policy. Resultatet inneholder oppgave-ID, status, strukturert leveranse eller artefaktreferanser, kilder, usikkerhet, blokkeringer og kjøringsreferanse. Verifisert kontrollstatus og faktisk ressursbruk registreres av Runtime, ikke bare av agenten.
+
+Orkestrator og underagenter deler et overordnet budsjett. Reservasjon og avstemming må hindre dobbeltdisponering ved parallell kjøring. Også kontekstinnhenting og kvalitetskontroll inngår i ressursregnskapet.
+
 Format, signering eller referansemodell, levetid, tilbakekalling og eventuell egen Capability Engine må avklares. En foreslått Capability Engine kan være en modul i eksisterende policyfunksjon, ikke nødvendigvis en selvstendig tjeneste.
 
 ## 6. Etterprøvbarhet, replay og kvalitet
@@ -130,6 +189,35 @@ En kjøring kan undersøkes ved hjelp av observerbare hendelser, agentversjon, m
 
 Replay av en agent er ikke nødvendigvis deterministisk: modeller, kilder og eksterne systemer kan ha endret seg. Simulering av eksterne handlinger må som hovedregel bruke mocks eller avgrensede testmiljøer. Produksjonsskriving skal ikke gjentas bare fordi en kjøring spilles av. Tilgang til evidens må begrenses av personvern og sletteregler.
 
-Evals og Quality Platform danner forbedringssløyfen. Offisielle agenter må gjennom obligatoriske evalueringer før publisering. Produksjonsfunn kan gi nye regresjonstester og forbedrede agentversjoner etter menneskelig godkjenning.
+### Målstyrte sløyfer og operativ kvalitetssikring
+
+LangGraph representerer både en enkel agent loop og en orkestrator med spesialiserte subgrafer. En goal loop kan realiseres med oppgavemål, akseptansekriterier, utførelse, validering og betingede overganger for målrettet utbedring. Den avsluttes ved godkjent leveranse eller eksplisitt stopp, feil, budsjettgrense, kansellering eller eskalering. En avsluttet kjøring er ikke nødvendigvis vellykket. En separat Goal Loop Engine er ikke et krav.
+
+En uavhengig kvalitetssikringsagent kan kontrollere delresultater og samlet leveranse mot oppgavekrav og versjonerte kvalitetsprofiler fra Evals. Vurdereren har egne instrukser, autoriserte kilder og avgrenset kontekst, ikke automatisk hele produsentens historikk. Deterministiske kontroller brukes først når tilstrekkelige. Supervisor håndhever harde grenser uavhengig av modellbaserte vurderinger.
+
+```mermaid
+flowchart TD
+ O[Orkestrator og mål] --> D[Oppgavepakker]
+ D --> A[Spesialiserte subagenter]
+ A --> C[Context on Demand via kontrollert API]
+ C --> A
+ A --> R[Strukturerte resultater]
+ R --> Q[Uavhengig kvalitetssikring]
+ Q --> G{Kriterier oppfylt?}
+ G -->|Ja| F[Leveranse]
+ G -->|Utbedring innen budsjett| O
+ G -->|Stopp eller eskaler| S[Avslutt eller menneskelig kontroll]
+ Q --> V[Avvik til Quality Platform]
+ V --> E[Nye evals og forbedringsforslag]
+ E --> P[Evaluert og godkjent ny versjon]
+```
+
+Evals og Quality Platform danner forbedringssløyfen. Offisielle agenter må gjennom obligatoriske evalueringer før publisering. Produksjonsfunn kan gi nye regresjonstester og forbedrede agentversjoner etter menneskelig godkjenning. En QA-agent kan anbefale ny iterasjon, men ikke overstyre sikkerhet, budsjett eller publiseringsporter.
+
+### Forslag til første vertikale leveranse
+
+En LangGraph-orkestrator med to spesialiserte underagenter, delegeringskontrakt, Context on Demand, hierarkisk budsjett, strukturert output, uavhengig kvalitetssikring og ett avvik som blir til en godkjent regresjonstest. Test at uautorisert kontekst avvises, parallell kjøring ikke overskrider budsjettet, og gjenopptakelse ikke ukontrollert gjentar eksterne sideeffekter. Det må avklares når langvarig koordinering krever en persistent Task Graph utover den enkelte LangGraph-grafen.
+
+Referanseprosjekter for videre teknisk arbeid: [LangGraph](https://docs.langchain.com/oss/javascript/langgraph/overview), [LangChain Subagents](https://docs.langchain.com/oss/javascript/langchain/multi-agent/subagents), [Hermes Agent](https://github.com/NousResearch/hermes-agent) og [OpenClaw](https://docs.openclaw.ai/). Disse er inspirasjon, ikke vedtatte teknologivalg. Gjennomgangen er målarkitektur per 26. november 2026, ikke verifisert implementeringsstatus.
 
 Se [åpne arkitekturvalg](./arkitekturavklaringer.mdx), [Agentbygger og Runtime](./agenter.mdx), [Execution Platform](./kjoremiljo.mdx), [Evals](./evaluering.mdx) og [Audit](./sporbarhet.mdx).

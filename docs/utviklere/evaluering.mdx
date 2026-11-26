@@ -45,6 +45,18 @@ Offline-evaluering kjøres mot versjonerte datasett før publisering, ved endrin
 
 Quality Platform kan trigge evals ved nye agent-, prompt-, modell-, skill-, tool- eller kildeversjoner, etter tid, ved kvalitetssvikt og etter hendelser. Automation Platform kan koordinere periodiske og hendelsesstyrte kjøringer med samme tilgangs-, budsjett- og godkjenningsregler som ordinær Runtime.
 
+## Kvalitetsprofil og operativ kvalitetssikring
+
+En agentversjon knyttes til en foreslått versjonert QualityProfile: godkjente kriterier, terskler, evalsett og resultater, vurderingsmetoder, testbetingelser, kjente begrensninger og relevante publiseringsbeslutninger. Beståtte evals er evidens under testede forhold, ikke en garanti for alle fremtidige kjøringer.
+
+Under faktisk kjøring brukes relevante kriterier sammen med den konkrete oppgavens akseptansekriterier. En uavhengig kvalitetssikringsagent kan vurdere semantisk kvalitet, kilder og oppgaveoppnåelse på deloppgaver og sluttresultat. Den har egne instrukser og autorisert kildetilgang, og får ikke automatisk produsentens interne historikk eller egenvurdering. Vurdereren må selv evalueres og kalibreres. Deterministiske kontroller (format, tester, referanseintegritet, policy) og menneskelig kontroll benyttes der nødvendig.
+
+Vurderingen returnerer kriterium, resultat, begrunnelse, evidensreferanser, alvorlighet og anbefalt handling. Runtime styrer godkjenning, korrigering, stopp eller eskalering. Kontrollpunkter og eventuell sampling tilpasses oppgavens risiko; tokenforbruk, kostnad og kjøretid for kontrollen inngår i totalbudsjettet.
+
+Operative avvik rapporteres til Quality Platform med agentversjon, kvalitetsprofil/evalversjon, Conversation ID, Run ID, Task ID, kriterium, evidens, alvorlighetsgrad og ressursbruk der relevant. Årsaksforklaringer merkes som hypoteser inntil bekreftet. Gjentakende funn kan utløse nye evals, regresjonstester og forbedringsforslag. Produksjonsdata kopieres ikke automatisk inn i evaldatasett; bruk godkjent, minimert evidens eller syntetiske reproduksjoner. Endringer av publiserte agenter skal fortsatt gjennom kontrollert eval- og godkjenningsløp.
+
+Se [Agent Harness](./agent-harness.mdx) for kjørings- og delegeringskontrakter.
+
 ## Fra produksjonsfeil til regresjonstest
 
 ```mermaid
@@ -66,6 +78,8 @@ Kvalitetsarbeidet kan gjenbruke eksisterende godkjente testsett, eksempelvis fra
 |---|---|
 | EvalCase / EvalSuite | Versjon, formål, testgrunnlag, kriterier, risiko, evaluator og terskler. |
 | EvalRun / EvalResult | Kjørings-ID, kandidatversjon, testversjon, målinger, utfall, funn og evidensreferanser. |
+| QualityProfile | Versjonerte kvalitetskriterier, terskler, evalreferanser, begrensninger og godkjenning. |
+| RuntimeQualityAssessment | Kriterium, vurderingsutfall, evidens, alvorlighet og anbefalt handling. |
 | QualityFinding | Kategori, alvorlighet, berørt versjon, eier, status og relevante kjøringsreferanser. |
 | Review / ImprovementProposal | Menneskelig vurdering, forslag, endringsgrunnlag og godkjenningsstatus. |
 | ReleaseDecision | Agentversjon, testresultater, ansvarlig godkjenner, tidspunkt og eventuelle avgrensninger. |

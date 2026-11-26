@@ -20,6 +20,10 @@ Denne siden er et arbeidsregister for arkitekturbeslutninger. Den skiller mellom
 
 Disse prinsippene er grunnlaget for videre arbeid. Konkrete grensesnitt, driftsvalg og godkjenninger må spesifiseres.
 
+## Oppdatert retning 26. november 2026
+
+LangGraph er kjernen for enkeltagenter og multiagentgrafer. Selektiv kontekstdelegering kombineres med Context on Demand mot persistent arbeidskontekst. Evalbaserte kvalitetsprofiler anvendes i uavhengig operativ kontroll; avvik går tilbake til Quality Platform og Evals. Dette er foreslått målarkitektur; kontrakter og implementeringsvalg nedenfor må fortsatt avklares.
+
 ## Avklaringer for Agent Harness
 
 Prioriteringene nedenfor er et forslag til rekkefølge for arkitekturarbeidet, ikke en vedtatt leveranseplan. P0 betyr avklaring før berørte sikkerhets- eller kjernefunksjoner bygges ferdig; P1 betyr viktig for en sammenhengende operativ harness; P2 betyr videreutvikling.
@@ -28,13 +32,16 @@ Prioriteringene nedenfor er et forslag til rekkefølge for arkitekturarbeidet, i
 |---|---|---|---|
 | H01 | Agent Execution Context | Felles schema, betrodd utsteder, verifikasjon, scope, levetid og tilbakekalling. | P0 |
 | H02 | Capabilities og delegering | Policy-eier, avgrensede verktøyrettigheter, subagentdelegering, godkjenninger og kontroll ved hvert kall. | P0 |
-| H03 | Context Engine | Tjenestegrense, kontekstprioritering, tokenbudsjett, komprimering og kildeproveniens. | P1 |
+| H03 | Kontekststyring og Context on Demand | Selektiv delegering i Runtime er foreslått retning. Avklar API, tilgangsfiltrering, komprimering, søk, budsjetter og proveniens. | P0/P1 |
 | H04 | Agent Workspace | Eierskap, tilstandsmodell, filer, artefakter, deloppgaver, persistens og cleanup. | P1 |
 | H05 | Agent Supervisor | Hardgrenser, tidsavbrudd, avbruddssignaler, fremdriftskontroll, ressursregnskap og stoppsløyfer. | P0/P1 |
 | H06 | Checkpoints og sideeffekter | State-format, idempotensnøkler, resume, tilbakekalte tilganger, avbrutte verktøykall og kompensasjon. | P1 |
 | H07 | Runtime Inspector | Visning av graph, steg, traces, checkpoint, test-replay og simulering. | P2 |
 | H08 | Agentdefinisjoner | Felles graph-/schemaformat for enkel agentbygger, nodeeditor, versjonering og validering. | P1 |
 | H09 | Automation Platform | Planlagte kjøringer, hendelser, delegert identitet, kø, samtidighet, retry og kansellering. | P1 |
+| H10 | Delegerings- og resultatkontrakt | Versjonerte oppgavepakker med mål, kontekst, ID-er, kvalitetsprofil, akseptansekriterier, output og autorisert budsjett. | P0/P1 |
+| H11 | Persistent arbeidskontekst | Datamodell for samtale, melding, run, task, artefakt og snapshot; oppbevaring, sletting og kontrollert kontekst-API. | P0/P1 |
+| H12 | Goal loops og Task Graph | Betingede LangGraph-overganger, avslutningsstatus og når persistent oppgavegraf/dispatcher utenfor én graf er nødvendig. | P1 |
 
 En egen mikrotjeneste skal bare etableres når det finnes en begrunnet ansvars-, sikkerhets-, skalerings- eller livsløpsgrense. En logisk funksjon kan ligge i en eksisterende tjeneste.
 
@@ -60,7 +67,7 @@ En egen mikrotjeneste skal bare etableres når det finnes en begrunnet ansvars-,
 |---|---|---|
 | D01 | Virtuelle kjøremiljøer | Kata Containers som kandidat, gVisor som alternativ med annen isolasjonsmekanisme, eventuelt egne VM-er. Trusselmodell, GUI, kapasitet og egress må testes. |
 | D02 | Evalplattform | Testformat, terskler, faglig kalibrering, release gates, testisolasjon og regresjon ved modell- og kildeendringer. |
-| D03 | Quality Platform | Tilgang til produksjonsepisoder, utvalg, reviewflyt, forbedringsforslag og ansvar for godkjenning. |
+| D03 | Quality Platform | Versjonerte kvalitetsprofiler, uavhengig operativ QA, kontrollpunkter, avvikskontrakt, godkjent produksjonsevidens, regresjonstester og ansvar for godkjenning. |
 | D04 | Tracing og observability | OpenTelemetry og eventuell LangSmith-bruk, databehandling, instrumentering og lagringsgrenser. |
 | D05 | Audit | Hendelseskontrakt, integritet, fail-safe strategi, retention, tilgang og separat evidenslagring. |
 | D06 | KI-forordningen og GDPR | Risikoklassifisering per tjeneste, tilbyder-/idriftsetterroller, relevante plikter, DPIA/ROS og dokumentasjon. |
