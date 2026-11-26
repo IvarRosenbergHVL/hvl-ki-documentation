@@ -1,4 +1,4 @@
-# HVLs KI-økosystem – dokumentasjon og opplæring
+# HVLs KI-økosystem – dokumentasjon og prosjektinnføring
 
 Offentlig tilgjengelig arkitektur- og funksjonalitetsbeskrivelse for planlagt utvikling av HVLs KI-økosystem.
 
@@ -8,7 +8,7 @@ Bruk Node.js 24 LTS og åpne repoet i VS Code. Kjør `npm install` og deretter `
 
 ## Innhold
 
-To læringsløp: utviklere og interessenter. Kursene ligger i `docs/` som Markdown/MDX. Diagrammer bruker Mermaid. Endringer gjennomgås i pull requests.
+Tre innganger til prosjektinnføringen: prodekanforum, interessenter og utviklere. Dokumentasjonen ligger i `docs/` som Markdown/MDX. Diagrammer bruker Mermaid. Endringer gjennomgås i pull requests.
 
 ## Publisering
 
