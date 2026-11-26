@@ -34,6 +34,29 @@ HVLs modellstrategi kombinerer godkjente kommersielle, nasjonale og lokalt kjør
 
 Kilder: [Microsoft Foundry – modelltilgjengelighet per region](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure-region-availability), [utrullingstyper og behandlingsgeografi](https://learn.microsoft.com/azure/ai-foundry/foundry-models/concepts/deployment-types) og [Datatilsynet – overføring av personopplysninger ut av EØS](https://www.datatilsynet.no/regelverk-og-verktoy/sporsmal-svar/overforing-av-personopplysninger-ut-av-eos/).
 
+## Eksempler på modeller HVL kan tilby
+
+HVLs KI-økosystem er ikke bundet til én modellleverandør. Følgende er eksempler på aktuelle modellfamilier og mulige driftsformer, ikke en liste over allerede godkjente eller tilgjengelige modeller ved HVL.
+
+| Driftsform | Eksempel på modellfamilie | Aktuell bruk |
+|---|---|---|
+| Microsoft Foundry | OpenAI GPT, inkludert mindre modellvarianter | Generell KI-assistanse, analyse, programmering og agentoppgaver. |
+| Microsoft Foundry | Anthropic Claude (Haiku, Sonnet og Opus) | Dokumentarbeid, analyse, programmering og sammensatte oppgaver. |
+| Microsoft Foundry | Mistral, eksempelvis Mistral Large | Flerspråklig tekstbehandling, analyse og agenter. |
+| Lokal drift ved HVL | OpenAI gpt-oss, eksempelvis 20B og 120B | Resonnering og agentoppgaver uten å sende selve modellforespørselen til en ekstern modellleverandør. |
+| Lokal drift ved HVL | Utvalgte modeller fra Mistral, eksempelvis Mistral Small | Flerspråklige oppgaver, dokumentarbeid og lokale assistenter. |
+| Lokal drift ved HVL | Nasjonalbibliotekets NB-Whisper | Norsk tale-til-tekst og transkripsjon. |
+| Lokal drift ved HVL | Chatterbox | Tekst-til-tale og lydproduksjon. |
+| Andre godkjente leverandører og nasjonale tjenester | Modeller som tilbys gjennom egnede avtaler og behandlingsmiljøer | Utvidelse av modellutvalget og kapasiteten etter behov. |
+
+Det er ikke nødvendig å kjøpe separate sluttbrukerlisenser til ChatGPT, Claude og andre produkter for å benytte de underliggende modellene gjennom godkjente API-er. Modelltilgang via API er imidlertid ikke det samme som tilgang til alle funksjonene i leverandørens ferdige produkt. HVL utvikler sitt eget tjenestelag for blant annet nettsøk, agenter, dokumentarbeid og integrasjoner.
+
+For Foundry må tilgjengelighet, konkret behandlingsregion, leverandørrolle og vilkår avklares per modell og utrulling. Claude i Foundry kan ha andre avtale- og behandlingsvilkår enn modeller som leveres direkte av Microsoft. For lokal drift må modellstørrelse, lisens, kvalitet, maskinvarekapasitet og samtidighet vurderes; eksemplene innebærer ikke at alle modellene kan betjene produksjonslast på dagens GB10-maskiner. Lokale modeller er særlig relevante der eksterne modellkall ikke er tillatt, men dataklassene må godkjennes for den konkrete installasjonen.
+
+Brukerne skal kunne velge mellom modellene som er godkjent for deres oppgave og arbeidsmiljø. Plattformen kan også velge en egnet modell automatisk. Utvalget kan endres uten å bygge om hele KI-tjenesten.
+
+**Kilder:** [Microsoft Foundry – Azure-modeller og regioner](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure-region-availability), [modellkatalog for partnermodeller](https://learn.microsoft.com/azure/ai-foundry/foundry-models/concepts/models-from-partners), [Claude og driftsalternativer i Foundry](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/claude-models-hosting-comparison), [OpenAI gpt-oss](https://openai.com/open-models/), [Mistrals modelloversikt](https://docs.mistral.ai/models), [NB-Whisper](https://huggingface.co/NbAiLab/nb-whisper-small) og [Chatterbox](https://github.com/resemble-ai/chatterbox). Modellkataloger endres fortløpende.
+
 Tale-til-tekst og stemmesamtaler på norsk og engelsk prioriteres tidlig, blant annet for tilgjengelighet. Podcastgenerering vurderes senere, og videogenerering har svært lav prioritet.
 
 Arkitekturen er designet og betydelig utviklingsarbeid er gjennomført. Utviklingen skjer trinnvis, både mellom og innenfor modulene. Første versjon trenger ikke omfatte alle fremtidige tjenester. Se [veien til lansering](./pilot.mdx).
