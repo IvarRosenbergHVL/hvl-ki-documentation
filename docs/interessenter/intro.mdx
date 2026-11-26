@@ -24,6 +24,16 @@ flowchart TD
 
 Første versjon skal tilby chat og enkle assistenter, god dokumentforståelse med kildebaserte svar, personlig hukommelse, modellvalg, bildegenerering og **nettsøk med kildehenvisninger**. Nettsøk er et lanseringskrav fordi det er viktig for brukernes daglige nytte. Et kontrollert API skal være på plass fra første versjon; publisering av egne agenter som API-er planlegges ved lansering eller i neste delleveranse.
 
+## Hvorfor kan ikke alle KI-modeller tilbys umiddelbart?
+
+Modelltilgjengelighet er ikke bare et teknologisk spørsmål. Nye modeller fra store internasjonale leverandører kan bli tilgjengelige i USA eller gjennom globale tjenester før de tilbys med avgrenset europeisk databehandling. Dette varierer mellom modeller, leverandører og tjenestetyper; det er ingen fast regel om hvor lenge man må vente. Brukerne ønsker gjerne tilgang til de nyeste og beste modellene, men den største modellen er ikke nødvendigvis best egnet til alle oppgaver.
+
+Microsoft Foundry er et eksempel på en tjeneste der modellutvalg og behandlingsgeografi varierer mellom globale, europeiske og regionale utrullingsalternativer. En europeisk ressursadresse er ikke i seg selv en garanti for at all behandling skjer i Europa. Tilgang til en modell som krever behandling i USA eller andre tredjeland forutsetter at HVL har vurdert og godkjent tjenesten og det konkrete behandlingsformålet, med nødvendig overføringsgrunnlag der personopplysninger overføres. Behandling i EØS er heller ikke alene en garanti for GDPR-etterlevelse.
+
+HVLs modellstrategi kombinerer godkjente kommersielle, nasjonale og lokalt kjørte modeller. Vi kan supplere modellutvalget etter hvert som nye modeller og behandlingsmiljøer godkjennes, og velge den best egnede modellen for oppgaven innenfor tillatte rammer. Enkle oppgaver kan løses effektivt med mindre modeller; krevende analyse kan ha nytte av kraftigere modeller. Kvalitet, språk, personvern, responstid, kapasitet og kostnad må inngå i vurderingen. Brukerens modellpreferanse kan aldri overstyre sikkerhetskravene.
+
+Kilder: [Microsoft Foundry – modelltilgjengelighet per region](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure-region-availability), [utrullingstyper og behandlingsgeografi](https://learn.microsoft.com/azure/ai-foundry/foundry-models/concepts/deployment-types) og [Datatilsynet – overføring av personopplysninger ut av EØS](https://www.datatilsynet.no/regelverk-og-verktoy/sporsmal-svar/overforing-av-personopplysninger-ut-av-eos/).
+
 Tale-til-tekst og stemmesamtaler på norsk og engelsk prioriteres tidlig, blant annet for tilgjengelighet. Podcastgenerering vurderes senere, og videogenerering har svært lav prioritet.
 
 Arkitekturen er designet og betydelig utviklingsarbeid er gjennomført. Utviklingen skjer trinnvis, både mellom og innenfor modulene. Første versjon trenger ikke omfatte alle fremtidige tjenester. Se [veien til lansering](./pilot.mdx).
