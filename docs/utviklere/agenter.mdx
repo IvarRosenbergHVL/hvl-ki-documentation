@@ -13,7 +13,7 @@ En enkel assistent kan konfigureres i et skjemabasert grensesnitt; mer avanserte
 
 ## Agent Runtime
 
-Agentbyggeren definerer; Runtime kjører. Runtime koordinerer tilstand, modellkall, verktøyresultater, godkjenningssteg, tids- og ressursgrenser og avslutning. LangGraph er en aktuell teknologi. Langvarige kjøringer trenger avbrudd, idempotens og gjenopptakelse der relevant.
+Agentbyggeren definerer; Runtime kjører. Runtime koordinerer tilstand, modellkall, verktøyresultater, godkjenningssteg, tids- og ressursgrenser og avslutning. [LangGraph](https://github.com/langchain-ai/langgraph) er orkestreringsmotoren i målarkitekturen og er allerede tatt i bruk i utviklingsarbeidet. Dette bekrefter ikke at hele Runtime eller Agent Harness er ferdig integrert eller godkjent for produksjon. Langvarige kjøringer trenger avbrudd, idempotens og gjenopptakelse der relevant.
 
 ```mermaid
 flowchart TD
