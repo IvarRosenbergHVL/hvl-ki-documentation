@@ -28,6 +28,10 @@ flowchart TD
  Q -->|Nei| S[Resultat og kilder]
 ```
 
+## Modellroller og Response Composer
+
+LangGraph koordinerer også valgfrie arbeidsflyter med flere modeller. Hovedmodellen løser oppgaven; en egen Response Composer-node kan deretter formulere svaret med Nasjonalbibliotekets Borealis lokalt på GB10. Runtime bygger en versjonert JSON-responspakke fra grafens tilstand med resultat, kilder, forbehold, språk og artefaktreferanser, og validerer sluttresponsen. Begge modellkall går gjennom Model Gateway og gjeldende policy. Gateway eier modelltilgang, ikke grafens arbeidsflyt. Se [modellroller og strukturert responspakke](./modeller.mdx#flere-modeller-i-én-arbeidsflyt-response-composer-i-langgraph).
+
 ## Kvalitet, utførelse og livsløp
 
 Offisielle agenter må gjennom obligatoriske evalueringer før publisering. Agentbyggeren foreslår agentspesifikke tester i tillegg til standardbiblioteket. Agent Registry knytter godkjenningen til en bestemt versjon. Runtime sender relevante hendelser til Audit og observability; Quality Platform følger opp kvalitet og menneskelig vurdering. Subagenter og planlagte kjøringer har egne avgrensede capabilities og arver ikke automatisk mer omfattende tilgang.

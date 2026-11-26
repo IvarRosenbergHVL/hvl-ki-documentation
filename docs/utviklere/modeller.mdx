@@ -9,6 +9,10 @@ En LLM tolker og genererer språk, men har ikke automatisk kunnskap om HVLs inte
 
 Registeret omfatter kommersielle skymodeller, modeller på HVLs egen maskinvare og modeller via nasjonale skytjenester. Hver modelloppføring beskriver modell og versjon, leverandør, behandlingsmiljø, godkjente dataklasser og bruksformål, modaliteter, kontekstvindu, språkegenskaper, kostnad, kapasitet og tilgjengelighet. Brukere og agenter får bare velge modeller som er tillatt for den aktuelle behandlingen.
 
+## Model Gateway MVP
+
+Første versjon avgrenses til modellregister med godkjent modellutvalg, manuelt modellvalg, leverandøradaptere med felles kallgrensesnitt, serverside policy og relevante logger. Avansert automatisk ruting og kostnadsoptimalisering kan komme senere. Gateway håndterer modellkall; LangGraph i Agent Runtime eier arbeidsflyten og bestemmer når de ulike modellrollene benyttes.
+
 ## Lokal inferens og ressursstyring
 
 Fire Dell GB10-maskiner er anskaffet til utvikling, testing og gradvis produksjon i Kubernetes. Planlagt hybridmodell omfatter også godkjente Azure Foundry-modeller i egnet behandlingsmiljø og eventuell nasjonal kapasitet (tilgang til NTNU-datasenteret er ikke avklart). Lokal inferens får kø, prioritet, kvoter og kapasitetsstyring; interaktive kall prioriteres foran batchjobber, som kjøres ved ledig kapasitet. Lyd-, bilde- og eventuell videogenerering kan få egne kvoter. Sammenkobling av to GB10-maskiner vurderes ved behov, avhengig av kompatibilitet og målt ytelse. Lokal kjøring eller EØS-region alene gir ikke godkjenning for en dataklasse.
@@ -38,20 +42,58 @@ Model Gateway skal håndheve miljø- og prosjektspesifikke modellrestriksjoner f
 
 Toolserver, Knowledge, Memory Fabric, Execution Platform og øvrige tjenester må håndheve tilsvarende begrensninger for egne operasjoner, lagring og utgående kommunikasjon. Modellvalg alene hindrer ikke dataflyt ut av forskningsmiljøet. Der forskningsdata må forbli innenfor en særskilt behandlingsgrense, vurderes isolert utrulling av nødvendige plattformkomponenter. Eksakt identitetskontrakt, tillatte modellendepunkter, nettverksgrenser og datalagring avklares med tjenesteeier før godkjenning. Dette er planlagt funksjonalitet, ikke dokumentert implementering.
 
-## Flere modeller i én arbeidsflyt
+## Flere modeller i én arbeidsflyt: Response Composer i LangGraph
 
-Runtime kan koordinere forskjellige modellroller, eksempelvis en modell for kompleks analyse og en annen for språklig syntese av sluttresponsen. Nasjonalbibliotekets åpne [Borealis-modellserie](https://ai.nb.no/borealis/) er en aktuell kandidat til norsk responsgenerering på bokmål og nynorsk. Modellen må evalueres for oppgaven, og syntesesteget må bevare fakta, kildehenvisninger og faglige nyanser.
+Første iterasjon kan tilby tre kjøremåter: direkte svar fra valgt modell, kombinert kjøring med en egen norsk responsmodell, og helt lokal kjøring med godkjente lokale modeller. Brukeren kan velge kombinert kjøring og ønsket målform. Nasjonalbibliotekets [Borealis-modellserie](https://ai.nb.no/borealis/) er foreslått som lokal Response Composer på HVLs GB10-infrastruktur. Konkret modellvariant, lisens, kvalitet og kapasitet må verifiseres.
+
+LangGraph koordinerer arbeidsflyten. Hovedmodellen løser oppgaven, eventuelt med tools og RAG. Deretter bygger Runtime en strukturert responspakke av grafens tilstand og autoriserte kildereferanser. En egen, valgfri Response Composer-node kaller Borealis via Model Gateway. Borealis formulerer sluttresponsen på bokmål eller nynorsk, uten å overta hovedmodellens oppgave eller verktøytilganger.
 
 ```mermaid
-flowchart LR
- A[Oppgave og kontekst] --> R[Runtime]
- R --> G[Model Gateway]
- G --> M[Analysemodell]
- M --> R
- R --> G
- G --> S[Norsk språk- og syntesemodell]
- S --> R
- R --> F[Sluttrespons med kilder]
+flowchart TD
+ A[Brukerens oppgave og modellvalg] --> B[LangGraph: oppgaveløsning]
+ B --> G1[Model Gateway: valgt hovedmodell]
+ G1 --> B
+ B --> D{Responskomponering valgt?}
+ D -->|Nei| F[Direkte respons]
+ D -->|Ja| C[Bygg og valider responspakke]
+ C --> R[LangGraph: Response Composer]
+ R --> G2[Model Gateway: lokal Borealis]
+ G2 --> V[Valider respons og kildereferanser]
+ V -->|Godkjent| S[Sluttrespons]
+ V -->|Avvik| H[Kontrollert fallback eller avklar]
 ```
+
+### Foreslått strukturert responspakke
+
+Runtime bygger en versjonert JSON-kontrakt. Den inneholder brukerens spørsmål, resultat og dokumenterbare konklusjoner fra hovedmodellen, autoriserte kilde-ID-er med referanser og relevante utdrag, usikkerhet, faglige forbehold, språk og presentasjonsformat samt eventuelle artefaktreferanser. Eksempel (illustrativt, ikke fastsatt API-schema):
+
+```json
+{
+  "schema_version": "0.1",
+  "question": "Hva viser analysen?",
+  "locale": "nn-NO",
+  "format": "markdown",
+  "findings": [
+    {
+      "text": "Resultatet er avgrenset til det undersøkte materialet.",
+      "source_ids": ["s1"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "s1",
+      "title": "Eksempeldokument",
+      "ref": "source:example",
+      "excerpt": "Analysen omfattar berre det undersøkte materialet."
+    }
+  ],
+  "caveats": ["Ingen generalisering utover materialet."],
+  "artifacts": []
+}
+```
+
+Kilderegister og artefaktreferanser forvaltes av Runtime, ikke av responsmodellen. Kildeinnhold behandles som data, ikke instruksjoner. JSON valideres før komponering. Response Composer skal bevare fakta, tall, forbehold og faglige nyanser, ikke introdusere nye påstander eller oppdiktede kilder. Runtime kontrollerer referanse-ID-er og rendrer lenker fra autoritative metadata. Slik validering sikrer ikke alene at påstandene er faglig underbygget; evals må også måle semantisk trofasthet, språkkvalitet på bokmål og nynorsk, kildegrunnlag og responstid. Ved feil kan Runtime bruke en allerede godkjent direkte respons eller avstå og forklare begrensningen; fallback må aldri omgå modellpolicy. Direkte streaming bør ikke vise hovedmodellens råutkast som endelig svar når komponering er valgt.
+
+Dette er en avgrenset, valgfri MVP-funksjon, ikke et krav om at alle svar skal gå gjennom Borealis. Lokal komponering gjør ikke et tidligere eksternt modellkall lokalt. Ved helt lokal kjøring må også embeddings, hjelpe- og reservekall samt relevante tools følge den lokale behandlingspolicyen.
 
 Modellregisteret og det felles grensesnittet gir mulighet for å introdusere nye modeller uten å omskrive agentene og applikasjonene som bruker plattformen.

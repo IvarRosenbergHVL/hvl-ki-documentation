@@ -29,6 +29,8 @@ Dette er prosjektets rapporterte status og foreslåtte leveranserekkefølge. Ing
 
 Ved lansering eller i neste delleveranse planlegges publisering av agenter som API-er gjennom Gravitee.io, med Agent ID, versjon, schema og kontrollert applikasjonstilgang. Dette er samme agentdefinisjon og runtime som chat. Avansert multiagentfunksjonalitet og omfattende interne connectors er ikke krav til første MVP.
 
+En valgfri utvidelse i første Model Gateway- og Runtime-iterasjon er strukturert responskomponering på norsk med lokal Borealis: LangGraph koordinerer hovedmodell og Response Composer, med versjonert JSON-responspakke og kildevalidering. Funksjonen evalueres før den tilbys; direkte modellrespons er fortsatt tilgjengelig. Se [Model Gateway og modellroller](./modeller.mdx).
+
 ## Videre prioriteringer
 
 Tale-til-tekst og naturlige stemmesamtaler på norsk og engelsk får tidlig prioritet, blant annet for universell utforming. Tale krever avbruddshåndtering, strømming og måling av samlet responstid; lokal og godkjent ekstern modellkapasitet kan benyttes. Selvstendig lydproduksjon og podcastgenerering vurderes separat. Video har svært lav prioritet.
