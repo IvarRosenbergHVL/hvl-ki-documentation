@@ -13,6 +13,8 @@ HVL tilbyr i dag blant annet UiO-GPT og Microsoft Copilot. En enkel chat med til
 
 Brukerne etterspør funksjonalitet de kjenner fra blant annet Claude, ChatGPT og Googles KI-tjenester: dokumentarbeid, søk, hukommelse, verktøy, agenter og selvstendig utførelse av sammensatte oppgaver.
 
+Ønsket om lisenser til internasjonale tjenester handler i stor grad om mulighetene brukerne savner i dagens tilbud. Ambisjonen er å dekke mange av disse behovene internt, med funksjonalitet vesentlig nærmere de store internasjonale løsningene enn de grunnleggende norske chattilbudene fra UiO og Sikt. Vi trenger ikke full funksjonsparitet for å gi brukerne et attraktivt alternativ.
+
 Samtidig må HVL kunne gi KI tilgang til interne informasjonskilder og fagsystemer på en forsvarlig måte. Eksterne KI-tjenester kan ikke uten videre få slike tilganger. Personvern, informasjonssikkerhet, leverandørvilkår og kontroll med handlinger må være ivaretatt. Også nettsøk krever et behandlingsoppsett som HVL kan godkjenne.
 
 ## 2. Forslaget: HVLs eget KI-økosystem
@@ -60,15 +62,30 @@ Felles komponenter kan gjenbrukes på tvers av fakulteter og tjenester. Canvas e
 
 Retningen samsvarer med flere temaer i Malthe-Sørenssen-utvalgets NOU 2026: 14, blant annet fagtilpasning, forvaltning, digital suverenitet og samarbeid. Se [prosjektets gjennomgang av kapittel 4 og 8](../interessenter/nou-2026-14.mdx). HVL bør undersøke utviklingssamarbeid med UiB og andre UH-aktører og gjenbruke nasjonal infrastruktur der det er egnet.
 
-## 5. Beslutningen vi trenger nå
+## 5. Vi starter ikke på bar bakke – kortere vei til første lansering
+
+Arkitekturen for økosystemet er allerede designet, og betydelig utviklingsarbeid er gjennomført. Det vi ber om nå, er forankring og ressurser til å videreføre, integrere, kvalitetssikre og ferdigstille arbeidet, ikke å starte et helt nytt prosjekt fra bunnen av.
+
+Utviklingen skjer modulært og trinnvis, også innenfor hver modul. Vi kan prioritere en sammenhengende første versjon som dekker de viktigste brukerbehovene, og deretter utvide funksjonaliteten uten å vente på at hele økosystemet er ferdig.
+
+```mermaid
+flowchart LR
+ A[Designet arkitektur og eksisterende utviklingsarbeid] --> B[Ferdigstille og integrere prioriterte funksjoner]
+ B --> C[Godkjent første lansering]
+ C --> D[Trinnvis utvidelse av moduler og tjenester]
+```
+
+Dette kan gi en relativt kort vei til første lansering. Konkret lanseringstidspunkt avhenger av kapasitet, faktisk modenhet, integrasjon, testing og nødvendige godkjenninger. En første versjon er ikke det samme som en ferdig utbygd plattform.
+
+## 6. Beslutningen vi trenger nå
 
 **Forslag til anbefaling fra prodekanforum:**
 
-- Støtte oppstart av arbeidet med HVLs modulære KI-økosystem, med en moderne KI-assistent for studenter og ansatte som første hovedleveranse.
+- Støtte formell forankring og videreføring av utviklingsarbeidet med HVLs modulære KI-økosystem, med en moderne KI-assistent for studenter og ansatte som første hovedleveranse.
 - Legge til grunn at tjenesten skal kunne overta for UiO-GPT når den har tilstrekkelig funksjonalitet, dokumentert kvalitet, godkjenning og driftsberedskap.
 - Bidra til prioritering av behov, fagmiljøer og videre anvendelser, og støtte avklaring av utviklingssamarbeid, mandat, ressurser og forvaltning.
 
-Første arbeidsfase skal konkretisere leveranseomfanget, utvikle og teste kjernen og dokumentere nytte, sikkerhet, kostnader og driftsbehov. En eventuell utfasing av UiO-GPT gjennomføres først når erstatningen er klar. Forslaget innebærer ikke automatisk utfasing av Microsoft Copilot, innkjøp eller produksjonsgodkjenning.
+Første arbeidsfase skal kartlegge modenheten i eksisterende komponenter, konkretisere leveranseomfanget, ferdigstille, integrere og teste kjernen og dokumentere nytte, sikkerhet, kostnader og driftsbehov. En eventuell utfasing av UiO-GPT gjennomføres først når erstatningen er klar. Forslaget innebærer ikke automatisk utfasing av Microsoft Copilot, innkjøp eller produksjonsgodkjenning.
 
 ---
 
